@@ -34,7 +34,7 @@ export default function productDetailfitting() {
     <div key={index}>
       <input
         name="search"
-        className="w-4 h-4 block xl:ml-12 lg:ml-12 sm:ml-4 mt-5 border-2 border-slate-700 lg:py-4 sm:py-4 xl:py-4 placeholder:text-black font-semibold"
+        className="w-4 h-4 block  lg:ml-12 sm:ml-4 mt-5 border-2 border-slate-700 sm:py-4  placeholder:text-black font-semibold"
         id={`checkbox_${index}`}
         type="checkbox"
       />
@@ -137,14 +137,14 @@ export default function productDetailfitting() {
                         Category
                       </h4>
 
-                      <div>
+                      <div className="my-4">
                         <input
                           className="w-full p-2 text-sm box-border mr-2 border-2 border-slate-300 text-slate-400"
                           type="text"
                           placeholder="Quick Lookup"
                         />
                       </div>
-                      <ul id="hawkfacet_d" className="mt-3">
+                      <ul id="hawkfacet_d" className="mt-3 flex flex-col  gap-2">
                         {facetItems.map((item, index) => (
                           <Link href={item.Link}>
                             <li key={index} className="flex">
@@ -156,20 +156,18 @@ export default function productDetailfitting() {
                                 value={item.value}
                                 href={item.Link}
                               /> */}
-                              <div className="">
-                                <BsArrowRight className="mt-1 mr-2 font-bold" stroke={1.5} color="slate-600"/>
-                              </div>
-                              <div>
-                                <span>
+                              
+                              <div className="flex">
+                                <p className="hover:text-blue-800 hover:underline" >
                                   {item.label} <span>({item.count})</span>
-                                </span>
+                                </p>
                               </div>
                             </li>
                           </Link>
                         ))}
                       </ul>
                     </div>
-                    <div className="mt-6 ml-2 grid grid-cols-2 gap-y-10 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                    <div className="mt-6 ml-2 grid grid-cols-2 gap-y-14 gap-x-8 lg:grid-cols-3 xl:grid-cols-4">
                       {products.map((product) => (
                         <ProductCard product={product} />
                       ))}

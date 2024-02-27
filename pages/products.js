@@ -144,7 +144,7 @@ export default function productsPage() {
 
         <div className="container mx-auto px-4 mt-10">
           <div className="grid lg:grid-cols-4 grid-cols-1 gap-4  text-center">
-            <Link href="\hunting" className="bx-item-pro h-auto">
+            <Link href="/products/hunting" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/hunting-uniform-athlotic-sport-pakistan.png"
@@ -180,7 +180,7 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="\cricket" className="bx-item-pro h-auto">
+            <Link href="/products/cricket" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/cricket-uniform-athlotic-sport-pakistan.jpg"
@@ -198,7 +198,7 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="\volleyball" className="bx-item-pro h-auto">
+            <Link href="/products/volleyball" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/cheers-uniform-athlotic-sport-pakistan.jpg"
@@ -219,7 +219,7 @@ export default function productsPage() {
         </div>
         <div className="container mx-auto px-4 mt-10">
           <div className="grid lg:grid-cols-4 grid-cols-1 gap-4  text-center">
-            <Link href="\running" className="bx-item-pro h-auto">
+            <Link href="/products/running" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/running-uniform-athlotic-sport-pakistan.png"
@@ -255,7 +255,7 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="\ice-hockey" className="bx-item-pro h-auto">
+            <Link href="/products/ice-hockey" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full pb-6">
                 <Image
                   src="/images/ice-hockey-athlotic-sport-pakistan.jpg"
@@ -273,7 +273,7 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="\shorts" className="bx-item-pro h-auto">
+            <Link href="/products/shorts" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/shorts-athlotic-sport-pakistan.jpg"
@@ -295,7 +295,7 @@ export default function productsPage() {
 
         <div className="container mx-auto px-4 mt-10">
           <div className="grid lg:grid-cols-4 grid-cols-1 gap-4  text-center">
-            <Link href="\gym-wear" className="bx-item-pro h-auto">
+            <Link href="/products/gym-wear" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/gym-wear-athlotic-sport-pakistan.jpg"
@@ -313,7 +313,7 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="\hoodies-and-joggers" className="bx-item-pro h-auto">
+            <Link href="/products/hoodies-and-joggers" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/hoodies-athlotic-sports-pakistan.jpg"
@@ -331,7 +331,7 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="\martial-art" className="bx-item-pro h-auto">
+            <Link href="/products/martial-art" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/martial-arts-wear-athlotic-sports-pakistan.jpg"
@@ -349,7 +349,7 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="\medical" className="bx-item-pro h-auto">
+            <Link href="/products/medical" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/medical-wear-athlotic-sports-pakistan.png"
@@ -371,7 +371,7 @@ export default function productsPage() {
 
         <div className="container mx-auto px-4 mt-10">
           <div className="grid lg:grid-cols-4 grid-cols-1 gap-4  text-center">
-            <Link href="\polo-shirts" className="bx-item-pro h-auto">
+            <Link href="/products/polo-shirts" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/polo-shirts-athlotic-sports-pakistan.jpg"
@@ -389,7 +389,7 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="\softshell-jackets" className="bx-item-pro h-auto">
+            <Link href="/products/softshell-jackets" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/softshell-jacket-athlotic-sports-pakistan.png"
@@ -407,7 +407,7 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="tracksuits" className="bx-item-pro h-auto">
+            <Link href="/products/tracksuits" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/t-shirts-athlotic-sports-pakistan.jpg"
@@ -425,7 +425,7 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="\sports-bag" className="bx-item-pro h-auto">
+            <Link href="/products/sports-bag" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/sports-bags-athlotic-sports-pakistan.jpg"

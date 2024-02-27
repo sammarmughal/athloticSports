@@ -816,8 +816,8 @@ export default function Home() {
                   alignItems: "center",
                 }}
               >
-                <div class="elementor-widget-container pt-12 transition duration-300 border border-transparent rounded shadow transform transition-transform">
-                  <h2 class="text-white font-montserrat font-extrabold xl:text-5xl lg:text-5xl text-3xl text-center uppercase leading-relaxed  text-shadow-md elementor-size-default">
+                <div className="elementor-widget-container pt-12 transition duration-300 border border-transparent rounded shadow transform transition-transform">
+                  <h2 className="text-white font-montserrat font-extrabold xl:text-5xl lg:text-5xl text-3xl text-center uppercase leading-relaxed  text-shadow-md elementor-size-default">
                     SPORTSWEAR CATEGORIES
                   </h2>
                 </div>
@@ -970,8 +970,8 @@ export default function Home() {
                     </h2>
                   </div>
                 </div>
-                <div class="elementor-widget-container transition duration-300 border border-transparent rounded shadow transform transition-transform">
-                  <h2 class="text-white font-montserrat font-extrabold xl:text-5xl lg:text-5xl text-center text-3xl uppercase leading-relaxed  text-shadow-md elementor-size-default">
+                <div className="elementor-widget-container transition duration-300 border border-transparent rounded shadow transform transition-transform">
+                  <h2 className="text-white font-montserrat font-extrabold xl:text-5xl lg:text-5xl text-center text-3xl uppercase leading-relaxed  text-shadow-md elementor-size-default">
                     ACTIVEWEAR CATEGORIES
                   </h2>
                 </div>
@@ -1216,7 +1216,7 @@ export default function Home() {
 
         <div className="container mx-auto px-4 ">
           <div className="grid lg:grid-cols-4 grid-cols-1 gap-4  text-center">
-            <Link href="/rugby" className="bx-item-pro h-auto">
+            <Link href="/products/rugby" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/athlotic-logo.png"

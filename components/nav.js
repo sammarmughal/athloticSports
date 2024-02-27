@@ -51,7 +51,7 @@ export default function Nav() {
             />
           </Link>
 
-          <ul className="top-links items-center ml-20 divide-x uppercase divide-slate-400 text-white divide-opacity-70 text-lg  hidden font-normal xl:flex whitespace-nowrap">
+          <ul className="top-links items-center ml-20 divide-x uppercase divide-slate-400 text-white divide-opacity-70 text-lg hidden font-normal xl:flex whitespace-nowrap ">
             <li>
               <Link href="/" className="hover:text-[#01b8ee] px-3">
                 Home
@@ -127,31 +127,16 @@ export default function Nav() {
                           <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Cricket
                         </Link>
                       </Menu.Item>
-                      {/* <Menu.Item>
-                        <Link href="#" title="Athletic Uniform">
-                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1"/> Athletic
-                        </Link>
-                      </Menu.Item> */}
                       <Menu.Item>
                         <Link href="/products/football" title="American Football Uniform">
                           <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> American Football
                         </Link>
                       </Menu.Item>
-                      {/* <Menu.Item>
-                        <Link href="#" title="Netball Uniform">
-                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1"/> Netball
-                        </Link>
-                      </Menu.Item> */}
                       <Menu.Item>
                         <Link href="/products/tennis" title="Tennis Uniform">
                           <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Tennis
                         </Link>
                       </Menu.Item>
-                      {/* <Menu.Item>
-                        <Link href="#" title="Softball Uniform">
-                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1"/> Softball
-                        </Link>
-                      </Menu.Item> */}
                       <Menu.Item>
                         <Link href="/products/running" title="Running Uniform">
                           <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Running
@@ -253,93 +238,7 @@ export default function Nav() {
                 </Transition>
               </Menu>
             </li>
-
-            <li>
-              <Link
-                href="#"
-                className={
-                  currentRoute === "/contact-us"
-                    ? "text-[#01b8ee] px-3"
-                    : "hover:text-[#01b8ee] px-3"
-                }
-              >
-                SCHOOL UNIFORMS
-              </Link>
-            </li>
-
-            <li>
-              <Menu as="div" className="relative inline-block text-left px-3">
-                <div>
-                  <Menu.Button className={
-                    currentRoute.includes("services") || currentRoute.includes("consultation") || currentRoute.includes("design")
-                      ? "text-[#01b8ee]"
-                      : "hover:text-[#01b8ee]"
-                  }  >JACKETS<svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="w-5 h-5 ml-2 inline"
-                  >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </Menu.Button>
-                </div>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items className="menuItems origin-center absolute   mt-2 w-[300px] rounded-md shadow-lg bg-white     focus:outline-none">
-                    <div className="p-5">
-                      <Menu.Item>
-                        <Link href="/products/softshell-jackets" title="Leather Jackets">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Leather
-                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/softshell-jackets" title="Softshell Jackets">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Softshell
-                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/softshell-jackets" title="Sports Jackets">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Sports
-                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/jackets" title="Varsity Jackets">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Varsity
-                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/jackets" title="Textile Jackets">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Textile
-                        </Link>
-                      </Menu.Item>
-
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
-            </li>
-
+           
             <li>
               <Menu as="div" className="relative inline-block text-left px-3">
                 <div>
