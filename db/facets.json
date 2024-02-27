@@ -1,0 +1,149 @@
+{
+    "facetItems": [
+      {
+        "value": "American Footballs",
+        "label": "American Footballs",
+        "count": 19,
+        "Link": "/products/football"
+      },
+      {
+        "value": "Baseball",
+        "label": "Baseball",
+        "count": 19,
+        "Link": "/products/baseball"
+      },
+      {
+        "value": "Basketball",
+        "label": "Basketball",
+        "count": 19,
+        "Link": "/products/basketball"
+      },
+    
+      {
+        "value": "Cycling",
+        "label": "Cycling",
+        "count": 19,
+        "Link": "/products/cycling"
+      },
+      {
+        "value": "Caps",
+        "label": "Caps",
+        "count": 19,
+        "Link": "/product/caps"
+      },
+      {
+        "value": "Cricket",
+        "label": "Cricket",
+        "count": 19,
+        "Link": "/product/cricket"
+      },
+      {
+        "value": "Golf",
+        "label": "Golf",
+        "count": 19,
+        "Link": "/products/golf"
+      },
+      {
+        "value": "Gym Wear",
+        "label": "Gym Wear",
+        "count": 19,
+        "Link": "/products/gym-wear"
+      },
+      {
+        "value": "Hoodies",
+        "label": "Hoodies",
+        "count": 19,
+        "Link": "/products/hoodies-and-joggers"
+      },
+      {
+        "value": "Ice Hockey",
+        "label": "Ice Hockey",
+        "count": 19,
+        "Link": "/products/ice-hockey"
+      },
+      {
+        "value": "Jackets",
+        "label": "Jackets",
+        "count": 19,
+        "Link": "/products/jackets"
+      },
+      {
+        "value": "Martial & arts",
+        "label": "Martial & arts",
+        "count": 19,
+        "Link": "/products/martial-art"
+      },
+      {
+        "value": "Medical Wear",
+        "label": "Medical Wear",
+        "count": 19,
+        "Link": "/products/medical"
+      },
+      {
+        "value": "Rugby",
+        "label": "Rugby",
+        "count": 19,
+        "Link": "/products/rugby"
+      },
+      {
+        "value": "Running",
+        "label": "Running",
+        "count": 19,
+        "Link": "/products/running"
+      },
+      {
+        "value": "Soccer",
+        "label": "Soccer",
+        "count": 19,
+        "Link": "/products/soccer"
+      },
+      {
+        "value": "Softshell jackets",
+        "label": "Softshell jackets",
+        "count": 19,
+        "Link": "/products/softshell-jackets"
+      },
+      {
+        "value": "Sports Bag",
+        "label": "Sports Bag",
+        "count": 19,
+        "Link": "/products/sports-bag"
+      },
+      {
+        "value": "Shorts",
+        "label": "Shorts",
+        "count": 19,
+        "Link": "/products/shorts"
+      },
+      {
+        "value": "Socks",
+        "label": "Socks",
+        "count": 19,
+        "Link": "/products/socks"
+      },
+      {
+        "value": "Tennis",
+        "label": "Tennis",
+        "count": 19,
+        "Link": "/products/tennis"
+      },
+      {
+        "value": "Track Suits",
+        "label": "Track Suits",
+        "count": 19,
+        "Link": "/products/tracksuits"
+      },
+      {
+        "value": "Winter Caps",
+        "label": "Winter Caps",
+        "count": 19,
+        "Link": "/products/winter-caps"
+      },
+      {
+        "value": "Volley ball",
+        "label": "Volley ball",
+        "count": 19,
+        "Link": "/products/volleyball"
+      }
+    ]
+  }

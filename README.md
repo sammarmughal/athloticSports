@@ -1,1 +1,2 @@
-# athloticSports
+# athloticapp
+Athlotic Sports Application
