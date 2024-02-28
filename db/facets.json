@@ -29,13 +29,13 @@
         "value": "Caps",
         "label": "Caps",
         "count": 19,
-        "Link": "/product/caps"
+        "Link": "/products/caps"
       },
       {
         "value": "Cricket",
         "label": "Cricket",
         "count": 19,
-        "Link": "/product/cricket"
+        "Link": "/products/cricket"
       },
       {
         "value": "Golf",
@@ -61,13 +61,7 @@
         "count": 19,
         "Link": "/products/ice-hockey"
       },
-      {
-        "value": "Jackets",
-        "label": "Jackets",
-        "count": 19,
-        "Link": "/products/jackets"
-      },
-      {
+        {
         "value": "Martial & arts",
         "label": "Martial & arts",
         "count": 19,
@@ -97,12 +91,7 @@
         "count": 19,
         "Link": "/products/soccer"
       },
-      {
-        "value": "Softshell jackets",
-        "label": "Softshell jackets",
-        "count": 19,
-        "Link": "/products/softshell-jackets"
-      },
+      
       {
         "value": "Sports Bag",
         "label": "Sports Bag",

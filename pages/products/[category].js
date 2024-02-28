@@ -97,7 +97,7 @@ export default function productDetailfitting() {
         <link rel="preconnect" href="//www.google-analytics.com" as="script" />
         <meta name="google" content="notranslate" />
       </Head>
-      <MainHeader pageHeading={headerText.value} />
+      <MainHeader pageHeading={headerText ? headerText.value : "Default Heading"} />
 
       <section className="main-sec">
         <div className="grid md:grid-cols-1 grid-cols-1 md:gap-4 container mx-auto">

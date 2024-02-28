@@ -28,8 +28,8 @@ export default function ProductCard({ product }) {
       <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
         <p className="font-bold text-lg"> PKR 2,000 </p>
         <button
-          className="px-3 py-1 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none mr-3">Add
-          to cart</button>   </div>
+          className="px-3 py-1 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none mr-3">Add to cart</button>   
+      </div>
     </div>
 
   );

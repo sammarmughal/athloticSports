@@ -285,7 +285,8 @@
 
     .top-social { @apply sm:flex gap-x-2 absolute right-0 top-16 hidden ; }
     .top-social a { @apply border border-white  w-10 h-10 flex items-center justify-center transition-all duration-300 rounded-full;}
-
+    .footer-social { @apply sm:flex gap-x-2 absolute right-0  hidden ; }
+    .footer-social a { @apply border border-white  w-10 h-10 flex items-center justify-center transition-all duration-300 rounded-full;}
     .panel-social { @apply flex  gap-x-2 mt-5; }
     .panel-social a { @apply    w-10 h-10 flex items-center justify-center  rounded-full;}
 
