@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import { Menu, Dialog, Transition } from "@headlessui/react";
 import { XIcon, FireIcon } from "@heroicons/react/outline";
-import { BsCart3 , BsPerson  } from "react-icons/bs";
+import { BsCart3, BsPerson } from "react-icons/bs";
 
 
 export default function Nav() {
@@ -54,268 +54,273 @@ export default function Nav() {
           </Link>
 
         </div>
-          <ul className="top-links items-center divide-x uppercase divide-slate-400 text-white divide-opacity-70 text-lg hidden font-normal xl:flex whitespace-nowrap ">
-            <li>
-              <Link href="/" className="hover:text-[#01b8ee] px-3">
-                Home
-              </Link>{" "}
-            </li>
+        <ul className="top-links items-center divide-x uppercase divide-slate-400 text-white divide-opacity-70 text-lg hidden font-normal xl:flex whitespace-nowrap ">
+          <li>
+            <Link href="/" className="hover:text-[#01b8ee] px-3">
+              Home
+            </Link>{" "}
+          </li>
 
-            <li>
-              <Menu as="div" className="relative inline-block text-left px-3">
-                <div>
-                  <Menu.Button className={
-                    currentRoute.includes("services") || currentRoute.includes("consultation") || currentRoute.includes("design")
-                      ? "text-[#01b8ee]"
-                      : "hover:text-[#01b8ee]"
-                  }  >SPORTS UNIFROM<svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="w-5 h-5 ml-2 inline"
-                  >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </Menu.Button>
-                </div>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
+          <li>
+            <Menu as="div" className="relative inline-block text-left px-3">
+              <div>
+                <Menu.Button className={
+                  currentRoute.includes("services") || currentRoute.includes("consultation") || currentRoute.includes("design")
+                    ? "text-[#01b8ee]"
+                    : "hover:text-[#01b8ee]"
+                }  >SPORTS UNIFROM<svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-5 h-5 ml-2 inline"
                 >
-                  <Menu.Items className="menuItems origin-center absolute   mt-2 w-[300px] rounded-md shadow-lg bg-white     focus:outline-none">
-                    <div className="p-5">
-                      <Menu.Item>
-                        <Link href="/products/rugby" title="Rugby Uniforms Manufacturer">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Rugby
-                        </Link>
-                      </Menu.Item>
-                      <Menu.Item>
-                        <Link href="/products/soccer" title="Soccer Uniform Manufacturer">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Soccer
-                        </Link>
-                      </Menu.Item>
-                      <Menu.Item>
-                        <Link href="/products/basketball" title="Basketball Uniform">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Basketball
-                        </Link>
-                      </Menu.Item>
-                      <Menu.Item>
-                        <Link href="/products/baseball" title="Baseball Uniform Manufacturer">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Baseball
-                        </Link>
-                      </Menu.Item>
-                      <Menu.Item>
-                        <Link href="/products/ice-hockey" title="Ice Hockey Uniform">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Ice Hockey
-                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/volleyball" title="Volley Ball Uniform">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Volley Ball
-                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/cricket" title="Cricket Uniform">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Cricket
-                        </Link>
-                      </Menu.Item>
-                      <Menu.Item>
-                        <Link href="/products/football" title="American Football Uniform">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> American Football
-                        </Link>
-                      </Menu.Item>
-                      <Menu.Item>
-                        <Link href="/products/tennis" title="Tennis Uniform">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Tennis
-                        </Link>
-                      </Menu.Item>
-                      <Menu.Item>
-                        <Link href="/products/running" title="Running Uniform">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Running
-                        </Link>
-                      </Menu.Item>
-                 
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
-            </li>
-
-            <li>
-              <Menu as="div" className="relative inline-block text-left px-3">
-                <div>
-                  <Menu.Button className={
-                    currentRoute.includes("services") || currentRoute.includes("consultation") || currentRoute.includes("design")
-                      ? "text-[#01b8ee]"
-                      : "hover:text-[#01b8ee]"
-                  }  >SPORTS WEAR<svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="w-5 h-5 ml-2 inline"
-                  >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </Menu.Button>
-                </div>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items className="menuItems origin-center absolute   mt-2 w-[300px] rounded-md shadow-lg bg-white     focus:outline-none">
-                    <div className="p-5">
-                      <Menu.Item>
-                        <Link href="/products/caps" title="Sports Caps and Hats">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Caps Hats
-                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/sports-bag" title="Sports Bag">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Sports Bags
-                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/tracksuits" title="Track Suits">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Track Suits
-                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/gym-wear" title="Gym Wear">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Gym
-                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/medical" title="Medical Wear">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Medical Wear                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/martial-art" title="Martial Arts Wear">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Martial Arts
-                        </Link>
-                      </Menu.Item>
-
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
-            </li>
-           
-            <li>
-              <Menu as="div" className="relative inline-block text-left px-3">
-                <div>
-                  <Menu.Button className={
-                    currentRoute.includes("services") || currentRoute.includes("consultation") || currentRoute.includes("design")
-                      ? "text-[#01b8ee]"
-                      : "hover:text-[#01b8ee]"
-                  }  >ACCESSORIES<svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="w-5 h-5 ml-2 inline"
-                  >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </Menu.Button>
-                </div>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items className="menuItems origin-center absolute   mt-2 w-[300px] rounded-md shadow-lg bg-white     focus:outline-none">
-                    <div className="p-5">
-                      <Menu.Item>
-                        <Link href="/products/winter-caps" title="Heat Caps">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Heat Caps
-                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/winter-caps" title="Winter Caps">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Winter Caps
-                        </Link>
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        <Link href="/products/socks" title="Socks">
-                          <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
-                          Socks
-                        </Link>
-                      </Menu.Item>
-
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
-            </li>
-
-            <li>
-              <Link
-                href="/contact-us"
-                className={
-                  currentRoute === "/contact-us"
-                    ? "text-[#01b8ee] px-3"
-                    : "hover:text-[#01b8ee] px-3"
-                }
+                    <path
+                      fillRule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </Menu.Button>
+              </div>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
               >
-                CONTACT US
-              </Link>
-            </li>
+                <Menu.Items className="menuItems origin-center absolute   mt-2 w-[300px] rounded-md shadow-lg bg-white     focus:outline-none">
+                  <div className="p-5">
+                    <Menu.Item>
+                      <Link href="/products/rugby" title="Rugby Uniforms Manufacturer">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Rugby
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Link href="/products/soccer" title="Soccer Uniform Manufacturer">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Soccer
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Link href="/products/basketball" title="Basketball Uniform">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Basketball
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Link href="/products/baseball" title="Baseball Uniform Manufacturer">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Baseball
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Link href="/products/ice-hockey" title="Ice Hockey Uniform">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Ice Hockey
+                      </Link>
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      <Link href="/products/volleyball" title="Volley Ball Uniform">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Volley Ball
+                      </Link>
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      <Link href="/products/cricket" title="Cricket Uniform">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Cricket
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Link href="/products/football" title="American Football Uniform">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> American Football
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Link href="/products/tennis" title="Tennis Uniform">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Tennis
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Link href="/products/running" title="Running Uniform">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Running
+                      </Link>
+                    </Menu.Item>
+
+                  </div>
+                </Menu.Items>
+              </Transition>
+            </Menu>
+          </li>
+
+          <li>
+            <Menu as="div" className="relative inline-block text-left px-3">
+              <div>
+                <Menu.Button className={
+                  currentRoute.includes("services") || currentRoute.includes("consultation") || currentRoute.includes("design")
+                    ? "text-[#01b8ee]"
+                    : "hover:text-[#01b8ee]"
+                }  >SPORTS WEAR<svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-5 h-5 ml-2 inline"
+                >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </Menu.Button>
+              </div>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="menuItems origin-center absolute   mt-2 w-[300px] rounded-md shadow-lg bg-white     focus:outline-none">
+                  <div className="p-5">
+                    <Menu.Item>
+                      <Link href="/products/caps" title="Sports Caps and Hats">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
+                        Caps Hats
+                      </Link>
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      <Link href="/products/sports-bag" title="Sports Bag">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
+                        Sports Bags
+                      </Link>
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      <Link href="/products/tracksuits" title="Track Suits">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
+                        Track Suits
+                      </Link>
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      <Link href="/products/gym-wear" title="Gym Wear">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
+                        Gym
+                      </Link>
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      <Link href="/products/medical" title="Medical Wear">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
+                        Medical Wear                        </Link>
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      <Link href="/products/martial-art" title="Martial Arts Wear">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
+                        Martial Arts
+                      </Link>
+                    </Menu.Item>
+
+                  </div>
+                </Menu.Items>
+              </Transition>
+            </Menu>
+          </li>
+
+          <li>
+            <Menu as="div" className="relative inline-block text-left px-3">
+              <div>
+                <Menu.Button className={
+                  currentRoute.includes("services") || currentRoute.includes("consultation") || currentRoute.includes("design")
+                    ? "text-[#01b8ee]"
+                    : "hover:text-[#01b8ee]"
+                }  >ACCESSORIES<svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-5 h-5 ml-2 inline"
+                >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </Menu.Button>
+              </div>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="menuItems origin-center absolute   mt-2 w-[300px] rounded-md shadow-lg bg-white     focus:outline-none">
+                  <div className="p-5">
+                    <Menu.Item>
+                      <Link href="/products/winter-caps" title="Heat Caps">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
+                        Heat Caps
+                      </Link>
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      <Link href="/products/winter-caps" title="Winter Caps">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
+                        Winter Caps
+                      </Link>
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      <Link href="/products/socks" title="Socks">
+                        <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
+                        Socks
+                      </Link>
+                    </Menu.Item>
+
+                  </div>
+                </Menu.Items>
+              </Transition>
+            </Menu>
+          </li>
+
+          <li>
+            <Link
+              href="/contact-us"
+              className={
+                currentRoute === "/contact-us"
+                  ? "text-[#01b8ee] px-3"
+                  : "hover:text-[#01b8ee] px-3"
+              }
+            >
+              CONTACT US
+            </Link>
+          </li>
 
 
-          </ul>
+        </ul>
         <div className="flex gap-4 mr-14">
-        
-        <Link href="/cart"  className={
-                  currentRoute === "/cart"
-                    ? "text-[#01b8ee] px-3"
-                    : "hover:text-[#01b8ee] px-3"
-                }><BsCart3 className="text-gray-200 hover:border-2 hover:border-blue-600 hover:text-white hover:rounded-xl p-1 hover:text-blue-700  w-10 h-10 flex items-center justify-center duration-300 "  strokeWidth={0.5}/> </Link>
-        <BsPerson className="text-gray-200 hover:border-2 hover:border-blue-600 hover:text-white hover:rounded-xl p-1 hover:text-blue-700  w-10 h-10 flex items-center justify-center duration-300 " strokeWidth={0.5}/> 
+
+          <Link href="/cart" className={
+            currentRoute === "/cart"
+              ? "text-[#01b8ee] px-3"
+              : "hover:text-[#01b8ee] px-3"
+          }><BsCart3 className="text-gray-200 hover:border-2 hover:border-blue-600 hover:text-white hover:rounded-xl p-1 hover:text-blue-700  w-10 h-10 flex items-center justify-center duration-300 " strokeWidth={0.5} /> </Link>
+          <Link href="/login" className={
+            currentRoute === "/login"
+              ? "text-[#01b8ee] px-3"
+              : "hover:text-[#01b8ee] px-3"
+          }>
+            <BsPerson className="text-gray-200 hover:border-2 hover:border-blue-600 hover:text-white hover:rounded-xl p-1 hover:text-blue-700  w-10 h-10 flex items-center justify-center duration-300 " strokeWidth={0.5} />  </Link>
 
         </div>
-       
+
       </nav>
 
       <Transition.Root show={open} as={Fragment}>
@@ -753,7 +758,7 @@ export default function Nav() {
                               +923024411817
                             </a>
                           </div>
-{/* 
+                          {/* 
                           <div className="gap-x-2  panel-social relative top-0 items-center justify-center">
                             <a
                               href="mailto:info@athlotic.com"

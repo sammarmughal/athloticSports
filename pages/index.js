@@ -1323,11 +1323,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* About our Production */}
       <section
         className="py-14 pb-14 bg-no-repeat bg-cover bg-fixed "
-        // style={{ backgroundImage: "url('./images/aam-pipes-machine.webp')" }}
       >
         <div className="sec-heading">
           <h2 style={{ color: "black" }}>About our Production</h2>
@@ -1437,8 +1434,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Standards */}
       <section className="py-10 pb-5 ">
         <div className="sec-heading">
           <h2>Standards</h2>

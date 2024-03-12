@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import MainHeader from "../components/mainheader";
-
+import Link from 'next/link';
 export default function CartPage() {
     return (
         <>
@@ -102,7 +102,7 @@ export default function CartPage() {
                                 <p className="text-sm text-gray-700">including VAT</p>
                             </div>
                         </div>
-                        <button className="btn-action w-full flex justify-center items-center mx-auto mt-4">Check out</button>
+                        <Link href="/checkout"><button className="btn-action w-full flex justify-center items-center mx-auto mt-4">Check out</button></Link>
                     </div>
                 </div>
             </div>

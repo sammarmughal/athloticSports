@@ -136,13 +136,15 @@
 .main-sec{ @apply py-8 pb-8 h-auto px-4; }
 
 .btn-action {@apply px-4 py-2 text-white 
-    bg-gradient-to-br from-[#01b8ee] to-blue-700    hover:to-[#01b8ee] duration-300 hover:from-blue-700     rounded-full   shadow   hover:text-amber-200 }
+    bg-gradient-to-br from-[#01b8ee] to-blue-700    hover:to-[#01b8ee] duration-300 hover:from-blue-700     rounded-full   shadow   hover:text-white}
 
 .bx-item-e {@apply w-auto flex items-center justify-center h-auto relative bg-white p-2 shadow hover:shadow-2xl; }
 .bx-item-e img {@apply p-3;}
 .bx-item-e p {@apply text-center font-semibold text-gray-600 -mt-5      mx-auto; }
 .bx-item-e span {@apply text-xs text-slate-400;}
-
+.add-cart{
+    @apply px-3 py-1 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none mr-3 cursor-pointer
+}
 .homeHeader {@apply  h-screen  w-full flex items-center justify-center bg-center  bg-cover relative; }
 .homehdrtxt {@apply absolute bg-gradient-to-tr from-[#3E4095] via-[#3537BF] w-full h-full opacity-70 z-20 flex justify-center items-center px-5; }
 .homehdrtxt h1 {@apply lg:text-5xl sm:text-4xl text-3xl text-white font-bold uppercase text-center; }
