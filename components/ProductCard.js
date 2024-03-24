@@ -1,7 +1,13 @@
 import Link from "next/link";
 import React from "react";
-
+import { useDispatch } from 'react-redux';
+import { increment } from '../components/store/cartSlice';
 export default function ProductCard({ product }) {
+  const dispatch = useDispatch();
+
+  const addToCart = () => {
+    dispatch(increment());
+  };
   return (
     <div className="flex flex-col gap-2">
       <div key={product.id} className="group relative">
@@ -30,7 +36,7 @@ export default function ProductCard({ product }) {
       </div>
       <div className="flex flex-col flex-wrap md:flex-row justify-between items-center text-gray-900">
         <p className="font-bold text-lg"> PKR 2,000 </p>
-        <Link href="/cart"><button className="add-cart mx-1"> Add to Cart</button></Link>
+        <Link href="#"><button className="add-cart mx-1" onClick={addToCart}> Add to Cart</button></Link>
       </div>
     </div>
   );

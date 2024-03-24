@@ -5,9 +5,11 @@ import { Fragment, useState } from "react";
 import { Menu, Dialog, Transition } from "@headlessui/react";
 import { XIcon, FireIcon } from "@heroicons/react/outline";
 import { BsCart3, BsPerson } from "react-icons/bs";
+import { useSelector } from 'react-redux';
 
 
 export default function Nav() {
+  const count = useSelector((state) => state.cart.count);
   const router = useRouter();
   const currentRoute = router.pathname;
   const [open, setOpen] = useState(false);
@@ -18,29 +20,7 @@ export default function Nav() {
   return (
     <>
       <nav className=" w-full bg-transparent  bg-opacity-30 transition-all duration-500 h-24 px-5 flex items-center justify-between  absolute  z-30 group">
-        <div className="flex">
-          <button
-            type="button"
-            aria-label="Mobile Menu"
-            title="Mobile Menu"
-            onClick={handleToggle}
-            className="sm:mt-3 mt-2  mr-3 flex h-8 w-8 items-center justify-center xl:hidden"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-8 h-8 text-slate-200"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
-              />
-            </svg>
-          </button>
+        <div className="flex items-center">
 
           <Link href="/">
             <Image
@@ -91,7 +71,7 @@ export default function Nav() {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="menuItems origin-center absolute   mt-2 w-[300px] rounded-md shadow-lg bg-white     focus:outline-none">
+                <Menu.Items className="menuItems origin-center absolute   mt-2 w-[300px] rounded-md shadow-lg bg-white focus:outline-none">
                   <div className="p-5">
                     <Menu.Item>
                       <Link href="/products/rugby" title="Rugby Uniforms Manufacturer">
@@ -305,20 +285,53 @@ export default function Nav() {
 
 
         </ul>
-        <div className="flex gap-4 mr-14">
+        <div className="flex items-center gap-4 sm:mr-14">
 
           <Link href="/cart" className={
             currentRoute === "/cart"
-              ? "text-[#01b8ee] px-3"
-              : "hover:text-[#01b8ee] px-3"
-          }><BsCart3 className="text-gray-200 hover:border-2 hover:border-blue-600 hover:text-white hover:rounded-xl p-1 hover:text-blue-700  w-10 h-10 flex items-center justify-center duration-300 " strokeWidth={0.5} /> </Link>
+              ? "text-[#01b8ee] "
+              : "hover:text-[#01b8ee]"}>
+            <p
+              className="relative inline-flex items-center text-sm font-semibold leading-5  transition duration-150 ease-in-out"
+            >
+              <span className="ml-1">
+                <BsCart3 className="text-gray-200 hover:border-2 rounded-xl hover:border-[#01b8ee] hover:rounded-xl p-1 hover:text-[#01b8ee]  w-10 h-10 flex items-center justify-center duration-300" />
+                {count > 0 && (
+                  <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                    {count}
+                  </span>
+                )}
+              </span>
+            </p>
+          </Link>
           <Link href="/login" className={
             currentRoute === "/login"
-              ? "text-[#01b8ee] px-3"
-              : "hover:text-[#01b8ee] px-3"
+              ? "text-[#01b8ee]"
+              : "hover:text-[#01b8ee]"
           }>
-            <BsPerson className="text-gray-200 hover:border-2 hover:border-blue-600 hover:text-white hover:rounded-xl p-1 hover:text-blue-700  w-10 h-10 flex items-center justify-center duration-300 " strokeWidth={0.5} />  </Link>
-
+            <BsPerson className="text-gray-200 hover:border-2 rounded-xl hover:border-[#01b8ee] hover:rounded-xl p-1 hover:text-[#01b8ee]  w-10 h-10 flex items-center justify-center duration-300" />  </Link>
+          <button
+            type="button"
+            aria-label="Mobile Menu"
+            title="Mobile Menu"
+            onClick={handleToggle}
+            className="sm:mt-3 mt-2  mr-3 flex h-8 w-8 items-center justify-center xl:hidden"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-8 h-8 text-slate-200"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
+              />
+            </svg>
+          </button>
         </div>
 
       </nav>

@@ -41,26 +41,26 @@ const LoginForm = () => {
             <MainHeader pageHeading="LOGIN" pageImg="" />
 
             <div className=" w-[70%] mx-auto my-20">
-                <div className="login-title py-8 px-6 flex items-center justify-between">
-                    <h3 className="text-center text-3xl sm:text-2xl text-xl mb-4 font-semibold">Welcome to Athlotic Sportswear! Please login.</h3>
+                <div className="login-title py-8 sm:px-6 flex sm:flex-row flex-col items-center justify-between">
+                    <h3 className="text-center lg:text-3xl sm:text-2xl text-xl mb-4 font-semibold">Welcome to Athlotic Sportswear! Please login.</h3>
                     <div className="login-other float-right text-gray-600">
                         <span>New member? <Link href="/signup" className="text-blue-600 hover:underline">Register</Link> here.</span>
                     </div>
                 </div>
-                <div className='bg-white p-6'>
+                <div className='bg-white sm:p-6 p-3'>
                     <form>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className='flex flex-col gap-4'>
                                 <div className="flex flex-col">
                                     <label htmlFor="loginInput" className="text-sm text-gray-600 mb-1">Phone Number or Email</label>
-                                    <input type="text" id="loginInput" placeholder="Please enter your Phone Number or Email" className="w-full border border-gray-300 rounded-md px-3 py-2 text-base text-gray-700 placeholder-gray-400  focus:outline-none focus:border-blue-500 focus:outline-none" />
+                                    <input type="text" id="loginInput" placeholder="Please enter your Phone Number or Email" className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400  focus:outline-none focus:border-blue-500 focus:outline-none" />
                                     <div className="flex items-center justify-end mt-1">
                                         <span className="text-red-500 text-xs"></span>
                                     </div>
                                 </div>
                                 <div className="flex flex-col">
                                     <label htmlFor="passwordInput" className="text-sm text-gray-600 mb-1">Password</label>
-                                    <div className='w-full border border-gray-300 rounded-md px-3 py-2 text-base text-gray-700 flex justify-between'>
+                                    <div className='w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 flex justify-between'>
                                         <input
                                             type={show ? 'text' : 'password'}
                                             placeholder="Please Enter Your Password"

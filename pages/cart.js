@@ -37,7 +37,7 @@ export default function CartPage() {
             </Head>
             <MainHeader pageHeading="CART ITEMS" pageImg="cart.jpg" />
 
-            <div className="h-screen bg-gray-100 pt-20">
+            <div className="bg-gray-100 pt-20">
                 <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
                     <div className="rounded-lg md:w-2/3">
                         <div className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
@@ -85,7 +85,7 @@ export default function CartPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+                    <div className="relative mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
                         <div className="mb-2 flex justify-between">
                             <p className="text-gray-700">Subtotal</p>
                             <p className="text-gray-700">PKR 129.99</p>

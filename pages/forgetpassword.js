@@ -40,10 +40,10 @@ const ForgetPassword = () => {
             <MainHeader pageHeading="FORGET PASSWORD" pageImg="Forget Password" />
 
             <div className=" w-[70%] mx-auto my-20">
-                 <div className="w-full lg:w-1/2 bg-white mx-auto p-5">
+                 <div className="w-full lg:w-1/2 bg-white mx-auto sm:p-5">
                     <div className="px-8 mb-4 text-center">
-                        <h3 className="pt-4 mb-2 text-2xl">Forgot Your Password?</h3>
-                        <p className="mb-4 text-sm text-gray-700">
+                        <h3 className="pt-4 mb-2 sm:text-2xl text-xl">Forgot Your Password?</h3>
+                        <p className="mb-4 sm:text-sm text-xs text-gray-700">
                             We get it, stuff happens. Just enter your email address below and we'll send you a
                             link to reset your password!
                         </p>

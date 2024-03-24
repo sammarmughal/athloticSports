@@ -42,8 +42,8 @@ const Signup = () => {
             <MainHeader pageHeading="SIGN UP" pageImg="" />
 
             <div className=" w-[70%] mx-auto my-20">
-                <div className="login-title py-8 px-6 flex items-center justify-between">
-                    <h3 className="text-center text-3xl sm:text-2xl text-xl mb-4 font-semibold">Create your Athlotic Sportswear Account.</h3>
+                <div className="login-title py-8 px-6 flex sm:flex-row flex-col items-center justify-between">
+                    <h3 className="text-center lg:text-3xl sm:text-2xl text-xl mb-4 font-semibold">Create your Athlotic Sportswear Account.</h3>
                     <div className="login-other float-right text-gray-600">
                         <span>Already member? <Link href="/login" className="text-blue-600 hover:underline">Login</Link> here.</span>
                     </div>
@@ -54,24 +54,24 @@ const Signup = () => {
                             <div className='flex flex-col gap-4'>
                                 <div className="flex flex-col">
                                     <label htmlFor="loginInput" className="text-sm text-gray-600 mb-1">Full Name</label>
-                                    <input type="text" id="loginInput" placeholder="Please enter your first and last name" className="w-full border border-gray-300 rounded-md px-3 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:outline-none" />
+                                    <input type="text" id="loginInput" placeholder="Please enter your first and last name" className="w-full border border-gray-300 rounded-md px-3 py-2 text-xs sm:text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:outline-none" />
                                     <div className="flex items-center justify-end mt-1">
                                         <span className="text-red-500 text-xs"></span>
                                     </div>
                                 </div>
                                 <div className="flex flex-col">
                                     <label htmlFor="loginInput" className="text-sm text-gray-600 mb-1">Phone Number or Email</label>
-                                    <input type="text" id="loginInput" placeholder="Please enter your Phone Number or Email" className="w-full border border-gray-300 rounded-md px-3 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:outline-none" />
+                                    <input type="text" id="loginInput" placeholder="Please enter your Phone Number or Email" className="w-full border border-gray-300 rounded-md px-3 py-2 text-xs sm:text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:outline-none" />
                                     <div className="flex items-center justify-end mt-1">
                                         <span className="text-red-500 text-xs"></span>
                                     </div>
                                 </div>
                                 <div className="flex flex-col">
                                     <label htmlFor="passwordInput" className="text-sm text-gray-600 mb-1">Password</label>
-                                     <div className='w-full border border-gray-300 rounded-md px-3 py-2 text-base text-gray-700 flex justify-between'>
+                                     <div className='w-full border border-gray-300 rounded-md px-3 py-2 text-xs sm:text-base text-gray-700 flex justify-between'>
                                         <input
                                             type={show ? 'text' : 'password'}
-                                            placeholder="Minimum 6 characters with a number and a letter"
+                                            placeholder="Minimum 6 characters with number and letter"
                                             className="w-full placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:outline-none"
                                         />
                                         <button className="block" onClick={() => setShow(!show)}>
@@ -85,14 +85,14 @@ const Signup = () => {
                                 </div>
                                 <div className="flex flex-col">
                                     <label htmlFor="Age" className="text-sm text-gray-600 mb-1">Age</label>
-                                    <input type="number" id="Age" placeholder="Enter your age" className="w-full border border-gray-300 rounded-md px-3 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:outline-none" />
+                                    <input type="number" id="Age" placeholder="Enter your age" className="w-full border border-gray-300 rounded-md px-3 py-2 text-xs sm:text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:outline-none" />
                                 </div>
                                 
                             </div>
                             <div>
                                 <div className="flex flex-col mb-5">
                                     <label htmlFor="passwordInput" className="text-sm text-gray-600 mb-1">Gender</label>
-                                    <select type="password" id="passwordInput" placeholder="" className="w-full border border-gray-300 rounded-md px-3 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:outline-none">
+                                    <select type="password" id="passwordInput" placeholder="" className="w-full border border-gray-300 rounded-md px-3 py-2 text-xs sm:text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:outline-none">
                                         <option value="male">Select a Gender</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>

@@ -71,7 +71,7 @@ export default function Product() {
           <link rel="preconnect" href="//www.google-analytics.com" as="script" />
           <meta name="google" content="notranslate" />
         </Head>
-        <MainHeader pageHeading={product.name} />
+        <MainHeader pageHeading={product.name}/>
 
         <section className="mx-auto max-w-2xl py-16 px-4 sm:px-6 lg:max-w-7xl lg:px-8 ">
           <div className="mt-6 flex px-4 sm:mt-16 sm:px-0 lg:mt-0">
