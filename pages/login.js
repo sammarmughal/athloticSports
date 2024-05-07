@@ -80,9 +80,9 @@ const LoginForm = () => {
                                 </div>
                             </div>
                             <div>
-                                <div className="">
+                                <Link href='/admin-portal' className="">
                                     <button type="submit" className="w-full py-3 btn-action rounded-full text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">LOGIN</button>
-                                </div>
+                                </Link>
                                 <div className="flex flex-col gap-4 justify-center items-center mt-6">
                                     <span className="mr-2">Or, login with</span>
                                     <button className="px-4 py-2 bg-blue-800 w-full rounded-full flex justify-center items-center gap-3 text-white font-semibold rounded hover:bg-blue-900 focus:outline-none focus:bg-blue-900"><FaFacebookF className='w-5 h-5 text-white' /> Facebook</button>

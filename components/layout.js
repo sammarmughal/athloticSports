@@ -6,15 +6,15 @@ import Footer from './footer';
 import MainHeader from './mainheader';
   
    
-export default function Layout({ children }) {
+export default function Layout({ children , showNavAndFooter = true }) {
     
   return (
     <div className="w-full mx-auto bg-center bg-no-repeat bg-cover">
       {/*style= {{backgroundImage:"url('../images/svgexport-3.svg'),url('../images/svgexport-5.svg')"}}*/}
       <Head></Head>
-      <Nav />
+      {showNavAndFooter && <Nav />}
       <div className="w-full   mx-auto">{children}</div>
-      <Footer/>
+      {showNavAndFooter && <Footer />}
     </div>
   );    
 
