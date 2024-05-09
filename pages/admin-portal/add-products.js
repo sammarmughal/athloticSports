@@ -11,12 +11,15 @@ const add_products = () => {
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [product_SKU, setProduct_SKU] = useState(null);
+
 
   const handleProductName = (e) => setProductName(e.target.value);
   const handleCategory = (e) => setCategory(e.target.value);
   const handlePrice = (e) => setPrice(e.target.value);
   const handleQuantity = (e) => setQuantity(e.target.value);
   const handleDescription = (e) => setDescription(e.target.value);
+  const handleProduct_SKU = (e) => setProduct_SKU(e.target.value);
   const handleSize = (e) => setSize(e.target.value);
   const handlePhotoChange = (event) => {
     const file = event.target.files[0];
@@ -30,9 +33,10 @@ const add_products = () => {
   };
   const handleCancel = () => {
     setSelectedPhoto(null);
-    // Optionally, clear the file input
-    // document.getElementById('photo-input').value = '';
   };
+  const handleSubmit =(e) => {
+    e.preventDefault();
+  }
   return (
     <>
       <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white  text-black ">
@@ -141,14 +145,26 @@ const add_products = () => {
                   </div>
                   <div className="grid grid-cols-1 mt-5 mx-7">
                     <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+                      Product SKU
+                    </label>
+                    <input
+                      value={product_SKU}
+                      onChange={handleProduct_SKU}
+                      className="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                      type="text"
+                      placeholder="Enter Product-SKU"
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 mt-5 mx-7">
+                    <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
                       Price
                     </label>
                     <input
                       value={price}
                       onChange={handlePrice}
                       className="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                      type="text"
-                      placeholder="Enter Product Name"
+                      type="number"
+                      placeholder="Enter Price"
                     />
                   </div>
                   <div className="grid grid-cols-1 mt-5 mx-7">
@@ -161,7 +177,7 @@ const add_products = () => {
                       rows="5"
                       className="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                       type="text"
-                      placeholder="Input 3"
+                      placeholder="Product Details"
                     />
                   </div>
                   <div className="grid grid-cols-1 mt-5 mx-7">
@@ -231,6 +247,7 @@ const add_products = () => {
                   <div className="w-full justify-end flex">
                     <button
                       type="submit"
+                      onClick={handleSubmit}
                       className="mt-10 mr-6 py-3 btn-action rounded-xl text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
                     >
                       Submit

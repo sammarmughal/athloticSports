@@ -1,21 +1,25 @@
 import Sidebar from "./component/sidebar";
 import Link from "next/link";
-import User_Nav from "./component/user-nav";
-const Orders = () => {
+import Admin_Nav from "./component/admin-nav";
+const Cancellerations = () => {
   return (
     <>
       <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white  text-black ">
-        <User_Nav />
+        <Admin_Nav />
         <Sidebar />
         <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
           <div className="mt-4 mx-4">
-           <div><h1 className="my-4 text-xl text-slate-600 font-semibold">My Orders</h1></div>
+            <div className="flex justify-between">
+              <h1 className="my-4 text-xl text-slate-600 font-semibold">
+                Cancelled Orders
+              </h1>
+            </div>
             <div className="w-full overflow-hidden rounded-lg shadow-xs">
               <div className="w-full overflow-x-auto">
                 <table className="w-full">
                   <thead>
                     <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b  bg-gray-50 ">
-                      <th className="px-4 py-3">Product Name</th>
+                      <th className="px-4 py-3">Client</th>
                       <th className="px-4 py-3">Amount</th>
                       <th className="px-4 py-3">Status</th>
                       <th className="px-4 py-3">Date</th>
@@ -39,9 +43,7 @@ const Orders = () => {
                           </div>
                           <div>
                             <p className="font-semibold">Jolina Angelie</p>
-                            <p className="text-xs text-gray-600">
-                              Unemployed
-                            </p>
+                            <p className="text-xs text-gray-600">Unemployed</p>
                           </div>
                         </div>
                       </td>
@@ -71,17 +73,15 @@ const Orders = () => {
                           </div>
                           <div>
                             <p className="font-semibold">Dave Li</p>
-                            <p className="text-xs text-gray-600">
-                              Influencer
-                            </p>
+                            <p className="text-xs text-gray-600">Influencer</p>
                           </div>
                         </div>
                       </td>
                       <td className="px-4 py-3 text-sm">$775.45</td>
                       <td className="px-4 py-3 text-xs">
-                        <span className="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full">
+                        <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">
                           {" "}
-                          Delivered{" "}
+                          Completed{" "}
                         </span>
                       </td>
                       <td className="px-4 py-3 text-sm">09-02-2021</td>
@@ -103,9 +103,7 @@ const Orders = () => {
                           </div>
                           <div>
                             <p className="font-semibold">Rulia Joberts</p>
-                            <p className="text-xs text-gray-600">
-                              Actress
-                            </p>
+                            <p className="text-xs text-gray-600">Actress</p>
                           </div>
                         </div>
                       </td>
@@ -113,7 +111,7 @@ const Orders = () => {
                       <td className="px-4 py-3 text-xs">
                         <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">
                           {" "}
-                          Approved{" "}
+                          Completed{" "}
                         </span>
                       </td>
                       <td className="px-4 py-3 text-sm">17-04-2021</td>
@@ -135,9 +133,7 @@ const Orders = () => {
                           </div>
                           <div>
                             <p className="font-semibold">Hitney Wouston</p>
-                            <p className="text-xs text-gray-600">
-                              Singer
-                            </p>
+                            <p className="text-xs text-gray-600">Singer</p>
                           </div>
                         </div>
                       </td>
@@ -145,7 +141,7 @@ const Orders = () => {
                       <td className="px-4 py-3 text-xs">
                         <span className="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">
                           {" "}
-                          Denied{" "}
+                          Expired{" "}
                         </span>
                       </td>
                       <td className="px-4 py-3 text-sm">11-01-2021</td>
@@ -160,4 +156,4 @@ const Orders = () => {
     </>
   );
 };
-export default Orders;
+export default Cancellerations;
