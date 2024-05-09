@@ -73,9 +73,9 @@ const CheckoutPage = () => {
                                         <span className="text-right px-2">Email</span>
                                         <input name="email" type="email" className="focus:outline-none px-3" placeholder="try@example.com" required="" />
                                     </label>
-                                    <label className="flex border-b border-gray-200 h-12 py-3 items-center">
+                                    <label className="flex border-b border-gray-200 h-12 py-3 pr-8 items-center">
                                         <span className="text-right px-2">Address</span>
-                                        <input name="address" className="focus:outline-none px-3" placeholder="10 Street XYZ 654" />
+                                        <input name="address" className="focus:outline-none w-full px-3" placeholder="10 Street XYZ 654" />
                                     </label>
                                     <label className="flex border-b border-gray-200 h-12 py-3 items-center">
                                         <span className="text-right px-2">City</span>
@@ -88,38 +88,7 @@ const CheckoutPage = () => {
                                     <label className="xl:w-1/4 xl:inline-flex py-3 items-center flex xl:border-none border-t border-gray-200 py-3">
                                         <span className="text-right px-2 xl:px-0 xl:text-none">ZIP</span>
                                         <input name="postal_code" className="focus:outline-none px-3" placeholder="98603" />
-                                    </label>
-                                    <label className="flex border-t border-gray-200 h-12 py-3 items-center select relative">
-                                        <span className="text-right px-2">Country</span>
-                                        <div id="country" className="focus:outline-none px-3 w-full flex items-center">
-                                            <select name="country" className="mx-4 border-none bg-transparent flex-1 cursor-pointer appearance-none focus:outline-none">
-                                                <option value="AU">Australia</option>
-                                                <option value="BE">Belgium</option>
-                                                <option value="BR">Brazil</option>
-                                                <option value="CA">Canada</option>
-                                                <option value="CN">China</option>
-                                                <option value="DK">Denmark</option>
-                                                <option value="FI">Finland</option>
-                                                <option value="FR">France</option>
-                                                <option value="DE">Germany</option>
-                                                <option value="HK">Hong Kong</option>
-                                                <option value="IE">Ireland</option>
-                                                <option value="IT">Italy</option>
-                                                <option value="JP">Japan</option>
-                                                <option value="LU">Luxembourg</option>
-                                                <option value="MX">Mexico</option>
-                                                <option value="NL">Netherlands</option>
-                                                <option value="PL">Poland</option>
-                                                <option value="PT">Portugal</option>
-                                                <option value="PK" selected="selected">Pakistan</option>
-                                                <option value="SG">Singapore</option>
-                                                <option value="ES">Spain</option>
-                                                <option value="TN">Tunisia</option>
-                                                <option value="GB">United Kingdom</option>
-                                                <option value="US" >United States</option>
-                                            </select>
-                                        </div>
-                                    </label>
+                                    </label>                                    
                                 </fieldset>
                             </section>
                         </form>
