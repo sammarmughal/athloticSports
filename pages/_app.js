@@ -16,8 +16,9 @@ function MyApp({ Component, pageProps }) {
   const isAdminPortalPage = router.pathname.startsWith('/admin-portal');
   const isUserPortalPage = router.pathname.startsWith('/user-dashboard');
   const isHomepage = router.pathname.startsWith('/products/homepage');
+  const isTablepage = router.pathname.startsWith('/table');
 
-  const showNavAndFooter  = !( isAdminPortalPage || isUserPortalPage || isHomepage )  ;
+  const showNavAndFooter  = !( isAdminPortalPage || isUserPortalPage || isHomepage || isTablepage )  ;
   return (
     <ReduxProvider>
       <Layout showNavAndFooter={showNavAndFooter}>

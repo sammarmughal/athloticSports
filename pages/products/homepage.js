@@ -1,113 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { useTable } from 'react-table';
+import React from 'react';
 
-function HomePage() {
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        fetch('/api/products')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => setProducts(data))
-            .catch(error => console.error('Error fetching products:', error));
-    }, []);
- 
-    const columns = React.useMemo(
-        () => [
-            {
-                Header: 'SKU ID',
-                accessor: 'sku_id',
-            },
-            {
-                Header: 'Name',
-                accessor: 'product_name',
-            },
-            {
-                Header: 'Description',
-                accessor: 'description',
-            },
-            {
-                Header: 'Price',
-                accessor: 'price',
-            },
-            {
-                Header: 'Quantity Available',
-                accessor: 'quantity_available',
-            },
-            {
-                Header: 'Category ID',
-                accessor: 'category_id',
-            },
-            {
-                Header: 'Image',
-                accessor: 'image_url',
-                Cell: ({ value }) => value && <img src={value} alt="Product" style={{ maxWidth: '100px' }} />,
-            },
-        ],
-        []
-    );
-
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    } = useTable({ columns, data: products });
-
+export default function HomePage({ products }) {
     return (
         <div>
-            <h1>Welcome to our website!</h1>
-            <table {...getTableProps()} style={{ border: 'solid 1px blue', borderCollapse: 'collapse' }}>
-                <thead>
-                    {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                                <th
-                                    {...column.getHeaderProps()}
-                                    style={{
-                                        borderBottom: 'solid 3px red',
-                                        background: 'aliceblue',
-                                        color: 'black',
-                                        fontWeight: 'bold',
-                                    }}
-                                >
-                                    {column.render('Header')}
-                                </th>
-                            ))}
-                        </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {rows.map(row => {
-                        prepareRow(row);
-                        return (
-                            <tr {...row.getRowProps()}>
-                                {row.cells.map(cell => {
-                                    return (
-                                        <td
-                                            {...cell.getCellProps()}
-                                            style={{
-                                                padding: '10px',
-                                                border: 'solid 1px gray',
-                                                background: 'papayawhip',
-                                            }}
-                                        >
-                                            {cell.render('Cell')}
-                                        </td>
-                                    );
-                                })}
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+            <h1>Products</h1>
+            <ul>
+                {products.map(product => (
+                    <li key={product.sku_id}>
+                        <h3>{product.product_name}</h3>
+                        <p>Price: ${product.price}</p>
+                        <p>Quantity Available: {product.quantity_available}</p>
+                        <p>Category: {product.category}</p>
+                        <p>Slug: {product.slug}</p>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }
 
-export default HomePage;
+export async function getServerSideProps() {
+    try {
+        // Fetch data from your database here
+        const response = await fetch('http://localhost:3000/products');
+        const products = await response.json();
+        
+        return { props: { products } };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return { props: { products: [] } }; // Return an empty array if there's an error
+    }
+}
