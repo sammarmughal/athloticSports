@@ -1,12 +1,7 @@
 import { fetchProducts } from '../lib/data';
-import { Product } from '../lib/definitions';
-import { GetServerSideProps } from 'next';
+import React from 'react';
 
-interface TablePageProps {
-  products: Product[];
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
+export async function getServerSideProps() {
   try {
     const products = await fetchProducts();
     return { props: { products } };
@@ -14,9 +9,20 @@ export const getServerSideProps: GetServerSideProps = async () => {
     console.error("Error fetching products:", error);
     return { props: { products: [] } };
   }
-};
+}
 
-const TablePage: React.FC<TablePageProps> = ({ products }) => {
+/** Defining the types of columns in table Products
+ * @typedef {Object} Product
+ * @property {number} sku_id
+ * @property {string} product_name
+ * @property {string} description
+ * @property {number} price
+ * @property {number} quantity_available
+ * @property {number} category_id
+ * @property {string} image_url
+ */
+
+const TablePage = ({ products }) => {
   return (
     <div className="min-h-screen bg-slate-100">
       <h2>Products Table</h2>
