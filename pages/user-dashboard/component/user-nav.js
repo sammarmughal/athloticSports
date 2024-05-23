@@ -1,18 +1,29 @@
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 function User_Nav() {
   return (
     <>
       <div className="fixed w-full flex items-center justify-between h-14 text-white bg-blue-800 z-10">
         <div className="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 border-none">
+        <Link href="/">
+            <Image
+              src="/images/logo-athlotic2.png"
+              alt="Athlotic Sports GUJRANWALA"
+              className="backHome sm:w-40 w-24 cursor-pointer"
+              width={240}
+              height={128}
+              title="Athlotic Sports GUJRANWALA"
+            />
+          </Link>
+        </div>
+        <div className="flex justify-between items-center h-14 bg-blue-800 header-right">
           <img
             className="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden"
             src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg"
             alt="Avatar"
           />
-          <span className="hidden md:block">User</span>
-        </div>
-        <div className="flex justify-between items-center h-14 bg-blue-800 header-right">
-         
+          <span className="hidden md:block">User</span>         
           <ul className="flex items-center">
             <li>
               <div className="block w-px h-6 mx-3 bg-gray-400"></div>

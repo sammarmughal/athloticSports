@@ -76,7 +76,7 @@ export default function Product() {
         <section className="mx-auto max-w-2xl py-16 px-4 sm:px-6 lg:max-w-7xl lg:px-8 ">
           <div className="mt-6 flex px-4 sm:mt-16 sm:px-0 lg:mt-0">
             <div className="mt-10 hover:-translate-y-2  duration-300">
-              <img className="rounded-3xl" src={product.imageSrc} alt={product.imageAlt} width={392} height={428} />
+              <Image className="rounded-3xl" src={product.imageSrc} alt={product.imageAlt} width={392} height={428} />
             </div>
             <div className="mt-8 mx-auto flex flex-col rounded-lg shadow-lg overflow-hidden hover:-translate-y-2 duration-300 w-[40%]">
               <div className="items-center">

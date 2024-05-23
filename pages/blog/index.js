@@ -85,10 +85,12 @@ export default function blogPosts() {
                   <div className="flex-shrink-0">
 
                     <span className="sr-only">{post.author}</span>
-                    <img
+                    <Image
                       className="h-10 w-10 rounded-full"
                       src={post.authorpic}
                       alt="Najam Awan Image"
+                      width={auto}
+                      height={auto}
                     />
 
                   </div>

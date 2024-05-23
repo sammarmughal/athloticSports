@@ -1,6 +1,7 @@
 import Sidebar from "./component/sidebar";
 import Link from "next/link";
 import Admin_Nav from "./component/admin-nav";
+import Image from "next/image";
 const Profile = () => {
   return (
     <>
@@ -26,11 +27,13 @@ const Profile = () => {
                   This information is secret so be careful
                 </span>
                 <div className="w-full p-8 mx-2 flex justify-center">
-                  <img
+                  <Image
                     id="showImage"
                     className="max-w-xs w-32 items-center border"
                     src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
                     alt=""
+                    height={auto}
+                    width={auto}
                   />
                 </div>
               </div>
