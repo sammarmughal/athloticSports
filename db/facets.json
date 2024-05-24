@@ -47,25 +47,25 @@
         "value": "Gym Wear",
         "label": "Gym Wear",
         "count": 19,
-        "Link": "/products/gym-wear"
+        "Link": "/products/gym"
       },
       {
         "value": "Hoodies",
         "label": "Hoodies",
         "count": 19,
-        "Link": "/products/hoodies-and-joggers"
+        "Link": "/products/hoodies"
       },
       {
         "value": "Ice Hockey",
         "label": "Ice Hockey",
         "count": 19,
-        "Link": "/products/ice-hockey"
+        "Link": "/products/icehockey"
       },
         {
         "value": "Martial & arts",
         "label": "Martial & arts",
         "count": 19,
-        "Link": "/products/martial-art"
+        "Link": "/products/martialarts"
       },
       {
         "value": "Medical Wear",
@@ -95,7 +95,7 @@
         "value": "Sports Bag",
         "label": "Sports Bag",
         "count": 19,
-        "Link": "/products/sports-bag"
+        "Link": "/products/sportsbag"
       },
       {
         "value": "Shorts",
@@ -125,7 +125,7 @@
         "value": "Winter Caps",
         "label": "Winter Caps",
         "count": 19,
-        "Link": "/products/winter-caps"
+        "Link": "/products/wintercaps"
       },
       {
         "value": "Volley ball",
