@@ -5,6 +5,7 @@ import { fetchProducts } from "../../lib/data";
 import { useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import ReactPaginate from "react-paginate";
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps() {
   try {
@@ -15,17 +16,34 @@ export async function getServerSideProps() {
     return { props: { products: [] } };
   }
 }
+
 const Products = ({ products }) => {
   const [dropdown, setDropdown] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const productPerPge = 25;
+  const router = useRouter();
+
   const handleDropdown = () => {
     setDropdown(!dropdown);
   };
+
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
-  console.log(products);
+
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`/api/products/${id}`, { method: 'DELETE' });
+      router.replace(router.asPath);
+    } catch (error) {
+      console.error('Failed to delete product:', error);
+    }
+  };
+
+  const handleEdit = (id) => {
+    router.push(`/admin/edit-product/${id}`);
+  };
+
   const offset = currentPage * productPerPge;
   const currentProducts = products.slice(offset, offset + productPerPge);
   const pageCount = Math.ceil(products.length / productPerPge);
@@ -65,7 +83,7 @@ const Products = ({ products }) => {
                     >
                       <path
                         fillRule="evenodd"
-                        d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                        d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
                         clipRule="evenodd"
                       />
                     </svg>
@@ -129,12 +147,20 @@ const Products = ({ products }) => {
                         </td>
                         <td className="px-4 py-3">{product.category}</td>
                         <td className="flex flex-col gap-1 p-1">
-                          <button className="bg-red-400 rounded px-2">
+                          <button
+                            className="bg-red-400 rounded px-2"
+                            onClick={() => handleDelete(product.sku_id)}
+                          >
                             Delete
                           </button>
-                          <button className="bg-green-400 rounded px-2">
+                          <Link href={'./edit-product'}>
+                          <button
+                            className="bg-green-400 rounded px-2"
+                            onClick={() => handleEdit(product.sku_id)}
+                          >
                             Edit
                           </button>{" "}
+                          </Link>
                         </td>
                       </tr>
                     ))}
