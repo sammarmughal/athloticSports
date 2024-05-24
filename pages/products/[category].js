@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { fetchProducts } from "../../lib/data";
 import headerTexts from "../../db/headerText.json";
 import facetData from "../../db/facets.json";
-import ProductCard from "../../components/ProductCard"; // Ensure this path is correct
+import ProductCard from "../../components/ProductCard"; 
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -27,18 +27,11 @@ export default function ProductDetailFitting({ products }) {
   const router = useRouter();
   const facetItems = facetData.facetItems;
   const category = router.query?.category || "soccer";
-
-  // Normalize category to ensure consistent comparison
   const normalizedCategory = category.trim().toLowerCase();
 
-  // Normalize product category for comparison, adding checks
   const filteredProducts = products.filter(
     (product) => product.category && product.category.trim().toLowerCase() === normalizedCategory
   );
-
-  console.log('Category:', category);
-  console.log('Products:', products);
-  console.log('Filtered Products:', filteredProducts);
 
   const headerText = headerTexts.find(header => header.name === category);
 
@@ -162,7 +155,7 @@ export default function ProductDetailFitting({ products }) {
                       </ul>
                     </div>
                     <div className="mt-6 ml-2 grid grid-cols-2 gap-y-14 gap-x-8 lg:grid-cols-3 xl:grid-cols-4">
-                      {products.map((product) => (
+                      {filteredProducts.map((product) => (
                         <ProductCard product={product} key={product.id} />
                       ))}
                     </div>

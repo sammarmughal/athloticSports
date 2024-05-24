@@ -25,6 +25,7 @@ const Products = ({ products }) => {
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
+  console.log(products);
   const offset = currentPage * productPerPge;
   const currentProducts = products.slice(offset, offset + productPerPge);
   const pageCount = Math.ceil(products.length / productPerPge);
@@ -110,7 +111,7 @@ const Products = ({ products }) => {
                       <th className="px-4 py-3">Description</th>
                       <th className="px-4 py-3">Price</th>
                       <th className="px-4 py-3">Quantity Available</th>
-                      <th className="px-4 py-3">Category ID</th>
+                      <th className="px-4 py-3">Category</th>
                       <th className="px-4 py-3">Action</th>
                     </tr>
                   </thead>
@@ -126,7 +127,7 @@ const Products = ({ products }) => {
                         <td className="px-4 py-3">
                           {product.quantity_available}
                         </td>
-                        <td className="px-4 py-3">{product.category_id}</td>
+                        <td className="px-4 py-3">{product.category}</td>
                         <td className="flex flex-col gap-1 p-1">
                           <button className="bg-red-400 rounded px-2">
                             Delete

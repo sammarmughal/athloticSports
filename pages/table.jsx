@@ -18,8 +18,10 @@ export async function getServerSideProps() {
  * @property {string} description
  * @property {number} price
  * @property {number} quantity_available
- * @property {number} category_id
+ * @property {string} category
  * @property {string} image_url
+ * @property {string} image_alt
+
  */
 
 const TablePage = ({ products }) => {
@@ -46,7 +48,7 @@ const TablePage = ({ products }) => {
               <td>{product.description}</td>
               <td>${product.price}</td>
               <td>{product.quantity_available}</td>
-              <td>{product.category_id}</td>
+              <td>{product.category}</td>
               <td>{product.image_url}</td>
             </tr>
           ))}
