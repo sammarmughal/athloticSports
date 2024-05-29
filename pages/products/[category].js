@@ -32,7 +32,6 @@ export default function ProductDetailFitting({ products }) {
   const filteredProducts = products.filter(
     (product) => product.category && product.category.trim().toLowerCase() === normalizedCategory
   );
-
   const headerText = headerTexts.find(header => header.name === category);
 
   useEffect(() => {

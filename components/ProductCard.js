@@ -2,12 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { useDispatch } from 'react-redux';
-import { increment } from '../components/store/cartSlice';
+import { addToCart } from './store/cartSlice';
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();
 
-  const addToCart = () => {
-    dispatch(increment());
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
   };
   const formatPrice = (price) => {
     return price.toString().endsWith('.00') ? price.toString().slice(0, -3) : price;
@@ -15,7 +15,7 @@ export default function ProductCard({ product }) {
   return (
     <div className="flex flex-col gap-2">
       <div key={product.id} className="group relative">
-        <Link href={`/product/${product.id}`} className="cursor-pointer">
+        <Link href={`/product/${product.sku_id}`} className="cursor-pointer">
           <div className="w-full min-h-90 rounded-lg border aspect-w-1 aspect-h-1 shadow    overflow-hidden group-hover:opacity-75 group-hover:-translate-y-2 transition-all duration-300 lg:h-60 lg:aspect-none">
             <Image
               src={product.image_url}
@@ -42,7 +42,7 @@ export default function ProductCard({ product }) {
       </div>
       <div className="flex flex-col flex-wrap md:flex-row justify-between items-center text-gray-900">
       <p className="font-bold text-lg">PKR {formatPrice(product.price)}</p>
-        <Link href="#"><button className="add-cart mx-1" onClick={addToCart}> Add to Cart</button></Link>
+        <Link href="#"><button className="add-cart mx-1" onClick={handleAddToCart}> Add to Cart</button></Link>
       </div>
     </div>
   );
