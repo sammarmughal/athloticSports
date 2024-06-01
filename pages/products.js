@@ -74,7 +74,7 @@ export default function productsPage() {
                 <Image
                   src="/images/rugby-uniform-athlotic-sport.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={400}
                   height={200}
                 />
@@ -92,7 +92,7 @@ export default function productsPage() {
                 <Image
                   src="/images/baseball-uniform-athlotic-sports.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-3"
+                  className="mx-auto flex justify-center rounded-lg mt-3"
                   width={400}
                   height={200}
                 />
@@ -110,7 +110,7 @@ export default function productsPage() {
                 <Image
                   src="/images/basketball-uniform-athlotic-sports-pakistan.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-3"
+                  className="mx-auto flex justify-center rounded-lg mt-3"
                   width={400}
                   height={200}
                 />
@@ -127,7 +127,7 @@ export default function productsPage() {
                 <Image
                   src="/images/cycling-uniform-athlotic-sports-pakistan.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-3"
+                  className="mx-auto flex justify-center rounded-lg mt-3"
                   width={400}
                   height={200}
                 />
@@ -144,30 +144,12 @@ export default function productsPage() {
 
         <div className="container mx-auto px-4 mt-10">
           <div className="grid lg:grid-cols-4 grid-cols-1 gap-4  text-center">
-            <Link href="/products/hunting" className="bx-item-pro h-auto">
-              <div className="flex flex-col w-full">
-                <Image
-                  src="/images/hunting-uniform-athlotic-sport-pakistan.png"
-                  alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
-                  width={400}
-                  height={200}
-                />
-
-                <h3>Hunting Uniform</h3>
-                <p>
-                  We Manufacture Hunting uniforms that are designed to be
-                  durable and functional.
-                </p>
-              </div>
-            </Link>
-
             <Link href="/products/soccer" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/soccer-uniform-athlotic-sport-pakistan.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={400}
                   height={200}
                 />
@@ -179,13 +161,30 @@ export default function productsPage() {
                 </p>
               </div>
             </Link>
+             <Link href="/products/tracksuits" className="bx-item-pro h-auto">
+              <div className="flex flex-col w-full">
+                <Image
+                  src="/images/t-shirts-athlotic-sports-pakistan.jpg"
+                  alt="ATHLOTIC SPORTS"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
+                  width={400}
+                  height={200}
+                />
+
+                <h3>Track Suits</h3>
+                <p>
+                  We Manufacture T Shirts that are designed to be durable and
+                  functional.
+                </p>
+              </div>
+            </Link>
 
             <Link href="/products/cricket" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/cricket-uniform-athlotic-sport-pakistan.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={400}
                   height={200}
                 />
@@ -203,7 +202,7 @@ export default function productsPage() {
                 <Image
                   src="/images/cheers-uniform-athlotic-sport-pakistan.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={400}
                   height={200}
                 />
@@ -224,7 +223,7 @@ export default function productsPage() {
                 <Image
                   src="/images/running-uniform-athlotic-sport-pakistan.png"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={400}
                   height={200}
                 />
@@ -242,7 +241,7 @@ export default function productsPage() {
                 <Image
                   src="/images/golf-uniform-athlotic-sport-pakistan.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={300}
                   height={100}
                 />
@@ -255,12 +254,12 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="/products/ice-hockey" className="bx-item-pro h-auto">
+            <Link href="/products/icehockey" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full pb-6">
                 <Image
                   src="/images/ice-hockey-athlotic-sport-pakistan.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={400}
                   height={200}
                 />
@@ -278,7 +277,7 @@ export default function productsPage() {
                 <Image
                   src="/images/shorts-athlotic-sport-pakistan.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={300}
                   height={100}
                 />
@@ -295,12 +294,12 @@ export default function productsPage() {
 
         <div className="container mx-auto px-4 mt-10">
           <div className="grid lg:grid-cols-4 grid-cols-1 gap-4  text-center">
-            <Link href="/products/gym-wear" className="bx-item-pro h-auto">
+            <Link href="/products/gym" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/gym-wear-athlotic-sport-pakistan.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={400}
                   height={200}
                 />
@@ -313,12 +312,12 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="/products/hoodies-and-joggers" className="bx-item-pro h-auto">
+            <Link href="/products/hoodies" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/hoodies-athlotic-sports-pakistan.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={400}
                   height={200}
                 />
@@ -331,12 +330,12 @@ export default function productsPage() {
               </div>
             </Link>
 
-            <Link href="/products/martial-art" className="bx-item-pro h-auto">
+            <Link href="/products/martialarts" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/martial-arts-wear-athlotic-sports-pakistan.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={400}
                   height={200}
                 />
@@ -354,7 +353,7 @@ export default function productsPage() {
                 <Image
                   src="/images/medical-wear-athlotic-sports-pakistan.png"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={400}
                   height={200}
                 />
@@ -370,67 +369,13 @@ export default function productsPage() {
         </div>
 
         <div className="container mx-auto px-4 mt-10">
-          <div className="grid lg:grid-cols-4 grid-cols-1 gap-4  text-center">
-            <Link href="/products/polo-shirts" className="bx-item-pro h-auto">
-              <div className="flex flex-col w-full">
-                <Image
-                  src="/images/polo-shirts-athlotic-sports-pakistan.jpg"
-                  alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
-                  width={400}
-                  height={200}
-                />
-
-                <h3>Polo Shirts</h3>
-                <p>
-                  We Manufacture Polo Shirts that are designed to be durable and
-                  functional.
-                </p>
-              </div>
-            </Link>
-
-            <Link href="/products/softshell-jackets" className="bx-item-pro h-auto">
-              <div className="flex flex-col w-full">
-                <Image
-                  src="/images/softshell-jacket-athlotic-sports-pakistan.png"
-                  alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
-                  width={400}
-                  height={200}
-                />
-
-                <h3>Softshell Jacket</h3>
-                <p>
-                  We Manufacture Softshell Jackets that are designed to be
-                  durable and functional.
-                </p>
-              </div>
-            </Link>
-
-            <Link href="/products/tracksuits" className="bx-item-pro h-auto">
-              <div className="flex flex-col w-full">
-                <Image
-                  src="/images/t-shirts-athlotic-sports-pakistan.jpg"
-                  alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
-                  width={400}
-                  height={200}
-                />
-
-                <h3>Track Suits</h3>
-                <p>
-                  We Manufacture T Shirts that are designed to be durable and
-                  functional.
-                </p>
-              </div>
-            </Link>
-
-            <Link href="/products/sports-bag" className="bx-item-pro h-auto">
+          <div className="grid lg:grid-cols-4 grid-cols-1 gap-4  text-center">       
+            <Link href="/products/sportsbag" className="bx-item-pro h-auto">
               <div className="flex flex-col w-full">
                 <Image
                   src="/images/sports-bags-athlotic-sports-pakistan.jpg"
                   alt="ATHLOTIC SPORTS"
-                  className="rounded-lg mt-4 mb-3"
+                  className="mx-auto flex justify-center rounded-lg mt-4 mb-3"
                   width={400}
                   height={200}
                 />

@@ -4,7 +4,7 @@ import { fetchProductById } from '../../../lib/data';
 
 const EditProduct = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { sku_id } = router.query;
   const [product, setProduct] = useState({
     product_name: '',
     description: '',
@@ -15,10 +15,10 @@ const EditProduct = () => {
   });
 
   useEffect(() => {
-    if (id) {
-      fetchProductById(id).then(data => setProduct(data));
+    if (sku_id) {
+      fetchProductById(sku_id).then(data => setProduct(data));
     }
-  }, [id]);
+  }, [sku_id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +28,7 @@ const EditProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch(`/api/products/${id}`, {
+      await fetch(`/api/products/${sku_id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(product),

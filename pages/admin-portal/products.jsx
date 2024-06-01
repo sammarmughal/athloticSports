@@ -5,6 +5,7 @@ import { fetchProducts } from "../../lib/data";
 import { useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import ReactPaginate from "react-paginate";
+import Swal from 'sweetalert2';
 
 export async function getServerSideProps() {
   try {
@@ -29,6 +30,47 @@ const Products = ({ products }) => {
   const offset = currentPage * productPerPge;
   const currentProducts = products.slice(offset, offset + productPerPge);
   const pageCount = Math.ceil(products.length / productPerPge);
+  const handleDelete = async (sku_id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    });
+  
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(`/api/products/${sku_id}`, {
+          method: 'DELETE',
+        });
+  
+        if (response.ok) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your product has been deleted.",
+            icon: "success"
+          });
+  
+          window.location.reload();
+        } else {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to delete product.');
+        }
+      } catch (error) {
+        console.error("Error deleting product:", error);
+        Swal.fire({
+          title: "Error!",
+          text: error.message || "Failed to delete product.",
+          icon: "error"
+        });
+      }
+    }
+  };
+  
+
 
   return (
     <>
@@ -129,12 +171,15 @@ const Products = ({ products }) => {
                         </td>
                         <td className="px-4 py-3">{product.category}</td>
                         <td className="flex flex-col gap-1 p-1">
-                          <button className="bg-red-400 rounded px-2">
+                          <button className="bg-red-400 rounded px-2"
+                          onClick={()=> handleDelete(product.sku_id)}>
                             Delete
                           </button>
-                          <button className="bg-green-400 rounded px-2">
-                            Edit
-                          </button>{" "}
+                          <Link href={`/admin-portal/edit-product/${product.sku_id}`}>
+                            <button className="bg-green-400 rounded px-2">
+                              Edit
+                            </button>
+                          </Link>
                         </td>
                       </tr>
                     ))}

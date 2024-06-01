@@ -207,7 +207,7 @@ export default function Home() {
         </h2>
       </div>
     </Link>,
-    <Link href="/products/ice-hockey">
+    <Link href="/products/icehockey">
       <div className="px-6">
         <Image
           src={Icehockey}
@@ -280,7 +280,7 @@ export default function Home() {
     // Add more slider items here as needed
   ];
   const sliderItems2 = [
-    <Link href="/products/hoddies-and-joggers">
+    <Link href="/products/hoddies">
       <div className="px-7">
         <Image
           src={Hoodies}
@@ -294,20 +294,7 @@ export default function Home() {
         </h2>
       </div>
     </Link>,
-    <Link href="/products/jackets">
-      <div className="px-7">
-        <Image
-          src={Jackets}
-          alt="Jackets logo"
-          className="logo"
-          width={56}
-          height={60}
-        />
-        <h2 className="text-center text-white font-montserrat font-semibold">
-          Jackets
-        </h2>
-      </div>
-    </Link>,
+  
     <Link href="/products/medical">
       <div className="px-7">
         <Image
@@ -362,7 +349,7 @@ export default function Home() {
     <Link href="/products/tracksuits">
       <div className="px-7">
         <Image
-          src={T_shirt}
+          src="/images/logos/T-shirt.png"
           alt="T_shirt logo"
           className="logo"
           width={65}
@@ -716,7 +703,7 @@ export default function Home() {
                 <h3>Hunting Uniform</h3>
               </div>
             </Link>
-            <Link href="/products/ice-hockey">
+            <Link href="/products/icehockey">
               <div className="bx">
                 <Image
                   src="/images/athletic-uniform-athlotic-sport.jpg"
@@ -748,7 +735,7 @@ export default function Home() {
                 <h3>Cricket Uniform</h3>
               </div>
             </Link>
-            <Link href="/products/sports-bag">
+            <Link href="/products/sportsbag">
               <div className="bx">
                 <Image
                   src="/images/sports-bags-athlotic-sports.jpg"
@@ -817,12 +804,12 @@ export default function Home() {
                 }}
               >
                 <div className="elementor-widget-container pt-12 transition duration-300 border border-transparent rounded shadow transform transition-transform">
-                  <h2 className="text-white font-montserrat font-extrabold xl:text-5xl lg:text-5xl text-3xl text-center uppercase leading-relaxed  text-shadow-md elementor-size-default">
+                  <h2 className="text-white font-montserrat font-extrabold md:text-4xl text-xl text-center uppercase leading-relaxed  text-shadow-md elementor-size-default">
                     SPORTSWEAR CATEGORIES
                   </h2>
                 </div>
 
-                <div className="py-8 pb-4 flex">
+                <div className="py-8 pb-4 flex flex-wrap gap-2">
                   <div className="xl:hidden lg:hidden flex">
                     <MdArrowForwardIos onClick={prevSlide}>
                       Previous
@@ -833,7 +820,7 @@ export default function Home() {
                   <Link href="/products/football">
                     <div className="px-6">
                       <Image
-                        src={AFlogo}
+                        src="/images/logos/AmericanFootball.png"
                         alt="AF logo"
                         className="logo"
                         width={60}
@@ -847,7 +834,7 @@ export default function Home() {
                   <Link href="/products/baseball">
                     <div className="px-6">
                       <Image
-                        src={Baseball}
+                        src="/images/logos/Baseball.png"
                         alt="Baseball logo"
                         className="logo"
                         width={60}
@@ -861,7 +848,7 @@ export default function Home() {
                   <Link href="/products/basketball">
                     <div className="px-6">
                       <Image
-                        src={Basketball}
+                        src="/images/logos/Basketball.png"
                         alt="Basketball logo"
                         className="logo"
                         width={72}
@@ -875,7 +862,7 @@ export default function Home() {
                   <Link href="/products/soccer">
                     <div className="px-6">
                       <Image
-                        src={Soccer}
+                        src="/images/logos/Soccer.png"
                         alt="Soccer logo"
                         className="logo"
                         width={60}
@@ -889,7 +876,7 @@ export default function Home() {
                   <Link href="/products/rugby">
                     <div className="px-6">
                       <Image
-                        src={Rugby}
+                        src="/images/logos/Rugby.png"
                         alt="Rugby logo"
                         className="logo"
                         width={60}
@@ -900,10 +887,10 @@ export default function Home() {
                       </h2>
                     </div>
                   </Link>
-                  <Link href="/products/ice-hockey">
+                  <Link href="/products/icehockey">
                     <div className="px-6">
                       <Image
-                        src={Icehockey}
+                        src="/images/logos/Icehockey.png"
                         alt="Icehockey logo"
                         className="logo"
                         width={47}
@@ -917,7 +904,7 @@ export default function Home() {
                   <Link href="/products/golf">
                     <div className="px-6">
                       <Image
-                        src={Golf}
+                        src="/images/logos/Golf.png"
                         alt="Golf logo"
                         className="logo"
                         width={65}
@@ -931,7 +918,7 @@ export default function Home() {
                   <Link href="/products/tennis">
                     <div className="px-6">
                       <Image
-                        src={Tennis}
+                        src="/images/logos/Tennis.png"
                         alt="Tennis logo"
                         className="logo"
                         width={42}
@@ -945,7 +932,7 @@ export default function Home() {
                   <Link href="/products/cycling">
                     <div className="px-6">
                       <Image
-                        src={Cycling}
+                        src="/images/logos/Cycling.png"
                         alt="Cycling logo"
                         className="logo"
                         width={70}
@@ -959,7 +946,7 @@ export default function Home() {
                   <Link href="/products/cricket"></Link>
                   <div className="px-6">
                     <Image
-                      src={Cricket}
+                      src="/images/logos/Cricket.png"
                       alt="Cricket logo"
                       className="logo"
                       width={37}
@@ -971,20 +958,20 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="elementor-widget-container transition duration-300 border border-transparent rounded shadow transform transition-transform">
-                  <h2 className="text-white font-montserrat font-extrabold xl:text-5xl lg:text-5xl text-center text-3xl uppercase leading-relaxed  text-shadow-md elementor-size-default">
+                  <h2 className="text-white font-montserrat font-extrabold md:text-4xl text-xl text-center uppercase leading-relaxed  text-shadow-md elementor-size-default">
                     ACTIVEWEAR CATEGORIES
                   </h2>
                 </div>
-                <div className="py-12 pb-8 flex">
+                <div className="py-12 pb-8 flex flex-wrap gap-2">
                   <div className="xl:hidden lg:hidden">
                     <MdArrowForwardIos onClick={prevSlide}></MdArrowForwardIos>
                     <div className="slider">{sliderItems[currentSlide]}</div>
                     <MdArrowBackIos onClick={nextSlide}></MdArrowBackIos>
                   </div>
-                  <Link href="/products/hoodies-and-joggers">
+                  <Link href="/products/hoodies">
                     <div className="px-7">
                       <Image
-                        src={Hoodies}
+                        src="/images/logos/Hoodies.png"
                         alt="Hoodies logo"
                         className="logo"
                         width={70}
@@ -995,24 +982,11 @@ export default function Home() {
                       </h2>
                     </div>
                   </Link>
-                  <Link href="/products/jackets">
-                    <div className="px-7">
-                      <Image
-                        src={Jackets}
-                        alt="Jackets logo"
-                        className="logo"
-                        width={68}
-                        height={75}
-                      />
-                      <h2 className="text-center text-white font-montserrat font-semibold">
-                        Jackets
-                      </h2>
-                    </div>
-                  </Link>
+                
                   <Link href="/products/medical"></Link>
-                  <div className="px-7">
+                  <div className="px-7 cursor-pointer">
                     <Image
-                      src={SportsBra}
+                      src="/images/logos/SportsBra.png"
                       alt="medical logo"
                       className="logo"
                       width={70}
@@ -1022,10 +996,10 @@ export default function Home() {
                       Medical <br></br> Wear
                     </h2>
                   </div>
-                  <Link href="/products/martial-art">
+                  <Link href="/products/martialarts">
                     <div className="px-7">
                       <Image
-                        src={MartialandArts}
+                        src="/images/logos/MartialandArts.png"
                         alt="Martial-arts logo"
                         className="logo"
                         width={70}
@@ -1036,24 +1010,11 @@ export default function Home() {
                       </h2>
                     </div>
                   </Link>
-                  <Link href="/products/softshell-jackets">
-                    <div className="px-7">
-                      <Image
-                        src={Sweatshirts}
-                        alt="softshell Jackets logo"
-                        className="logo"
-                        width={70}
-                        height={79}
-                      />
-                      <h2 className="text-center text-white font-montserrat font-semibold">
-                        Softshell <br></br> Jackets
-                      </h2>
-                    </div>
-                  </Link>
+                  
                   <Link href="/products/socks">
                     <div className="px-7">
                       <Image
-                        src={socks}
+                        src="/images/logos/Socks.png"
                         alt="Socks logo"
                         className="logo"
                         width={70}
@@ -1067,7 +1028,7 @@ export default function Home() {
                   <Link href="/products/tracksuits">
                     <div className="px-7">
                       <Image
-                        src={T_shirt}
+                        src="/images/logos/T-shirt.png"
                         alt="Track suits logo"
                         className="logo"
                         width={85}
@@ -1081,7 +1042,7 @@ export default function Home() {
                   <Link href="/products/caps">
                     <div className="px-7">
                       <Image
-                        src={caps}
+                        src="/images/logos/caps.png"
                         alt="Caps logo"
                         className="logo"
                         width={87}
@@ -1095,7 +1056,7 @@ export default function Home() {
                   <Link href="/products/shorts">
                     <div className="px-7">
                       <Image
-                        src={Shorts}
+                        src="/images/logos/shorts.png"
                         alt="Shorts logo"
                         className="logo"
                         width={80}

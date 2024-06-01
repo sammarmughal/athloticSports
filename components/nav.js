@@ -113,7 +113,7 @@ export default function Nav() {
                     </Menu.Item>
                     <Menu.Item>
                       <Link
-                        href="/products/ice-hockey"
+                        href="/products/icehockey"
                         title="Ice Hockey Uniform"
                       >
                         <FireIcon className="w-5 h-5 inline -mt-1 mr-1" /> Ice
@@ -210,7 +210,7 @@ export default function Nav() {
                     </Menu.Item>
 
                     <Menu.Item>
-                      <Link href="/products/sports-bag" title="Sports Bag">
+                      <Link href="/products/sportsbag" title="Sports Bag">
                         <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
                         Sports Bags
                       </Link>
@@ -224,7 +224,7 @@ export default function Nav() {
                     </Menu.Item>
 
                     <Menu.Item>
-                      <Link href="/products/gym-wear" title="Gym Wear">
+                      <Link href="/products/gym" title="Gym Wear">
                         <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
                         Gym
                       </Link>
@@ -239,7 +239,7 @@ export default function Nav() {
 
                     <Menu.Item>
                       <Link
-                        href="/products/martial-art"
+                        href="/products/martialarts"
                         title="Martial Arts Wear"
                       >
                         <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
@@ -291,14 +291,14 @@ export default function Nav() {
                 <Menu.Items className="menuItems origin-center absolute   mt-2 w-[300px] rounded-md shadow-lg bg-white     focus:outline-none">
                   <div className="p-5">
                     <Menu.Item>
-                      <Link href="/products/winter-caps" title="Heat Caps">
+                      <Link href="/products/wintercaps" title="Heat Caps">
                         <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
                         Heat Caps
                       </Link>
                     </Menu.Item>
 
                     <Menu.Item>
-                      <Link href="/products/winter-caps" title="Winter Caps">
+                      <Link href="/products/wintercaps" title="Winter Caps">
                         <FireIcon className="w-5 h-5 inline -mt-1 mr-1" />
                         Winter Caps
                       </Link>
@@ -339,12 +339,12 @@ export default function Nav() {
           >
             <div className="relative inline-flex items-center text-sm font-semibold leading-5  transition duration-150 ease-in-out">
               <Link href="/cart" className="ml-1">
-                <BsCart3 className="text-gray-200 hover:border-2 rounded-xl hover:border-[#01b8ee] hover:rounded-xl p-1 hover:text-[#01b8ee]  w-10 h-10 flex items-center justify-center duration-300" />
-                {count > 0 && (
-                  <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-                    {count}
-                  </span>
-                )}
+                  <BsCart3 className="text-gray-200 hover:border-2 rounded-xl hover:border-[#01b8ee] hover:rounded-xl p-1 hover:text-[#01b8ee] w-10 h-10 flex items-center justify-center duration-300" />
+                  {typeof window !== "undefined" && count > 0 && (
+                    <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                      {count}
+                    </span>
+                  )}
               </Link>
             </div>
           </div>
@@ -698,7 +698,7 @@ export default function Nav() {
                           </Link>
                           <Link
                             onClick={handleToggle}
-                            href="/products/sports-bag"
+                            href="/products/sportsbag"
                             title="Sports Promotional Products"
                             className="block mt-2 ml-4 text-blue-500"
                           >
@@ -738,7 +738,7 @@ export default function Nav() {
                           </Link>
                           <Link
                             onClick={handleToggle}
-                            href="/products/gym-wear"
+                            href="/products/gym"
                             title="Gym Wear"
                             className="block mt-2 ml-4 text-blue-500"
                           >
@@ -767,7 +767,7 @@ export default function Nav() {
                           </Link> */}
                           <Link
                             onClick={handleToggle}
-                            href="/products/martial-art"
+                            href="/products/martialarts"
                             title="Martial Arts Wear"
                             className="block mt-2 ml-4 text-blue-500"
                           >
@@ -807,114 +807,10 @@ export default function Nav() {
                         </li>
 
                         <li className="py-3">
-                          JACKETS
-                          <Link
-                            onClick={handleToggle}
-                            href="/products/softshell-jackets"
-                            title="Leather Jackets"
-                            className="block mt-2 ml-4 text-blue-500"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-5 h-5 inline -mt-1 mr-1"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            Leather
-                          </Link>
-                          <Link
-                            onClick={handleToggle}
-                            href="/products/softshell-jackets"
-                            title="Softshell Jackets"
-                            className="block mt-2 ml-4 text-blue-500"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-5 h-5 inline -mt-1 mr-1"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            Softshell
-                          </Link>
-                          <Link
-                            onClick={handleToggle}
-                            href="/products/jackets"
-                            title="Sports Jackets"
-                            className="block mt-2 ml-4 text-blue-500"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-5 h-5 inline -mt-1 mr-1"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            Sports
-                          </Link>
-                          <Link
-                            onClick={handleToggle}
-                            href="/products/jackets"
-                            title="Varsity Jackets"
-                            className="block mt-2 ml-4 text-blue-500"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-5 h-5 inline -mt-1 mr-1"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            Varsity
-                          </Link>
-                          <Link
-                            onClick={handleToggle}
-                            href="/products/jackets"
-                            title="Textile Jackets"
-                            className="block mt-2 ml-4 text-blue-500"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-5 h-5 inline -mt-1 mr-1"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            Textile
-                          </Link>
-                        </li>
-
-                        <li className="py-3">
                           ACCESSORIES
                           <Link
                             onClick={handleToggle}
-                            href="/products/winter-caps"
+                            href="/products/wintercaps"
                             title="Heat Caps"
                             className="block mt-2 ml-4 text-blue-500"
                           >
@@ -934,7 +830,7 @@ export default function Nav() {
                           </Link>
                           <Link
                             onClick={handleToggle}
-                            href="/products/winter-caps"
+                            href="/products/wintercaps"
                             title="Winter Caps"
                             className="block mt-2 ml-4 text-blue-500"
                           >

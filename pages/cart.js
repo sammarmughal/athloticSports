@@ -1,4 +1,5 @@
 // pages/cart.js
+import { useRouter } from 'next/router';
 import Head from "next/head";
 import MainHeader from "../components/mainheader";
 import Link from "next/link";
@@ -12,6 +13,7 @@ import {
 
 export default function CartPage() {
   const cart = useSelector((state) => state.cart.items);
+  const router = useRouter();
   const dispatch = useDispatch();
   console.log(cart);
   const subTotal = cart
@@ -25,6 +27,13 @@ export default function CartPage() {
     (totalQuantity > 1 ? (totalQuantity - 1) * additionalShippingPerItem : 0);
   const total = (parseFloat(subTotal) + totalShipping).toFixed(2);
 
+  const handleCheckout = () => {
+    const cartData = JSON.stringify(cart);
+    router.push({
+      pathname: '/checkout',
+      query: { cart: cartData },
+    });
+  };
   return (
     <>
       <Head>
@@ -123,7 +132,7 @@ export default function CartPage() {
               </div>
             </div>
             <Link href="/checkout">
-              <button className="btn-action w-full flex justify-center items-center mx-auto mt-4">
+              <button onClick={handleCheckout} className="btn-action w-full flex justify-center items-center mx-auto mt-4">
                 Check out
               </button>
             </Link>

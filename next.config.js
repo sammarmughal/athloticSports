@@ -7,7 +7,16 @@ const nextConfig = {
   pwa: {
     dest: 'public',
   },
- 
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        net: false,
+        tls: false,
+      };
+    }
+    return config;
+  },
 }
 
 module.exports = withPWA(nextConfig)

@@ -189,8 +189,7 @@ export default function Product({ product }) {
                   Printing any Design As Per Requirement.
                 </p>
               </div>
-            </div>
-          
+            </div>          
             <div className="flex items-baseline mt-4 mb-6 pb-6 border-b border-slate-200 w-[90%] mx-auto">
               <div className="space-x-2 flex text-sm">
                 <label>
