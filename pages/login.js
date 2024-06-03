@@ -1,52 +1,68 @@
-import React, { useState } from "react";
-import Head from "next/head";
-import MainHeader from "../components/mainheader";
-import { FaFacebookF, FaGoogle } from "react-icons/fa";
-import Link from "next/link";
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Swal from 'sweetalert2';
+import Head from 'next/head';
+import MainHeader from '../components/mainheader';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
-    loginInput: "",
-    password: "",
+    loginInput: '',
+    password: '',
   });
   const [errors, setErrors] = useState({});
   const [show, setShow] = useState(false);
+  const router = useRouter();
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    setFormData({
-      ...formData,
-      [id]: value,
-    });
+    setFormData({ ...formData, [id]: value });
   };
 
   const validateForm = () => {
-    let formErrors = {};
-    if (!formData.loginInput) {
-      formErrors.loginInput = "Email is required";
-    } else if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.loginInput) &&
-      !/^\d{10}$/.test(formData.loginInput)
-    ) {
-      formErrors.loginInput = "Invalid Email";
-    }
-
-    if (!formData.password) {
-      formErrors.password = "Password is required";
-    } else if (formData.password.length < 6) {
-      formErrors.password = "Password must be at least 6 characters long";
-    }
-
+    const formErrors = {};
+    if (!formData.loginInput) formErrors.loginInput = 'Email/Username is required';
+    if (!formData.password) formErrors.password = 'Password is required';
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form submitted", formData);
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        Swal.fire({
+          title: 'Login Successful',
+          text: 'You will be redirected shortly',
+          icon: 'success',
+          timer: 2000,
+          timerProgressBar: true,
+          willClose: () => {
+            if (data.role === 'user') {
+              router.push('/user-dashboard');
+            } else if (data.role === 'admin') {
+              router.push('/admin-portal');
+            }
+          },
+        });
+      } else {
+        Swal.fire({
+          title: 'Login Failed',
+          text: 'Please check your credentials and try again',
+          icon: 'error',
+        });
+        console.error('Login failed');
+      }
     }
   };
+
 
   return (
     <>
@@ -122,20 +138,18 @@ const LoginForm = () => {
         <link rel="preconnect" href="//www.google-analytics.com" as="script" />
         <meta name="google" content="notranslate" />
       </Head>
-      <MainHeader
-        pageHeading="Welcome to Athlotic Sportswear! Please login.
-"
-        pageImg=""
-      />
-      <div className="sm:w-[40%] mx-auto my-20">
+      <MainHeader pageHeading="Welcome to Athlotic Sportswear! Please login." />
+      <div className="sm:w-[40%] w-[90%] mx-auto my-20">
         <div className="login-title py-8 sm:px-6 flex sm:flex-row flex-col items-center justify-between">
-          <h3 className="text-center lg:text-3xl sm:text-2xl text-xl mb-4 font-semibold"></h3>
+          <h3 className="text-center lg:text-3xl sm:text-2xl text-xl mb-4 font-semibold">
+            Login
+          </h3>
           <div className="login-other float-right text-gray-600">
             <span>
-              New member?{" "}
+              New member?{' '}
               <Link href="/signup" className="text-blue-600 hover:underline">
                 Register
-              </Link>{" "}
+              </Link>{' '}
               here.
             </span>
           </div>
@@ -149,14 +163,14 @@ const LoginForm = () => {
                     htmlFor="loginInput"
                     className="text-sm text-gray-600 mb-1"
                   >
-                     Email
+                    Email/Username
                   </label>
                   <input
                     type="text"
                     id="loginInput"
                     value={formData.loginInput}
                     onChange={handleInputChange}
-                    placeholder="Please enter your Email"
+                    placeholder="Please enter your Email or Username"
                     className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
                   />
                   {errors.loginInput && (
@@ -176,7 +190,7 @@ const LoginForm = () => {
                   </label>
                   <div className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 flex justify-between">
                     <input
-                      type={show ? "text" : "password"}
+                      type={show ? 'text' : 'password'}
                       id="password"
                       value={formData.password}
                       onChange={handleInputChange}
@@ -188,7 +202,7 @@ const LoginForm = () => {
                       className="block"
                       onClick={() => setShow(!show)}
                     >
-                      {show ? (
+                     {show ? (
                         <div>
                           <i className="fas fa-eye text-lg"></i>
                         </div>
