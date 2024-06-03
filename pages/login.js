@@ -127,7 +127,7 @@ const LoginForm = () => {
 "
         pageImg=""
       />
-      <div className="w-[40%] mx-auto my-20">
+      <div className="sm:w-[40%] mx-auto my-20">
         <div className="login-title py-8 sm:px-6 flex sm:flex-row flex-col items-center justify-between">
           <h3 className="text-center lg:text-3xl sm:text-2xl text-xl mb-4 font-semibold"></h3>
           <div className="login-other float-right text-gray-600">

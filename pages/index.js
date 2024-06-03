@@ -135,7 +135,6 @@ export default function Home() {
     touchThreshold: 5,
   };
   const sliderItems = [
-    // Replace with your actual slider content
 
     <Link href="/products/football">
       <div className="px-6">

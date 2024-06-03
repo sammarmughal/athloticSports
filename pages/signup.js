@@ -147,7 +147,7 @@ const Signup = () => {
       </Head>
       <MainHeader pageHeading="SIGN UP" pageImg="" />
 
-      <div className=" w-[70%] mx-auto my-20">
+      <div className="sm:w-[70%] mx-auto my-20">
         <div className="login-title py-8 px-6 flex sm:flex-row flex-col items-center justify-between">
           <h3 className="text-center lg:text-3xl sm:text-2xl text-xl mb-4 font-semibold">
             Create your Athlotic Sportswear Account.

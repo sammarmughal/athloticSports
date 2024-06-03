@@ -5,7 +5,9 @@ import Image from "next/image";
 import { fetchProducts } from "../../lib/data";
 import MainHeader from "../../components/mainheader";
 import React, { useState } from "react";
-
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../components/store/cartSlice';
+import CartButton from "../../components/addtocart";
 export async function getServerSideProps(context) {
   const { sku_id } = context.params;
 
@@ -24,6 +26,7 @@ export default function Product({ product }) {
   const router = useRouter();
   const { sku_id } = router.query;
   const [selectedSize, setSelectedSize] = useState("m");
+
 
   if (!product) {
     return <div>Product not found</div>;
@@ -290,9 +293,7 @@ export default function Product({ product }) {
               </div>
             </div>
             <Link href="/cart">
-              <button className="w-[90%] flex justify-center mx-auto py-1 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none  cursor-pointer mb-8">
-                Add to Cart
-              </button>
+             <CartButton product={product}/>
             </Link>
           </div>
         </div>

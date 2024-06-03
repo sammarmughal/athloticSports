@@ -2,13 +2,47 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import MainHeader from "../components/mainheader";
+import { PayPalButton } from "react-paypal-button-v2";
+
 
 const CheckoutPage = () => {
   const [selectedCountry, setSelectedCountry] = useState("US");
-
+  const [scriptLoaded, setScriptLoaded] = useState(false);
   const handleCountryChange = (event) => {
     setSelectedCountry(event.target.value);
   };
+  useEffect(() => {
+    const paypalScript = () => {
+      const script = document.createElement("script");
+      script.src =
+        "https://www.paypal.com/sdk/js?client-id=AVagQDrpSiWLTEPxT3TmDjLQ2a0LiK-kKuA5n_lBIFaFgq9KMKi5EhPfmre69te6Ou_suu84AUoUFQL-";
+      script.type = "text/javascript";
+      script.async = true;
+      script.onload = () => setScriptLoaded(true);
+
+      document.body.appendChild(script);
+    };
+    paypalScript();
+  }, []);
+  const addDonationInDB = async (name, amount) => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_ENDPOINT}/api/donations/`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            name,
+            amount,
+          }),
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   const router = useRouter();
   const [cart, setCart] = useState([]);
   const [subTotal, setSubTotal] = useState(0);
@@ -112,9 +146,9 @@ const CheckoutPage = () => {
         <link rel="preconnect" href="//www.google-analytics.com" as="script" />
         <meta name="google" content="notranslate" />
       </Head>
-      <MainHeader pageHeading="CART ITEMS" pageImg="checkout2.png" />
+      <MainHeader pageHeading="CHECKOUT" pageImg="checkout2.png" />
 
-      <div className="grid grid-cols-3 bg-indigo-50">
+      <div className="sm:grid sm:grid-cols-3 flex flex-col-reverse bg-indigo-50">
         <div className="py-10 lg:col-span-2 col-span-3 bg-indigo-50 space-y-8 px-12">
           <div className="mt-6 p-4 relative flex flex-col sm:flex-row sm:items-center bg-white shadow rounded-md">
             <div className="flex flex-row items-center border-b sm:border-b-0 w-full sm:w-auto pb-4 sm:pb-0">
@@ -223,7 +257,7 @@ const CheckoutPage = () => {
               Payment
             </h2>
             <div className="w-full mx-auto rounded-lg bg-white border border-gray-200 text-gray-800 font-light mb-6">
-              <div className="w-full p-5 border-b border-gray-200">
+              {/* <div className="w-full p-5 border-b border-gray-200">
                 <div className="mb-5">
                   <label
                     for="type1"
@@ -316,7 +350,7 @@ const CheckoutPage = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="w-full p-5">
                 <label for="type2" className="flex items-center cursor-pointer">
                   <input
@@ -347,12 +381,24 @@ const CheckoutPage = () => {
                 </label>
               </div>
               <button className="btn-action my-5 px-4 py-3 rounded-full text-white focus:ring focus:outline-none w-[90%] mx-auto flex justify-center text-xl font-semibold transition-colors">
-                Pay Now
+                Order Now
               </button>
+              {scriptLoaded ? (
+                <PayPalButton
+                  amount={total}
+                  onSuccess={(details, data) => {
+                    //save the transaction
+                    // console.log(details);
+                    addDonationInDB(details.payer.name.given_name);
+                  }}
+                />
+              ) : (
+                <span>Loading...</span>
+              )}{" "}
             </div>
           </div>
         </div>
-        <div className="col-span-1 my-16 mr-12 bg-white lg:block hidden">
+        <div className="col-span-1 sm:my-16 sm:mr-12 mx-12  bg-white block mx-auto">
           <h1 className="py-6 border-b-2 text-xl text-gray-600 px-8">
             Order Summary
           </h1>
@@ -406,3 +452,5 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
+//client id paypal
+//AeFJ0aek4IyfSJ-wA-B_O_MAKkMFvk-wRQANsl1mVwbg1A0AuK2vSjekswaBDaLuY3fa72decdgxTP-i

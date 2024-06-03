@@ -86,9 +86,8 @@ export default function Footer({ children, home }) {
                         d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
                       />
                     </svg>
-                    <a href="tel:+923024411817" style={{ color: "white" }}>
-                      +923024411817
-                    </a>
+                    <a href="tel:+923174696178" style={{ color: "white" }}>
+                      +923174696178                    </a>
                   </p>
                   <p className="text-base mt-2 ">
                     <svg
@@ -131,7 +130,7 @@ export default function Footer({ children, home }) {
                   </a>
 
                   <a
-                    href="https://www.facebook.com/AamPipes/"
+                    href="https://www.facebook.com/profile.php?id=100011591113364/"
                     title="Athlotic Sports on Facebook"
                     className="facebook tooltip group hover:fill-white hover:bg-[#4267B2] hover:border-[#4267B2]"
                   >
@@ -188,7 +187,7 @@ export default function Footer({ children, home }) {
         <div className="chat-msg-tip">
           <div></div>
         </div>
-        <a href="https://wa.me/+923024411817" title='WhatsApp'>
+        <a href="https://wa.me/+923174696178" title='WhatsApp'>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
