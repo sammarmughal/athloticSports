@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import Head from 'next/head';
-import MainHeader from '../components/mainheader';
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import Head from "next/head";
+import MainHeader from "../components/mainheader";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
-    name: '', // Changed from fullName to name
-    email: '',
-    password: '',
-    username: '',
-    age: '',
-    gender: '',
+    name: "", 
+    email: "",
+    password: "",
+    username: "",
+    age: "",
+    gender: "",
+    childhoodName: "",
   });
   const [errors, setErrors] = useState({});
   const router = useRouter();
@@ -23,12 +24,15 @@ const SignupForm = () => {
 
   const validateForm = () => {
     const formErrors = {};
-    if (!formData.name) formErrors.name = 'Full Name is required'; // Changed from fullName to name
-    if (!formData.email) formErrors.email = 'Email is required';
-    if (!formData.password) formErrors.password = 'Password is required';
-    if (!formData.username) formErrors.username = 'Username is required';
-    if (!formData.age) formErrors.age = 'Age is required';
-    if (!formData.gender) formErrors.gender = 'Gender is required';
+    if (!formData.name) formErrors.name = "Full Name is required"; 
+    if (!formData.email) formErrors.email = "Email is required";
+    if (!formData.password) formErrors.password = "Password is required";
+    if (!formData.username) formErrors.username = "Username is required";
+    if (!formData.age) formErrors.age = "Age is required";
+    if (!formData.gender) formErrors.gender = "Gender is required";
+    if (!formData.childhoodName)
+      formErrors.childhoodName = "childhood Name is required";
+
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
   };
@@ -36,21 +40,23 @@ const SignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      const response = await fetch('/api/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        router.push('/user-dashboard');
+        router.push("/login");
       } else {
         const errorData = await response.json();
-        console.error('Signup failed:', errorData.message);
+        console.error("Signup failed:", errorData.message);
         if (response.status === 409) {
-          setErrors({ username: 'Username already exists. Please choose a different one.' });
+          setErrors({
+            username: "Username already exists. Please choose a different one.",
+          });
         } else {
-          setErrors({ general: 'Error registering user. Please try again.' });
+          setErrors({ general: "Error registering user. Please try again." });
         }
       }
     }
@@ -58,18 +64,16 @@ const SignupForm = () => {
 
   return (
     <>
-      <Head>
-        {/* Meta tags */}
-      </Head>
+      <Head>{/* Meta tags */}</Head>
       <MainHeader pageHeading="Welcome to Athlotic Sportswear! Please sign up." />
-      <div className="w-[40%] mx-auto my-20">
+      <div className="sm:w-[40%] w-[90%] mx-auto my-20">
         <div className="signup-title py-8 sm:px-6 flex sm:flex-row flex-col items-center justify-between">
           <h3 className="text-center lg:text-3xl sm:text-2xl text-xl mb-4 font-semibold">
             Sign Up
           </h3>
           <div className="signup-other float-right text-gray-600">
             <span>
-              Already a member?{' '}
+              Already a member?{" "}
               <Link href="/login" className="text-blue-600 hover:underline">
                 Login
               </Link>{' '}
@@ -91,11 +95,15 @@ const SignupForm = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Please enter your full name"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                    className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${
+                      errors.name ? "border-red-500" : "border-gray-300"
+                    } rounded appearance-none focus:outline-none placeholder-gray-400 focus:border-blue-500`}
                   />
                   {errors.name && (
                     <div className="flex items-center justify-end mt-1">
-                      <span className="text-red-500 text-xs">{errors.name}</span>
+                      <span className="text-red-500 text-xs">
+                        {errors.name}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -109,16 +117,23 @@ const SignupForm = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="Please enter your email"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                    className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${
+                      errors.email ? "border-red-500" : "border-gray-300"
+                    } rounded appearance-none focus:outline-none placeholder-gray-400 focus:border-blue-500`}
                   />
                   {errors.email && (
                     <div className="flex items-center justify-end mt-1">
-                      <span className="text-red-500 text-xs">{errors.email}</span>
+                      <span className="text-red-500 text-xs">
+                        {errors.email}
+                      </span>
                     </div>
                   )}
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="password" className="text-sm text-gray-600 mb-1">
+                  <label
+                    htmlFor="password"
+                    className="text-sm text-gray-600 mb-1"
+                  >
                     Password
                   </label>
                   <div className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 flex justify-between">
@@ -128,17 +143,24 @@ const SignupForm = () => {
                       value={formData.password}
                       onChange={handleInputChange}
                       placeholder="Please enter your password"
-                      className="w-full placeholder-gray-400 focus:outline-none"
+                      className={`w-full placeholder-gray-400 focus:outline-none ${
+                        errors.password ? "border-red-500" : "border-gray-300"
+                      }`}
                     />
                   </div>
                   {errors.password && (
                     <div className="flex items-center justify-end mt-1">
-                      <span className="text-red-500 text-xs">{errors.password}</span>
+                      <span className="text-red-500 text-xs">
+                        {errors.password}
+                      </span>
                     </div>
                   )}
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="username" className="text-sm text-gray-600 mb-1">
+                  <label
+                    htmlFor="username"
+                    className="text-sm text-gray-600 mb-1"
+                  >
                     Username
                   </label>
                   <input
@@ -147,11 +169,15 @@ const SignupForm = () => {
                     value={formData.username}
                     onChange={handleInputChange}
                     placeholder="Please enter your username"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                    className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${
+                      errors.username ? "border-red-500" : "border-gray-300"
+                    } rounded appearance-none focus:outline-none placeholder-gray-400 focus:border-blue-500`}
                   />
                   {errors.username && (
                     <div className="flex items-center justify-end mt-1">
-                      <span className="text-red-500 text-xs">{errors.username}</span>
+                      <span className="text-red-500 text-xs">
+                        {errors.username}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -165,7 +191,9 @@ const SignupForm = () => {
                     value={formData.age}
                     onChange={handleInputChange}
                     placeholder="Please enter your age"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                    className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${
+                      errors.age ? "border-red-500" : "border-gray-300"
+                    } rounded appearance-none focus:outline-none placeholder-gray-400 focus:border-blue-500`}
                   />
                   {errors.age && (
                     <div className="flex items-center justify-end mt-1">
@@ -174,20 +202,57 @@ const SignupForm = () => {
                   )}
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="gender" className="text-sm text-gray-600 mb-1">
+                  <label
+                    htmlFor="gender"
+                    className="text-sm text-gray-600 mb-1"
+                  >
                     Gender
                   </label>
-                  <input
-                    type="text"
+                  <select
                     id="gender"
                     value={formData.gender}
                     onChange={handleInputChange}
-                    placeholder="Please enter your gender"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
-                  />
+                    className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${
+                      errors.gender ? "border-red-500" : "border-gray-300"
+                    } rounded appearance-none focus:outline-none placeholder-gray-400 focus:border-blue-500`}
+                  >
+                    <option value="">Select a Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="others">Others</option>
+                  </select>
                   {errors.gender && (
                     <div className="flex items-center justify-end mt-1">
-                      <span className="text-red-500 text-xs">{errors.gender}</span>
+                      <span className="text-red-500 text-xs">
+                        {errors.gender}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="childhoodName"
+                    className="block mb-2 text-sm font-bold text-gray-700"
+                  >
+                    What is your Childhood name?
+                  </label>
+                  <input
+                    className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${
+                      errors.childhoodName
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    } rounded appearance-none focus:outline-none placeholder-gray-400 focus:border-blue-500`}
+                    id="childhoodName"
+                    type="text"
+                    value={formData.childhoodName}
+                    onChange={handleInputChange}
+                    placeholder="Enter Your Childhood Name"
+                  />
+                  {errors.childhoodName && (
+                    <div className="flex items-center justify-end mt-1">
+                      <span className="text-red-500 text-xs">
+                        {errors.childhoodName}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -198,7 +263,9 @@ const SignupForm = () => {
                   SIGN UP
                 </button>
                 {errors.general && (
-                  <div className="text-red-500 mt-2 text-sm text-center">{errors.general}</div>
+                  <div className="text-red-500 mt-2 text-sm text-center">
+                    {errors.general}
+                  </div>
                 )}
               </div>
             </div>
@@ -210,4 +277,3 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
-

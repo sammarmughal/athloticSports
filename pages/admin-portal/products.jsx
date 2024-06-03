@@ -74,7 +74,7 @@ const Products = ({ products }) => {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white text-black">
+      <div className="min-h-screen w-full flex flex-col flex-auto flex-shrink-0 antialiased bg-white text-black">
         <Admin_Nav />
         <Sidebar />
         <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
@@ -163,20 +163,20 @@ const Products = ({ products }) => {
                         className="bg-gray-50  hover:bg-gray-10 text-gray-700"
                         key={product.sku_id}
                       >
-                        <td className="px-4 py-3">{product.product_name}</td>
-                        <td className="px-4 py-3">{product.description}</td>
-                        <td className="px-4 py-3">${product.price}</td>
-                        <td className="px-4 py-3">
+                        <td className="px-4 py-3 hove:bg-slate-100">{product.product_name}</td>
+                        <td className="px-4 py-3 hove:bg-slate-100">{product.description}</td>
+                        <td className="px-4 py-3 hove:bg-slate-100">${product.price}</td>
+                        <td className="px-4 py-3 hove:bg-slate-100">
                           {product.quantity_available}
                         </td>
-                        <td className="px-4 py-3">{product.category}</td>
+                        <td className="px-4 py-3 hove:bg-slate-100">{product.category}</td>
                         <td className="flex flex-col gap-1 p-1">
-                          <button className="bg-red-400 rounded px-2"
+                          <button className="bg-red-400 text-white rounded px-2"
                           onClick={()=> handleDelete(product.sku_id)}>
                             Delete
                           </button>
                           <Link href={`/admin-portal/edit-product/${product.sku_id}`}>
-                            <button className="bg-green-400 rounded px-2">
+                            <button className="bg-green-400 rounded px-2 w-full text-white">
                               Edit
                             </button>
                           </Link>
@@ -187,7 +187,7 @@ const Products = ({ products }) => {
                 </table>
               </div>
             </div>
-            <div className="flex justify-center mt-4">
+            <div className="sm:flex justify-center mt-4">
               <ReactPaginate
                 previousLabel={
                   <div className="p-2 rounded-full bg-white border border-slate-700 text-black">
@@ -206,7 +206,7 @@ const Products = ({ products }) => {
                 pageRangeDisplayed={5}
                 onPageChange={handlePageChange}
                 containerClassName={
-                  "flex gap-4 justify-center py-5 items-center space-x-2.5"
+                  "flex flex-wrap gap-4 justify-center py-5 items-center space-x-2.5"
                 }
                 subContainerClassName={
                   "flex justify-center py-5 items-center space-x-2.5"

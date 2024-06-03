@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Swal from 'sweetalert2';
 import Head from 'next/head';
 import MainHeader from '../components/mainheader';
 
@@ -37,16 +38,31 @@ const LoginForm = () => {
 
       if (response.ok) {
         const data = await response.json();
-        if (data.role === 'user') {
-          router.push('/user-dashboard');
-        } else if (data.role === 'admin') {
-          router.push('/admin-portal');
-        }
+        Swal.fire({
+          title: 'Login Successful',
+          text: 'You will be redirected shortly',
+          icon: 'success',
+          timer: 2000,
+          timerProgressBar: true,
+          willClose: () => {
+            if (data.role === 'user') {
+              router.push('/user-dashboard');
+            } else if (data.role === 'admin') {
+              router.push('/admin-portal');
+            }
+          },
+        });
       } else {
+        Swal.fire({
+          title: 'Login Failed',
+          text: 'Please check your credentials and try again',
+          icon: 'error',
+        });
         console.error('Login failed');
       }
     }
   };
+
 
   return (
     <>
@@ -54,7 +70,7 @@ const LoginForm = () => {
         {/* Meta tags */}
       </Head>
       <MainHeader pageHeading="Welcome to Athlotic Sportswear! Please login." />
-      <div className="w-[40%] mx-auto my-20">
+      <div className="sm:w-[40%] w-[90%] mx-auto my-20">
         <div className="login-title py-8 sm:px-6 flex sm:flex-row flex-col items-center justify-between">
           <h3 className="text-center lg:text-3xl sm:text-2xl text-xl mb-4 font-semibold">
             Login
@@ -117,7 +133,7 @@ const LoginForm = () => {
                       className="block"
                       onClick={() => setShow(!show)}
                     >
-                      {show ? (
+                     {show ? (
                         <div>
                           <i className="fas fa-eye text-lg"></i>
                         </div>

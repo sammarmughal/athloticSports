@@ -6,6 +6,7 @@ import { Menu, Dialog, Transition } from "@headlessui/react";
 import { XIcon, FireIcon } from "@heroicons/react/outline";
 import { BsCart3, BsPerson } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import CartIcon from "./cartIcon";
 
 
 export default function Nav() {
@@ -338,16 +339,7 @@ export default function Nav() {
                 : "hover:text-[#01b8ee]"
             }
           >
-            <div className="relative inline-flex items-center text-sm font-semibold leading-5  transition duration-150 ease-in-out">
-              <Link href="/cart" className="ml-1">
-                  <BsCart3 className="text-gray-200 hover:border-2 rounded-xl hover:border-[#01b8ee] hover:rounded-xl p-1 hover:text-[#01b8ee] w-10 h-10 flex items-center justify-center duration-300" />
-                  {typeof window !== "undefined" && count > 0 && (
-                    <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-                      {count}
-                    </span>
-                  )}
-              </Link>
-            </div>
+            <CartIcon/>
           </div>
           <Link
             href="/login"
@@ -798,16 +790,6 @@ export default function Nav() {
                         </li>
 
                         <li className="py-3">
-                          <Link
-                            href="/"
-                            onClick={handleToggle}
-                            className="hover:text-[#01b8ee] py-2"
-                          >
-                            SCHOOL UNIFORMS
-                          </Link>{" "}
-                        </li>
-
-                        <li className="py-3">
                           ACCESSORIES
                           <Link
                             onClick={handleToggle}
@@ -887,7 +869,7 @@ export default function Nav() {
                           <div>
                             {" "}
                             <a
-                              href="tel:+923024411817"
+                              href="tel:+923174696178"
                               title="Call"
                               className="tooltip font-bold text-xl mt-5 block hover:text-amber-400"
                             >
@@ -906,7 +888,7 @@ export default function Nav() {
                                   d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
                                 />
                               </svg>
-                              +923024411817
+                              +923174696178
                             </a>
                           </div>
                           {/* 

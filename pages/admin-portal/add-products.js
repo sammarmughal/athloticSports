@@ -88,7 +88,7 @@ const AddProducts = () => {
         <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
           <div className="flex h-screen items-center justify-center mt-32 mb-32">
             <form className="w-full mt-28" >
-              <div className="w-full grid bg-white rounded-lg shadow-xl">
+              <div className="w-full grid p b-10 bg-white rounded-lg shadow-xl">
                 <div className="mt-28">
                   <h1 className="sm:text-3xl text-xl text-slate-700 text-center">Add Product</h1>
                 </div>

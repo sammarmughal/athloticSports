@@ -135,7 +135,6 @@ export default function Home() {
     touchThreshold: 5,
   };
   const sliderItems = [
-    // Replace with your actual slider content
 
     <Link href="/products/football">
       <div className="px-6">
@@ -687,7 +686,7 @@ export default function Home() {
                 <h3>Basketball Uniform</h3>
               </div>
             </Link>
-            <Link href="/products/hunting">
+            <Link href="/products/caps">
               <div className="bx">
                 <Image
                   src="/images/hunting-uniform-athlotic-sport.jpg"
@@ -700,7 +699,7 @@ export default function Home() {
                 (max-width: 1200px) 50vw,
                 33vw"
                 />
-                <h3>Hunting Uniform</h3>
+                <h3>Caps</h3>
               </div>
             </Link>
             <Link href="/products/icehockey">
