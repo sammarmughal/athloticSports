@@ -19,7 +19,6 @@ export default NextAuth({
           database: process.env.DB_NAME
         });
 
-        // Query the user by username
         const [rows] = await connection.execute('SELECT * FROM users WHERE username = ?', [credentials.username]);
         
         // Close the connection
@@ -29,7 +28,12 @@ export default NextAuth({
 
         if (user && user.password === credentials.password) {
           // Password match
-          return { id: user.id, name: user.name, email: user.email };
+          const token = { id: user.id, name: user.name, email: user.email }; // Creating the token
+          
+          // Log the allocated token to the console
+          console.log('Allocated Token:', token);
+
+          return token;
         } else {
           // Invalid credentials
           return null;

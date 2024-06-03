@@ -52,7 +52,7 @@ function Admin_Nav() {
             </li>
             <li>
               <a
-                href="#"
+                href=""
                 className="flex items-center mr-4 hover:text-blue-100"
               >
                 <span className="inline-flex mr-1">
