@@ -8,6 +8,7 @@ import { BsCart3, BsPerson } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import CartIcon from "./cartIcon";
 
+
 export default function Nav() {
   const count = useSelector((state) => state.cart.count);
   const router = useRouter();

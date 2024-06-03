@@ -67,76 +67,7 @@ const LoginForm = () => {
   return (
     <>
       <Head>
-        <meta charSet="utf-8" />
-        <meta
-          content="width=device-width, initial-scale=1.0, maximum-scale=5, shrink-to-fit=no"
-          name="viewport"
-        />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="generator" content="Getsol Inc." />
-        <title>Login</title>
-        <meta
-          name="title"
-          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
-        <meta
-          name="description"
-          content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
-        />
-        <link rel="icon" type="image/x-icon" href="/favicon.ico"></link>
-        <meta name="robots" content="index, follow" />
-        <meta name="revisit-after" content="1 days" />
-        <meta name="author" content="Sardar Imran" />
-        <meta
-          itemProp="name"
-          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
-        <meta
-          itemProp="image"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
-        <meta name="twitter:card" content="summary" />
-        <meta
-          name="twitter:title"
-          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
-        <meta
-          name="twitter:description"
-          content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
-        />
-        <meta
-          name="twitter:image:src"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
-        <meta
-          property="og:title"
-          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
-        <meta property="og:type" content="article" />
-        <meta
-          property="og:image"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
-        <meta
-          property="og:description"
-          content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
-        />
-        <meta property="og:locale" content="en" />
-        <meta
-          itemProp="image"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
-        <script
-          defer
-          src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-        ></script>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        ></link>
-        <link rel="canonical" href="https://athlotic.com/contact-us" />
-        <link rel="preconnect" href="//www.google-analytics.com" as="script" />
-        <meta name="google" content="notranslate" />
+        {/* Meta tags */}
       </Head>
       <MainHeader pageHeading="Welcome to Athlotic Sportswear! Please login." />
       <div className="sm:w-[40%] w-[90%] mx-auto my-20">

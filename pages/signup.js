@@ -76,7 +76,7 @@ const SignupForm = () => {
               Already a member?{" "}
               <Link href="/login" className="text-blue-600 hover:underline">
                 Login
-              </Link>{" "}
+              </Link>{' '}
               here.
             </span>
           </div>
