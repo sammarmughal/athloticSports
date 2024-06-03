@@ -7,6 +7,7 @@ import { XIcon, FireIcon } from "@heroicons/react/outline";
 import { BsCart3, BsPerson } from "react-icons/bs";
 import { useSelector } from "react-redux";
 
+
 export default function Nav() {
   const count = useSelector((state) => state.cart.count);
   const router = useRouter();

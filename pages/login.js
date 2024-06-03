@@ -1,141 +1,70 @@
-import React, { useState } from "react";
-import Head from "next/head";
-import MainHeader from "../components/mainheader";
-import { FaFacebookF, FaGoogle } from "react-icons/fa";
-import Link from "next/link";
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Head from 'next/head';
+import MainHeader from '../components/mainheader';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
-    loginInput: "",
-    password: "",
+    loginInput: '',
+    password: '',
   });
   const [errors, setErrors] = useState({});
   const [show, setShow] = useState(false);
+  const router = useRouter();
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    setFormData({
-      ...formData,
-      [id]: value,
-    });
+    setFormData({ ...formData, [id]: value });
   };
 
   const validateForm = () => {
-    let formErrors = {};
-    if (!formData.loginInput) {
-      formErrors.loginInput = "Email is required";
-    } else if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.loginInput) &&
-      !/^\d{10}$/.test(formData.loginInput)
-    ) {
-      formErrors.loginInput = "Invalid Email";
-    }
-
-    if (!formData.password) {
-      formErrors.password = "Password is required";
-    } else if (formData.password.length < 6) {
-      formErrors.password = "Password must be at least 6 characters long";
-    }
-
+    const formErrors = {};
+    if (!formData.loginInput) formErrors.loginInput = 'Email/Username is required';
+    if (!formData.password) formErrors.password = 'Password is required';
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form submitted", formData);
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.role === 'user') {
+          router.push('/user-dashboard');
+        } else if (data.role === 'admin') {
+          router.push('/admin-portal');
+        }
+      } else {
+        console.error('Login failed');
+      }
     }
   };
 
   return (
     <>
       <Head>
-        <meta charSet="utf-8" />
-        <meta
-          content="width=device-width, initial-scale=1.0, maximum-scale=5, shrink-to-fit=no"
-          name="viewport"
-        />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="generator" content="Getsol Inc." />
-        <title>Login</title>
-        <meta
-          name="title"
-          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
-        <meta
-          name="description"
-          content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
-        />
-        <link rel="icon" type="image/x-icon" href="/favicon.ico"></link>
-        <meta name="robots" content="index, follow" />
-        <meta name="revisit-after" content="1 days" />
-        <meta name="author" content="Sardar Imran" />
-        <meta
-          itemProp="name"
-          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
-        <meta
-          itemProp="image"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
-        <meta name="twitter:card" content="summary" />
-        <meta
-          name="twitter:title"
-          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
-        <meta
-          name="twitter:description"
-          content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
-        />
-        <meta
-          name="twitter:image:src"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
-        <meta
-          property="og:title"
-          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
-        <meta property="og:type" content="article" />
-        <meta
-          property="og:image"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
-        <meta
-          property="og:description"
-          content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
-        />
-        <meta property="og:locale" content="en" />
-        <meta
-          itemProp="image"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
-        <script
-          defer
-          src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-        ></script>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        ></link>
-        <link rel="canonical" href="https://athlotic.com/contact-us" />
-        <link rel="preconnect" href="//www.google-analytics.com" as="script" />
-        <meta name="google" content="notranslate" />
+        {/* Meta tags */}
       </Head>
-      <MainHeader
-        pageHeading="Welcome to Athlotic Sportswear! Please login.
-"
-        pageImg=""
-      />
+      <MainHeader pageHeading="Welcome to Athlotic Sportswear! Please login." />
       <div className="w-[40%] mx-auto my-20">
         <div className="login-title py-8 sm:px-6 flex sm:flex-row flex-col items-center justify-between">
-          <h3 className="text-center lg:text-3xl sm:text-2xl text-xl mb-4 font-semibold"></h3>
+          <h3 className="text-center lg:text-3xl sm:text-2xl text-xl mb-4 font-semibold">
+            Login
+          </h3>
           <div className="login-other float-right text-gray-600">
             <span>
-              New member?{" "}
+              New member?{' '}
               <Link href="/signup" className="text-blue-600 hover:underline">
                 Register
-              </Link>{" "}
+              </Link>{' '}
               here.
             </span>
           </div>
@@ -149,14 +78,14 @@ const LoginForm = () => {
                     htmlFor="loginInput"
                     className="text-sm text-gray-600 mb-1"
                   >
-                     Email
+                    Email/Username
                   </label>
                   <input
                     type="text"
                     id="loginInput"
                     value={formData.loginInput}
                     onChange={handleInputChange}
-                    placeholder="Please enter your Email"
+                    placeholder="Please enter your Email or Username"
                     className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
                   />
                   {errors.loginInput && (
@@ -176,7 +105,7 @@ const LoginForm = () => {
                   </label>
                   <div className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 flex justify-between">
                     <input
-                      type={show ? "text" : "password"}
+                      type={show ? 'text' : 'password'}
                       id="password"
                       value={formData.password}
                       onChange={handleInputChange}
