@@ -3,6 +3,7 @@ import Sidebar from "./component/sidebar";
 import User_nav from "./component/user-nav";
 import Link from "next/link";
 
+
 const Admin = () => {
   return (
     <>
