@@ -1,5 +1,5 @@
 // pages/cart.js
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import Head from "next/head";
 import MainHeader from "../components/mainheader";
 import Link from "next/link";
@@ -28,11 +28,19 @@ export default function CartPage() {
   const total = (parseFloat(subTotal) + totalShipping).toFixed(2);
 
   const handleCheckout = () => {
-    const cartData = JSON.stringify(cart);
-    router.push({
-      pathname: '/checkout',
-      query: { cart: cartData },
-    });
+    const accessToken = localStorage.getItem("accessToken");
+
+    if (!accessToken) {
+      // If the user is not logged in (i.e., there is no access token), redirect them to the login page
+      router.push("/login");
+    } else {
+      // If the user is logged in (i.e., there is an access token), proceed to the checkout page
+      const cartData = JSON.stringify(cart);
+      router.push({
+        pathname: "/checkout",
+        query: { cart: cartData },
+      });
+    }
   };
   return (
     <>
@@ -131,11 +139,12 @@ export default function CartPage() {
                 <p className="text-sm text-gray-700">including VAT</p>
               </div>
             </div>
-            <Link href="/checkout">
-              <button onClick={handleCheckout} className="btn-action w-full flex justify-center items-center mx-auto mt-4">
-                Check out
-              </button>
-            </Link>
+            <button
+              onClick={handleCheckout}
+              className="btn-action w-full flex justify-center items-center mx-auto mt-4"
+            >
+              Check out
+            </button>
           </div>
         </div>
       </div>

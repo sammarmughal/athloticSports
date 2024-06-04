@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import Head from "next/head";
 import MainHeader from "../components/mainheader";
 import Link from "next/link";
+import Swal from "sweetalert2";
+import { useRouter } from "next/router";
+
 
 const ForgetPassword = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({ username: "", security_answer: "", new_password: "" });
   const [errors, setErrors] = useState({ username: "", security_answer: "", new_password: "" });
+  const router = useRouter();
 
   const validateForm = () => {
     let formIsValid = true;
@@ -48,7 +52,7 @@ const ForgetPassword = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username: formData.username, security_answer: formData.security_answer, new_password: "" }),
           });
-
+  
           const data = await response.json();
           if (data.success) {
             setStep(2);
@@ -68,10 +72,19 @@ const ForgetPassword = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
           });
-
+  
           const data = await response.json();
           if (data.success) {
-            alert("Password updated successfully");
+            Swal.fire({
+              title: "Password Update Successful",
+              text: "Your password has been updated successfully.",
+              icon: "success",
+              timer: 2000,
+              timerProgressBar: true,
+              willClose: () => {
+                router.push("/login");
+              },
+            });
           } else {
             alert(data.message);
           }
@@ -82,7 +95,7 @@ const ForgetPassword = () => {
       }
     }
   };
-
+  
   return (
     <>
       <Head>
