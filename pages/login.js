@@ -22,7 +22,7 @@ const LoginForm = () => {
   const validateForm = () => {
     const formErrors = {};
     if (!formData.loginInput)
-      formErrors.loginInput = "Email/Username is required";
+      formErrors.loginInput = "Email is required";
     if (!formData.password) formErrors.password = "Password is required";
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
@@ -165,14 +165,14 @@ const LoginForm = () => {
                     htmlFor="loginInput"
                     className="text-sm text-gray-600 mb-1"
                   >
-                    Email/Username
+                    Email
                   </label>
                   <input
                     type="text"
                     id="loginInput"
                     value={formData.loginInput}
                     onChange={handleInputChange}
-                    placeholder="Please enter your Email or Username"
+                    placeholder="Please enter your Email"
                     className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
                   />
                   {errors.loginInput && (
