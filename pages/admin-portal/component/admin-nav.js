@@ -15,6 +15,7 @@ function Admin_Nav() {
       });
 
       if (response.ok) {
+        localStorage.removeItem('accessToken');
         // Show the success popup
         Swal.fire({
           icon: 'success',
@@ -22,11 +23,9 @@ function Admin_Nav() {
           showConfirmButton: false,
           timer: 1500,
         }).then(() => {
-          // Redirect to login page after the popup is closed
           router.push('/login');
         });
       } else {
-        // Show an error popup
         Swal.fire({
           icon: 'error',
           title: 'Logout failed',
@@ -35,7 +34,6 @@ function Admin_Nav() {
       }
     } catch (error) {
       console.error('An error occurred during logout:', error);
-      // Show an error popup
       Swal.fire({
         icon: 'error',
         title: 'An error occurred',

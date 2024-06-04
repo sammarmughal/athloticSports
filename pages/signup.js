@@ -5,6 +5,7 @@ import Head from "next/head";
 import MainHeader from "../components/mainheader";
 
 const SignupForm = () => {
+  const [show , setShow] = useState("")
   const [formData, setFormData] = useState({
     name: "", 
     email: "",
@@ -47,6 +48,7 @@ const SignupForm = () => {
       });
 
       if (response.ok) {
+        
         router.push("/login");
       } else {
         const errorData = await response.json();
@@ -64,7 +66,79 @@ const SignupForm = () => {
 
   return (
     <>
-      <Head>{/* Meta tags */}</Head>
+   
+      <Head>
+        <meta charSet="utf-8" />
+        <meta
+          content="width=device-width, initial-scale=1.0, maximum-scale=5, shrink-to-fit=no"
+          name="viewport"
+        />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="generator" content="Getsol Inc." />
+        <title>SignUp</title>
+        <meta
+          name="title"
+          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
+        />
+        <meta
+          name="description"
+          content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
+        />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico"></link>
+        <meta name="robots" content="index, follow" />
+        <meta name="revisit-after" content="1 days" />
+        <meta name="author" content="Sardar Imran" />
+        <meta
+          itemProp="name"
+          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
+        />
+        <meta
+          itemProp="image"
+          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
+        />
+        <meta name="twitter:card" content="summary" />
+        <meta
+          name="twitter:title"
+          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
+        />
+        <meta
+          name="twitter:description"
+          content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
+        />
+        <meta
+          name="twitter:image:src"
+          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
+        />
+        <meta
+          property="og:title"
+          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
+        />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:image"
+          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
+        />
+        <meta
+          property="og:description"
+          content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
+        />
+        <meta property="og:locale" content="en" />
+        <meta
+          itemProp="image"
+          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
+        />
+        <script
+          defer
+          src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        ></link>
+        <link rel="canonical" href="https://athlotic.com/contact-us" />
+        <link rel="preconnect" href="//www.google-analytics.com" as="script" />
+        <meta name="google" content="notranslate" />
+      </Head>
       <MainHeader pageHeading="Welcome to Athlotic Sportswear! Please sign up." />
       <div className="sm:w-[40%] w-[90%] mx-auto my-20">
         <div className="signup-title py-8 sm:px-6 flex sm:flex-row flex-col items-center justify-between">
@@ -147,6 +221,21 @@ const SignupForm = () => {
                         errors.password ? "border-red-500" : "border-gray-300"
                       }`}
                     />
+                    <button
+                      type="button"
+                      className="block"
+                      onClick={() => setShow(!show)}
+                    >
+                      {show ? (
+                        <div>
+                          <i className="fas fa-eye text-lg"></i>
+                        </div>
+                      ) : (
+                        <div>
+                          <i className="fas fa-eye-slash text-lg"></i>
+                        </div>
+                      )}
+                    </button>
                   </div>
                   {errors.password && (
                     <div className="flex items-center justify-end mt-1">

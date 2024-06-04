@@ -1,12 +1,50 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
+
 function User_Nav() {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("/api/logout", {
+        method: "POST",
+      });
+
+      if (response.ok) {
+        localStorage.removeItem("accessToken");
+        // Show the success popup
+        Swal.fire({
+          icon: "success",
+          title: "Logged out successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        }).then(() => {
+          router.push("/login");
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Logout failed",
+          text: "Please try again later",
+        });
+      }
+    } catch (error) {
+      console.error("An error occurred during logout:", error);
+      Swal.fire({
+        icon: "error",
+        title: "An error occurred",
+        text: "Please try again later",
+      });
+    }
+  };
   return (
     <>
       <div className="fixed w-full flex items-center justify-between h-14 text-white bg-blue-800 z-10">
         <div className="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 border-none">
-        <Link href="/">
+          <Link href="/">
             <Image
               src="/images/logo-athlotic2.png"
               alt="Athlotic Sports GUJRANWALA"
@@ -23,15 +61,15 @@ function User_Nav() {
             src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg"
             alt="Avatar"
           />
-          <span className="hidden md:block">User</span>         
+          <span className="hidden md:block">User</span>
           <ul className="flex items-center">
             <li>
               <div className="block w-px h-6 mx-3 bg-gray-400"></div>
             </li>
             <li>
-              <a
-                href="#"
+              <button
                 className="flex items-center mr-4 hover:text-blue-100"
+                onClick={handleLogout}
               >
                 <span className="inline-flex mr-1">
                   <svg
@@ -50,7 +88,7 @@ function User_Nav() {
                   </svg>
                 </span>
                 Logout
-              </a>
+              </button>
             </li>
           </ul>
         </div>
