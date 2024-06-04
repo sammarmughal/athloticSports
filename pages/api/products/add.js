@@ -6,7 +6,6 @@ import fs from 'fs';
 
 const uploadDir = path.join(process.cwd(), 'public', 'uploads');
 
-// Ensure the upload directory exists
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -68,6 +67,6 @@ export default apiRoute;
 
 export const config = {
   api: {
-    bodyParser: false, // Disallow body parsing, consume as stream
+    bodyParser: false, 
   },
 };
