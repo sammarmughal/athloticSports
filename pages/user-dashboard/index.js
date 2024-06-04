@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import Sidebar from "./component/sidebar";
 import User_nav from "./component/user-nav";
 import Link from "next/link";
+import withAuth from '../../components/withAuth';
 
 
-const Admin = () => {
+
+const User = () => {
   return (
     <>
       <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white  text-black ">
@@ -303,4 +305,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default withAuth(User);

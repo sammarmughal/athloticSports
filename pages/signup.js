@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
+import Swal from "sweetalert2";
 import MainHeader from "../components/mainheader";
 
 const SignupForm = () => {
-  const [show , setShow] = useState("")
+  const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
     name: "", 
     email: "",
@@ -22,22 +23,31 @@ const SignupForm = () => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
   };
-
   const validateForm = () => {
     const formErrors = {};
-    if (!formData.name) formErrors.name = "Full Name is required"; 
+    
+    // Regular expression for a valid username (lowercase letters, digits, underscores, hyphens)
+    const usernameRegex = /^[a-z0-9_-]+$/;
+  
+    if (!formData.name) formErrors.name = "Full Name is required";
     if (!formData.email) formErrors.email = "Email is required";
     if (!formData.password) formErrors.password = "Password is required";
-    if (!formData.username) formErrors.username = "Username is required";
+    
+    // Username validation
+    if (!formData.username) {
+      formErrors.username = "Username is required";
+    } else if (!usernameRegex.test(formData.username)) {
+      formErrors.username = "Username can only contain lowercase letters, digits, underscores, and hyphens";
+    }
+    
     if (!formData.age) formErrors.age = "Age is required";
     if (!formData.gender) formErrors.gender = "Gender is required";
-    if (!formData.childhoodName)
-      formErrors.childhoodName = "childhood Name is required";
-
+    if (!formData.childhoodName) formErrors.childhoodName = "Childhood Name is required";
+  
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -48,25 +58,38 @@ const SignupForm = () => {
       });
 
       if (response.ok) {
-        
-        router.push("/login");
+        Swal.fire({
+          title: "Signup Successful",
+          text: "You will be redirected to the login page.",
+          icon: "success",
+          timer: 2000,
+          timerProgressBar: true,
+          willClose: () => {
+            router.push("/login");
+          },
+        });
       } else {
         const errorData = await response.json();
-        console.error("Signup failed:", errorData.message);
         if (response.status === 409) {
-          setErrors({
-            username: "Username already exists. Please choose a different one.",
+          Swal.fire({
+            title: "Signup Failed",
+            text: errorData.message,
+            icon: "error",
           });
+          setErrors({ email: errorData.message });
         } else {
+          Swal.fire({
+            title: "Signup Failed",
+            text: "Error registering user. Please try again.",
+            icon: "error",
+          });
           setErrors({ general: "Error registering user. Please try again." });
         }
       }
     }
   };
-
   return (
     <>
-   
       <Head>
         <meta charSet="utf-8" />
         <meta
@@ -221,7 +244,7 @@ const SignupForm = () => {
                         errors.password ? "border-red-500" : "border-gray-300"
                       }`}
                     />
-                    <button
+                     <button
                       type="button"
                       className="block"
                       onClick={() => setShow(!show)}

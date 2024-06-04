@@ -49,10 +49,11 @@ const LoginForm = () => {
           timerProgressBar: true,
           willClose: () => {
             if (data.role === "user") {
-              router.push("/user-dashboard");
+              router.push(`/user-dashboard?username=${data.username}`);
             } else if (data.role === "admin") {
-              router.push("/admin-portal");
+              router.push(`/admin-portal?username=${data.username}`);
             }
+            console.log(data.username);
           },
         });
       } else {
@@ -65,7 +66,6 @@ const LoginForm = () => {
       }
     }
   };
-
   return (
     <>
       <Head>

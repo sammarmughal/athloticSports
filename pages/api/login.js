@@ -1,7 +1,8 @@
 import { db } from '../../utils/db';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = '91e15b5e976f86643e7860de6c1624c0bc45c8b92e1cfa4d241fa7353c92f9f45857104c5b1b44626f46c7a3d88e26c32f4ef760554c07d4ad6d48484217af52';  
+const JWT_SECRET = '91e15b5e976f86643e7860de6c1624c0bc45c8b92e1cfa4d241fa7353c92f9f45857104c5b1b44626f46c7a3d88e26c32f4ef760554c07d4ad6d48484217af52';
+
 export default async (req, res) => {
   const { method } = req;
   const { loginInput, password } = req.body;
@@ -21,7 +22,7 @@ export default async (req, res) => {
 
     if (user.length > 0) {
       const token = jwt.sign({ role: 'user', id: user[0].id }, JWT_SECRET, { expiresIn: '1h' });
-      return res.status(200).json({ token, role: 'user' });
+      return res.status(200).json({ token, role: 'user', username: user[0].username });
     }
 
     // Check admin credentials
@@ -29,7 +30,7 @@ export default async (req, res) => {
 
     if (admin.length > 0) {
       const token = jwt.sign({ role: 'admin', id: admin[0].id }, JWT_SECRET, { expiresIn: '1h' });
-      return res.status(200).json({ token, role: 'admin' });
+      return res.status(200).json({ token, role: 'admin', username: admin[0].username });
     }
 
     return res.status(401).json({ message: 'Invalid credentials' });

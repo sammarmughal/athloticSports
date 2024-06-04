@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Sidebar from "./component/sidebar";
 import Admin_Nav from "./component/admin-nav";
 import Link from "next/link";
+import withAuth from '../../components/withAuth';
+
 
 const Admin = () => {
   const [activePanel, setActivePanel] = useState("No orders");
@@ -617,4 +619,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default withAuth(Admin);
