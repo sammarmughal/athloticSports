@@ -2,7 +2,7 @@ import { createConnection } from 'mysql2/promise';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { name, email, username, password, age, gender } = req.body; // Extracting values from request body
+    const { name, email, username, password, age, gender, security_answer } = req.body;
 
     const connection = await createConnection({
       host: 'localhost',
@@ -33,8 +33,8 @@ export default async function handler(req, res) {
       }
 
       await connection.execute(
-        'INSERT INTO users (name, email, username, password, age, gender) VALUES (?, ?, ?, ?, ?, ?)',
-        [name, email, username, password, age, gender]
+        'INSERT INTO users (name, email, username, password, age, gender, security_answer) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [name, email, username, password, age, gender, security_answer]
       );
 
       res.status(201).json({ message: 'User registered successfully' });

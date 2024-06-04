@@ -14,7 +14,7 @@ const SignupForm = () => {
     username: "",
     age: "",
     gender: "",
-    childhoodName: "",
+    security_answer: "",
   });
   const [errors, setErrors] = useState({});
   const router = useRouter();
@@ -42,7 +42,7 @@ const SignupForm = () => {
     
     if (!formData.age) formErrors.age = "Age is required";
     if (!formData.gender) formErrors.gender = "Gender is required";
-    if (!formData.childhoodName) formErrors.childhoodName = "Childhood Name is required";
+    if (!formData.security_answer) formErrors.security_answer = "Childhood Name is required";
   
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
@@ -329,8 +329,8 @@ const SignupForm = () => {
                     } rounded appearance-none focus:outline-none placeholder-gray-400 focus:border-blue-500`}
                   >
                     <option value="">Select a Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                     <option value="others">Others</option>
                   </select>
                   {errors.gender && (
@@ -343,27 +343,27 @@ const SignupForm = () => {
                 </div>
                 <div className="mb-4">
                   <label
-                    htmlFor="childhoodName"
+                    htmlFor="security_answer"
                     className="block mb-2 text-sm font-bold text-gray-700"
                   >
-                    What is your Childhood name?
+                     <br></br><strong>REMEMBER THIS AS THIS WILL BE USED TO RESET YOUR PASSWORD IF YOU FORGET IT !</strong><br></br>What was your Childhood Nickname? 
                   </label>
                   <input
                     className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${
-                      errors.childhoodName
+                      errors.security_answer
                         ? "border-red-500"
                         : "border-gray-300"
                     } rounded appearance-none focus:outline-none placeholder-gray-400 focus:border-blue-500`}
-                    id="childhoodName"
+                    id="security_answer"
                     type="text"
-                    value={formData.childhoodName}
+                    value={formData.security_answer}
                     onChange={handleInputChange}
                     placeholder="Enter Your Childhood Name"
                   />
-                  {errors.childhoodName && (
+                  {errors.security_answer && (
                     <div className="flex items-center justify-end mt-1">
                       <span className="text-red-500 text-xs">
-                        {errors.childhoodName}
+                        {errors.security_answer}
                       </span>
                     </div>
                   )}
