@@ -16,7 +16,6 @@ function Admin_Nav() {
 
       if (response.ok) {
         localStorage.removeItem('accessToken');
-        // Show the success popup
         Swal.fire({
           icon: 'success',
           title: 'Logged out successfully',

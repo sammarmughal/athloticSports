@@ -1,72 +1,64 @@
-import nextConnect from 'next-connect';
 import multer from 'multer';
 import path from 'path';
-import { callProducts } from '../../../lib/db';
 import fs from 'fs';
+import { v4 as uuidv4 } from 'uuid';
+import { query } from '../../../lib/db';
 
-const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
+// Configure multer for file upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, uploadDir);
+    const category = req.body.category ? req.body.category.toLowerCase().replace(/ /g, '_') : 'uncategorized';
+    const dir = path.join(process.cwd(), 'public', 'images', 'products', category);
+
+    // Ensure directory exists
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
+    cb(null, dir);
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  }
-});
-
-const upload = multer({ storage: storage });
-
-const apiRoute = nextConnect({
-  onError(error, req, res) {
-    console.error(`Error: ${error.message}`);
-    res.status(501).json({ error: `Sorry something happened! ${error.message}` });
-  },
-  onNoMatch(req, res) {
-    res.status(405).json({ error: `Method ${req.method} Not Allowed` });
+    const uniqueFileName = uuidv4() + path.extname(file.originalname);
+    cb(null, uniqueFileName);
   },
 });
 
-apiRoute.use(upload.single('image'));
-
-apiRoute.post(async (req, res) => {
-  const {
-    product_name,
-    category,
-    description,
-    price,
-    quantity_available,
-    sku_id
-  } = req.body;
-
-  const image_url = `/uploads/${req.file.filename}`;
-
-  const query = `
-    INSERT INTO products (product_name, category, description, price, quantity_available, image_url, sku_id)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-  `;
-  const values = [product_name, category, description, price, quantity_available, image_url, sku_id];
-
-  try {
-    console.log("Executing query:", query);
-    console.log("With values:", values);
-
-    await callProducts(query, values);
-    res.status(200).json({ message: 'Product added successfully' });
-  } catch (error) {
-    console.error("Error adding product:", error);
-    res.status(500).json({ error: 'Failed to add product' });
-  }
-});
-
-export default apiRoute;
+const upload = multer({ storage });
 
 export const config = {
   api: {
-    bodyParser: false, 
+    bodyParser: false,
   },
 };
+
+const handler = async (req, res) => {
+  upload.single('image')(req, res, async (err) => {
+    if (err) {
+      console.error('Error uploading file:', err);
+      return res.status(500).json({ message: 'Failed to upload image' });
+    }
+
+    try {
+      const { product_name, category, description, price, quantity_available, sku_id } = req.body;
+
+      if (!product_name || !category || !description || !price || !quantity_available || !sku_id || !req.file) {
+        return res.status(400).json({ message: 'All fields are required' });
+      }
+
+      const image_url = `/images/products/${category.toLowerCase().replace(/ /g, '_')}/${req.file.filename}`;
+
+      // Insert the product into the database
+      const result = await query(
+        'INSERT INTO products (product_name, category, description, price, quantity_available, sku_id, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+        [product_name, category, description, price, quantity_available, sku_id, image_url]
+      );
+
+      return res.status(200).json({ message: 'Product added successfully' });
+    } catch (error) {
+      console.error('Failed to add product:', error);
+      return res.status(500).json({ message: 'Failed to add product' });
+    }
+  });
+};
+
+export default handler;
