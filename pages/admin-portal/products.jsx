@@ -2,10 +2,10 @@ import Sidebar from "./component/sidebar";
 import Link from "next/link";
 import Admin_Nav from "./component/admin-nav";
 import { fetchProducts } from "../../lib/data";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import ReactPaginate from "react-paginate";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 export async function getServerSideProps() {
   try {
@@ -16,20 +16,30 @@ export async function getServerSideProps() {
     return { props: { products: [] } };
   }
 }
+
 const Products = ({ products }) => {
   const [dropdown, setDropdown] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const productPerPge = 25;
+  const [currentPage, setCurrentPage] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const productsPerPage = 25;
+
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [selectedCategory]);
+
   const handleDropdown = () => {
     setDropdown(!dropdown);
   };
+
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
-  console.log(products);
-  const offset = currentPage * productPerPge;
-  const currentProducts = products.slice(offset, offset + productPerPge);
-  const pageCount = Math.ceil(products.length / productPerPge);
+  const categories = [...new Set(products.map((product) => product.category))];
+  console.log(categories);
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+    setDropdown(false);
+  };
   const handleDelete = async (sku_id) => {
     const result = await Swal.fire({
       title: "Are you sure?",
@@ -38,40 +48,48 @@ const Products = ({ products }) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     });
-  
+
     if (result.isConfirmed) {
       try {
         const response = await fetch(`/api/products/${sku_id}`, {
-          method: 'DELETE',
+          method: "DELETE",
         });
-  
+
         if (response.ok) {
           Swal.fire({
             title: "Deleted!",
             text: "Your product has been deleted.",
-            icon: "success"
+            icon: "success",
           });
-  
+
           window.location.reload();
         } else {
           const errorData = await response.json();
-          throw new Error(errorData.message || 'Failed to delete product.');
+          throw new Error(errorData.message || "Failed to delete product.");
         }
       } catch (error) {
         console.error("Error deleting product:", error);
         Swal.fire({
           title: "Error!",
           text: error.message || "Failed to delete product.",
-          icon: "error"
+          icon: "error",
         });
       }
     }
   };
-  
 
+  const filteredProducts = selectedCategory
+    ? products.filter((product) => product.category === selectedCategory)
+    : products;
 
+  const offset = currentPage * productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    offset,
+    offset + productsPerPage
+  );
+  const pageCount = Math.ceil(filteredProducts.length / productsPerPage);
   return (
     <>
       <div className="min-h-screen w-full flex flex-col flex-auto flex-shrink-0 antialiased bg-white text-black">
@@ -120,24 +138,18 @@ const Products = ({ products }) => {
                         aria-orientation="vertical"
                         aria-labelledby="dropdown-button"
                       >
-                        <li
-                          className="flex block rounded-md my-2 px-4 py-2 text-sm border-b  text-gray-700 cursor-pointer"
-                          role="menuitem"
-                        >
-                          Pending
-                        </li>
-                        <li
-                          className="flex block my-2 rounded-md px-4 py-2 text-sm border-b text-gray-700 cursor-pointer"
-                          role="menuitem"
-                        >
-                          Ready To Ship
-                        </li>
-                        <li
-                          className="flex block rounded-md px-4 py-2 text-sm border-b text-gray-700 cursor-pointer"
-                          role="menuitem"
-                        >
-                          Shipped
-                        </li>
+                        {categories.map((category) => (
+                          <li
+                            key={category}
+                            className={`flex block rounded-md my-2 px-4 py-2 text-sm border-b  text-gray-700 cursor-pointer ${
+                              selectedCategory === category ? "bg-gray-200" : ""
+                            }`}
+                            role="menuitem"
+                            onClick={() => handleCategorySelect(category)}
+                          >
+                            {category}
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   )}
@@ -163,19 +175,31 @@ const Products = ({ products }) => {
                         className="bg-gray-50  hover:bg-gray-10 text-gray-700"
                         key={product.sku_id}
                       >
-                        <td className="px-4 py-3 hove:bg-slate-100">{product.product_name}</td>
-                        <td className="px-4 py-3 hove:bg-slate-100">{product.description}</td>
-                        <td className="px-4 py-3 hove:bg-slate-100">Rs.{product.price}</td>
+                        <td className="px-4 py-3 hove:bg-slate-100">
+                          {product.product_name}
+                        </td>
+                        <td className="px-4 py-3 hove:bg-slate-100">
+                          {product.description}
+                        </td>
+                        <td className="px-4 py-3 hove:bg-slate-100">
+                          Rs.{product.price}
+                        </td>
                         <td className="px-4 py-3 hove:bg-slate-100">
                           {product.quantity_available}
                         </td>
-                        <td className="px-4 py-3 hove:bg-slate-100">{product.category}</td>
+                        <td className="px-4 py-3 hove:bg-slate-100">
+                          {product.category}
+                        </td>
                         <td className="flex flex-col gap-1 p-1">
-                          <button className="bg-red-400 text-white rounded px-2"
-                          onClick={()=> handleDelete(product.sku_id)}>
+                          <button
+                            className="bg-red-400 text-white rounded px-2"
+                            onClick={() => handleDelete(product.sku_id)}
+                          >
                             Delete
                           </button>
-                          <Link href={`/admin-portal/edit-product/${product.sku_id}`}>
+                          <Link
+                            href={`/admin-portal/edit-product/${product.sku_id}`}
+                          >
                             <button className="bg-green-400 rounded px-2 w-full text-white">
                               Edit
                             </button>
