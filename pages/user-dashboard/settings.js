@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "./component/sidebar";
 import User_Nav from "./component/user-nav";
 
 const Settings = () => {
+  const [username, setUsername] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [oldSecurityAnswer, setOldSecurityAnswer] = useState("");
@@ -12,7 +13,17 @@ const Settings = () => {
   const [isChangingSecurityAnswer, setIsChangingSecurityAnswer] = useState(false);
   const [message, setMessage] = useState("");
 
-  const username = "your-unique-username"; // Replace with the actual username
+  useEffect(() => {
+    const fetchUsername = async () => {
+      try {
+        const response = await axios.get("/api/user/profile");
+        setUsername(response.data.username);
+      } catch (error) {
+        setMessage("Error fetching user data");
+      }
+    };
+    fetchUsername();
+  }, []);
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
