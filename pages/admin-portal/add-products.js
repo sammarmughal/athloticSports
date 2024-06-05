@@ -134,7 +134,7 @@ const AddProducts = () => {
                     className="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   >
                     <option>Select Category</option>
-                    <option>American Footballs</option>
+                    <option>Football</option>
                     <option>Baseball</option>
                     <option>Basketball</option>
                     <option>Cycling</option>

@@ -165,7 +165,7 @@ const Products = ({ products }) => {
                       >
                         <td className="px-4 py-3 hove:bg-slate-100">{product.product_name}</td>
                         <td className="px-4 py-3 hove:bg-slate-100">{product.description}</td>
-                        <td className="px-4 py-3 hove:bg-slate-100">${product.price}</td>
+                        <td className="px-4 py-3 hove:bg-slate-100">Rs.{product.price}</td>
                         <td className="px-4 py-3 hove:bg-slate-100">
                           {product.quantity_available}
                         </td>
