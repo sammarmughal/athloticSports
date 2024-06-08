@@ -619,4 +619,4 @@ const Admin = () => {
   );
 };
 
-export default withAuth(Admin);
+export default withAuth(Admin, ["admin"]);

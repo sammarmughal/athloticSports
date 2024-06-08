@@ -3,6 +3,7 @@ import Admin_Nav from "./component/admin-nav";
 import { useState } from "react";
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import withAuth from "../../components/withAuth";
 
 const AddProducts = () => {
   const [product_name, setProduct_name] = useState("");
@@ -275,4 +276,4 @@ const AddProducts = () => {
   );
 };
 
-export default AddProducts;
+export default withAuth(AddProducts, ["admin"]);

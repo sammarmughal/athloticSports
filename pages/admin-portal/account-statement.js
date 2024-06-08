@@ -1,6 +1,9 @@
 import Sidebar from "./component/sidebar";
 import Link from "next/link";
 import Admin_Nav from "./component/admin-nav";
+import withAuth from "../../components/withAuth";
+
+
 const Account_statement = () => {
   return (
     <>
@@ -156,4 +159,4 @@ const Account_statement = () => {
     </>
   );
 };
-export default Account_statement;
+export default withAuth(Account_statement, ["admin"]);

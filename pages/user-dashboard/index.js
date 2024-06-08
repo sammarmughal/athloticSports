@@ -4,8 +4,6 @@ import User_nav from "./component/user-nav";
 import Link from "next/link";
 import withAuth from '../../components/withAuth';
 
-
-
 const User = () => {
   return (
     <>
@@ -305,4 +303,4 @@ const User = () => {
   );
 };
 
-export default withAuth(User);
+export default withAuth(User, ["user"]);

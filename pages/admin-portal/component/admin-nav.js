@@ -16,6 +16,10 @@ function Admin_Nav() {
 
       if (response.ok) {
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('exp');
+        localStorage.removeItem('username');
+        localStorage.removeItem('role');
+
         Swal.fire({
           icon: 'success',
           title: 'Logged out successfully',

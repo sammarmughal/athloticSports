@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "./component/sidebar";
 import User_Nav from "./component/user-nav";
+import withAuth from "../../components/withAuth";
 
 const Settings = () => {
   const [username, setUsername] = useState("");
@@ -14,24 +15,18 @@ const Settings = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    const fetchUsername = async () => {
-      try {
-        const response = await axios.get("/api/user/profile");
-        setUsername(response.data.username);
-      } catch (error) {
-        setMessage("Error fetching user data");
-      }
-    };
-    fetchUsername();
+    // Retrieve username from localStorage
+    const storedUsername = localStorage.getItem("username");
+    setUsername(storedUsername);
   }, []);
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.put("/api/user/password", {
-        username,
         oldPassword,
         newPassword,
+        username, // Pass username with the request
       });
       if (response.status === 200) {
         setMessage("Password changed successfully");
@@ -50,9 +45,9 @@ const Settings = () => {
     }
     try {
       const response = await axios.put("/api/user/security-answer", {
-        username,
         oldSecurityAnswer,
         newSecurityAnswer,
+        username, // Pass username with the request
       });
       if (response.status === 200) {
         setMessage("Security answer changed successfully");
@@ -160,4 +155,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default withAuth(Settings, ["user"]);

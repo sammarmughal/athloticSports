@@ -20,7 +20,7 @@ export default function CartPage() {
     .reduce((total, item) => total + item.price * item.quantity, 0)
     .toFixed(2);
   const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-  const baseShipping = 300.99;
+  const baseShipping = 0;
   const additionalShippingPerItem = 120;
   const totalShipping =
     baseShipping +
@@ -31,10 +31,8 @@ export default function CartPage() {
     const accessToken = localStorage.getItem("accessToken");
 
     if (!accessToken) {
-      // If the user is not logged in (i.e., there is no access token), redirect them to the login page
       router.push("/login");
     } else {
-      // If the user is logged in (i.e., there is an access token), proceed to the checkout page
       const cartData = JSON.stringify(cart);
       router.push({
         pathname: "/checkout",

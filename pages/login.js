@@ -22,7 +22,7 @@ const LoginForm = () => {
   const validateForm = () => {
     const formErrors = {};
     if (!formData.loginInput)
-      formErrors.loginInput = "Email is required";
+      formErrors.loginInput = "Email/Username is required";
     if (!formData.password) formErrors.password = "Password is required";
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
@@ -31,41 +31,51 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('accessToken', data.token);
-
-        Swal.fire({
-          title: "Login Successful",
-          text: "You will be redirected shortly",
-          icon: "success",
-          timer: 2000,
-          timerProgressBar: true,
-          willClose: () => {
-            if (data.role === "user") {
-              router.push(`/user-dashboard?username=${data.username}`);
-            } else if (data.role === "admin") {
-              router.push(`/admin-portal?username=${data.username}`);
-            }
-            console.log(data.username);
-          },
+      try {
+        const response = await fetch("/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
         });
-      } else {
+
+        if (response.ok) {
+          const data = await response.json();
+          localStorage.setItem("accessToken", data.token);
+          localStorage.setItem("username", formData.loginInput); // Store the username
+          localStorage.setItem("role", data.role);
+
+          Swal.fire({
+            title: "Login Successful",
+            text: "You will be redirected shortly",
+            icon: "success",
+            timer: 2000,
+            timerProgressBar: true,
+            willClose: () => {
+              if (data.role === "user") {
+                router.push(`/user-dashboard`);
+              } else if (data.role === "admin") {
+                router.push(`/admin-portal`);
+              }
+            },
+          });
+        } else {
+          Swal.fire({
+            title: "Login Failed",
+            text: "Please check your credentials and try again",
+            icon: "error",
+          });
+        }
+      } catch (error) {
+        console.error("Login error:", error);
         Swal.fire({
-          title: "Login Failed",
-          text: "Please check your credentials and try again",
+          title: "Login Error",
+          text: "An unexpected error occurred. Please try again later.",
           icon: "error",
         });
-        console.error("Login failed");
       }
     }
   };
+
   return (
     <>
       <Head>
@@ -165,21 +175,19 @@ const LoginForm = () => {
                     htmlFor="loginInput"
                     className="text-sm text-gray-600 mb-1"
                   >
-                    Email
+                    Email/Username
                   </label>
                   <input
                     type="text"
                     id="loginInput"
                     value={formData.loginInput}
                     onChange={handleInputChange}
-                    placeholder="Please enter your Email"
+                    placeholder="Please enter your Email/Username"
                     className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
                   />
                   {errors.loginInput && (
-                    <div className="flex items-center justify-end mt-1">
-                      <span className="text-red-500 text-xs">
-                        {errors.loginInput}
-                      </span>
+                    <div className="flex items-center text-red-600 text-xs mt-1">
+                      <span>{errors.loginInput}</span>
                     </div>
                   )}
                 </div>
@@ -190,50 +198,37 @@ const LoginForm = () => {
                   >
                     Password
                   </label>
-                  <div className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 flex justify-between">
-                    <input
-                      type={show ? "text" : "password"}
-                      id="password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      placeholder="Please Enter Your Password"
-                      className="w-full placeholder-gray-400 focus:outline-none"
-                    />
-                    <button
-                      type="button"
-                      className="block"
-                      onClick={() => setShow(!show)}
-                    >
-                      {show ? (
-                        <div>
-                          <i className="fas fa-eye text-lg"></i>
-                        </div>
-                      ) : (
-                        <div>
-                          <i className="fas fa-eye-slash text-lg"></i>
-                        </div>
-                      )}
-                    </button>
-                  </div>
+                  <input
+                    type={show ? "text" : "password"}
+                    id="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    placeholder="Please enter your password"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                  />
                   {errors.password && (
-                    <div className="flex items-center justify-end mt-1">
-                      <span className="text-red-500 text-xs">
-                        {errors.password}
-                      </span>
+                    <div className="flex items-center text-red-600 text-xs mt-1">
+                      <span>{errors.password}</span>
                     </div>
                   )}
                 </div>
-                <div className="text-right mt-2">
-                  <Link href="/forgetpassword">
-                    <p className="text-xs text-blue-600">Reset Your Password</p>
-                  </Link>
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="show-password"
+                    checked={show}
+                    onChange={() => setShow(!show)}
+                    className="mr-2"
+                  />
+                  <label htmlFor="show-password" className="text-sm text-gray-600">
+                    Show Password
+                  </label>
                 </div>
-                <div></div>
                 <button
                   type="submit"
-                  className="w-full py-3 btn-action rounded-full text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200"
                 >
-                  LOGIN
+                  Login
                 </button>
               </div>
             </div>

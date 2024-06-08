@@ -15,6 +15,9 @@ function User_Nav() {
 
       if (response.ok) {
         localStorage.removeItem("accessToken");
+        localStorage.removeItem('username');
+        localStorage.removeItem('role');
+        localStorage.removeItem('exp');
         // Show the success popup
         Swal.fire({
           icon: "success",

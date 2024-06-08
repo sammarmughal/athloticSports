@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import ReactPaginate from "react-paginate";
 import Swal from "sweetalert2";
+import withAuth from "../../components/withAuth";
 
 export async function getServerSideProps() {
   try {
@@ -254,4 +255,4 @@ const Products = ({ products }) => {
   );
 };
 
-export default Products;
+export default withAuth(Products, ["admin"]);

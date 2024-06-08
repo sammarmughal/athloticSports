@@ -3,6 +3,7 @@ import Link from "next/link";
 import User_Nav from "./component/user-nav";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import withAuth from "../../components/withAuth";
 
 const Profile = () => {
   const [formPopup, setFormPopup] = useState(false);
@@ -188,4 +189,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile, ["user"]);
