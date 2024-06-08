@@ -76,7 +76,7 @@ const Settings = () => {
                   <label className="block text-gray-700">Old Password</label>
                   <input
                     type="password"
-                    className="border-1 rounded px-4 py-2 w-full"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
                     value={oldPassword}
                     onChange={(e) => setOldPassword(e.target.value)}
                     required
@@ -86,7 +86,7 @@ const Settings = () => {
                   <label className="block text-gray-700">New Password</label>
                   <input
                     type="password"
-                    className="border-1 rounded px-4 py-2 w-full"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
@@ -117,7 +117,7 @@ const Settings = () => {
                   <label className="block text-gray-700">Old Security Answer</label>
                   <input
                     type="text"
-                    className="border-1 rounded px-4 py-2 w-full"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
                     value={oldSecurityAnswer}
                     onChange={(e) => setOldSecurityAnswer(e.target.value)}
                     required
@@ -127,7 +127,7 @@ const Settings = () => {
                   <label className="block text-gray-700">New Security Answer</label>
                   <input
                     type="text"
-                    className="border-1 rounded px-4 py-2 w-full"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 sm:text-base text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500"
                     value={newSecurityAnswer}
                     onChange={(e) => setNewSecurityAnswer(e.target.value)}
                     required

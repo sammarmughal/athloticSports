@@ -92,8 +92,8 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              href="/user-dashboard/settings"
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
@@ -117,16 +117,11 @@ const Sidebar = () => {
                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                   ></path>
                 </svg>
-              </span>
-              <Link
-              href="/user-dashboard/settings"
-              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
-            >
+              </span>            
               <span className="ml-2 text-sm tracking-wide truncate">
                 Settings
               </span>
-              </Link>
-            </a>
+            </Link>
           </li>
         </ul>
         <p className="mb-14 px-5 py-3 hidden md:block text-center text-xs">

@@ -7,10 +7,24 @@ import withAuth from "../../components/withAuth";
 
 const Profile = () => {
   const [formPopup, setFormPopup] = useState(false);
+  const [formPopup2, setFormPopup2] = useState(false);
+
   const [user, setUser] = useState({});
   const [address, setAddress] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
 
-  const username = 'your-unique-username'; // Replace with the actual username
+  // Fetch username from local storage
+  useEffect(() => {
+    const savedUsername = localStorage.getItem('username');
+    if (savedUsername) {
+      setUsername(savedUsername);
+    } else {
+      console.error("Username not found in local storage");
+      // Handle the case where the username is not found, e.g., redirect to login
+    }
+  }, []);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -18,6 +32,8 @@ const Profile = () => {
         const response = await axios.get(`/api/user?username=${username}`);
         setUser(response.data);
         setAddress(response.data.address);
+        setName(response.data.name);
+        setEmail(response.data.email);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -27,6 +43,9 @@ const Profile = () => {
 
   const handlePopup = () => {
     setFormPopup(!formPopup);
+  };
+  const handlePopup2 = () => {
+    setFormPopup2(!formPopup2);
   };
 
   const handleAddressChange = async (e) => {
@@ -45,6 +64,22 @@ const Profile = () => {
       console.error("Error updating address:", error);
     }
   };
+  const handleProfileUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(`/api/user/${username}`, {
+        name,
+        email,
+      });
+      if (response.status === 200) {
+        setFormPopup2(false);
+        setUser({ ...user, name, email });
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
+
 
   return (
     <>
@@ -59,12 +94,12 @@ const Profile = () => {
                   <span className="text-xl font-semibold block">
                     User Profile
                   </span>
-                  <a
-                    href="#"
+                  <button
+                  onClick={handlePopup2}
                     className="mb-2 -mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800"
                   >
                     Edit
-                  </a>
+                  </button>
                 </div>
                 <span className="text-gray-600">
                 </span>
@@ -107,6 +142,66 @@ const Profile = () => {
                 </div>
               </div>
             </div>
+            {formPopup2 && (
+              <div className="fixed inset-0 mt-36 z-40">
+                <div className="w-full md:w-[40%] bg-white md:max-w-full z-40 mx-auto">
+                  <div className="p-6 border border-gray-300 sm:rounded-md">
+                    <div className="flex justify-between">
+                      <span className="text-xl font-semibold block">
+                        Edit Profile
+                      </span>
+                      <svg
+                        onClick={handlePopup2}
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="h-5 w-5 cursor-pointer duration-150 hover:text-red-500"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </div>
+                    <form onSubmit={handleProfileUpdate}>
+                      <label className="block mb-6">
+                        <span className="text-gray-700">Name</span>
+                        <input
+                          name="address"
+                          type="text"
+                          className="w-full input-field"
+                          placeholder="Enter Your Address"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </label>
+                      <label className="block mb-6">
+                        <span className="text-gray-700">Email</span>
+                        <input
+                          name="address"
+                          type="text"
+                          className="w-full input-field"
+                          placeholder="Enter Your Address"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </label>
+                      <div className="mb-6 w-full flex justify-end">
+                        <button
+                          type="submit"
+                          className="py-3 px-6 btn-action rounded-xl text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="w-full relative">
             <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md mt-10">

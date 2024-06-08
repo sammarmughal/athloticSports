@@ -20,11 +20,8 @@ export default function CartPage() {
     .reduce((total, item) => total + item.price * item.quantity, 0)
     .toFixed(2);
   const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-  const baseShipping = 0;
-  const additionalShippingPerItem = 120;
-  const totalShipping =
-    baseShipping +
-    (totalQuantity > 1 ? (totalQuantity - 1) * additionalShippingPerItem : 0);
+  const shippingPerItem = 120;
+  const totalShipping = totalQuantity * shippingPerItem;
   const total = (parseFloat(subTotal) + totalShipping).toFixed(2);
 
   const handleCheckout = () => {

@@ -46,7 +46,7 @@ function User_Nav() {
   return (
     <>
       <div className="fixed w-full flex items-center justify-between h-14 text-white bg-blue-800 z-10">
-        <div className="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 border-none">
+        <div className="flex items-center justify-start md:justify-center pl-3 w-36 md:w-64 h-14 border-none">
           <Link href="/">
             <Image
               src="/images/logo-athlotic2.png"

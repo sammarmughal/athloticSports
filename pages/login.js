@@ -224,9 +224,14 @@ const LoginForm = () => {
                     Show Password
                   </label>
                 </div>
+                <div className="text-right mt-2">
+                  <Link href="/forgetpassword">
+                    <p className="text-xs text-blue-600">Reset Your Password</p>
+                  </Link>
+                </div>
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200"
+                  className="w-full py-3 btn-action rounded-full text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
                 >
                   Login
                 </button>

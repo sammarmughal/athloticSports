@@ -2,15 +2,20 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import MainHeader from "../components/mainheader";
-import { PayPalButton } from "react-paypal-button-v2";
+// import { PayPalButton } from "react-paypal-button-v2";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
-
+const initialOptions = {
+  "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID, // This will use the public client ID
+  currency: "USD",
+};
 const CheckoutPage = () => {
-  const [selectedCountry, setSelectedCountry] = useState("US");
   const [scriptLoaded, setScriptLoaded] = useState(false);
-  const handleCountryChange = (event) => {
-    setSelectedCountry(event.target.value);
-  };
+  const [cart, setCart] = useState([]);
+  const [subTotal, setSubTotal] = useState(0);
+  const [totalShipping, setTotalShipping] = useState(0);
+  const [total, setTotal] = useState(0);
+  const router = useRouter();
   useEffect(() => {
     const paypalScript = () => {
       const script = document.createElement("script");
@@ -21,15 +26,41 @@ const CheckoutPage = () => {
       script.onload = () => setScriptLoaded(true);
 
       document.body.appendChild(script);
-    };
+    };  
     paypalScript();
   }, []);
+  useEffect(() => {
+    if (router.query.cart) {
+      const cartData = JSON.parse(router.query.cart);
+      const calculatedSubTotal = cartData
+        .reduce((total, item) => total + item.price * item.quantity, 0)
+        .toFixed(2);
+      const totalQuantity = cartData.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+      const baseShipping = 300.99;
+      const additionalShippingPerItem = 120;
+      const calculatedTotalShipping =
+        baseShipping +
+        (totalQuantity > 1
+          ? (totalQuantity - 1) * additionalShippingPerItem
+          : 0);
+      const calculatedTotal = (
+        parseFloat(calculatedSubTotal) + calculatedTotalShipping
+      ).toFixed(2);
+      setTotal(calculatedTotal);
+    }
+  }, [router.query.cart]);
   const addDonationInDB = async (name, amount) => {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_ENDPOINT}/api/donations/`,
         {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
             name,
             amount,
@@ -42,12 +73,6 @@ const CheckoutPage = () => {
       console.log(error);
     }
   };
-  
-  const router = useRouter();
-  const [cart, setCart] = useState([]);
-  const [subTotal, setSubTotal] = useState(0);
-  const [totalShipping, setTotalShipping] = useState(0);
-  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     if (router.query.cart) {
@@ -78,7 +103,12 @@ const CheckoutPage = () => {
       setTotal(calculatedTotal);
     }
   }, [router.query.cart]);
-
+  const initialOptions = {
+    "client-id":
+      "AVagQDrpSiWLTEPxT3TmDjLQ2a0LiK-kKuA5n_lBIFaFgq9KMKi5EhPfmre69te6Ou_suu84AUoUFQL-",
+    currency: "USD",
+    "disable-funding": "credit,card", // Example of disabling certain payment methods
+  };
   return (
     <>
       <Head>
@@ -106,10 +136,7 @@ const CheckoutPage = () => {
           itemProp="name"
           content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
         />
-        <meta
-          itemProp="image"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
+
         <meta name="twitter:card" content="summary" />
         <meta
           name="twitter:title"
@@ -119,29 +146,18 @@ const CheckoutPage = () => {
           name="twitter:description"
           content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
         />
-        <meta
-          name="twitter:image:src"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
+
         <meta
           property="og:title"
           content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
         />
         <meta property="og:type" content="article" />
-        <meta
-          property="og:image"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
+
         <meta
           property="og:description"
           content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
         />
         <meta property="og:locale" content="en" />
-        <meta
-          itemProp="image"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
-
         <link rel="canonical" href="https://athlotic.com/contact-us" />
         <link rel="preconnect" href="//www.google-analytics.com" as="script" />
         <meta name="google" content="notranslate" />
@@ -289,7 +305,7 @@ const CheckoutPage = () => {
               <button className="btn-action my-5 px-4 py-3 rounded-full text-white focus:ring focus:outline-none w-[90%] mx-auto flex justify-center text-xl font-semibold transition-colors">
                 Order Now
               </button>
-              {scriptLoaded ? (
+              {/* {scriptLoaded ? (
                 <PayPalButton
                   amount={total}
                   onSuccess={(details, data) => {
@@ -300,7 +316,40 @@ const CheckoutPage = () => {
                 />
               ) : (
                 <span>Loading...</span>
-              )}{" "}
+              )}{" "} */}
+             <div className="w-full mx-auto justify-center">
+              {scriptLoaded ? (
+                <PayPalScriptProvider options={initialOptions}>
+                  <PayPalButtons
+                    style={{ layout: "vertical" }}
+                    createOrder={(data, actions) => {
+                      return actions.order.create({
+                        purchase_units: [
+                          {
+                            amount: {
+                              value: total.toString(), // Total amount to be paid
+                            },
+                          },
+                        ],
+                      });
+                    }}
+                    onApprove={(data, actions) => {
+                      return actions.order.capture().then((details) => {
+                        const payerName = details.payer.name.given_name;
+                        addDonationInDB(payerName, total); // Save transaction details
+                        alert(`Transaction completed by ${payerName}`);
+                      });
+                    }}
+                    onError={(err) => {
+                      console.error("PayPal Checkout onError", err);
+                      // Handle errors here
+                    }}
+                  />
+                </PayPalScriptProvider>
+              ) : (
+                <span>Loading...</span>
+              )}
+              </div>
             </div>
           </div>
         </div>
