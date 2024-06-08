@@ -11,7 +11,6 @@ export default NextAuth({
         password: {  label: "Password", type: "password" }
       },
       authorize: async (credentials) => {
-        // Connect to MySQL database
         const connection = await mysql.createConnection({
           host: process.env.DB_HOST,
           user: process.env.DB_USER,
@@ -21,21 +20,17 @@ export default NextAuth({
 
         const [rows] = await connection.execute('SELECT * FROM users WHERE username = ?', [credentials.username]);
         
-        // Close the connection
         await connection.end();
 
         const user = rows[0];
 
         if (user && user.password === credentials.password) {
-          // Password match
-          const token = { id: user.id, name: user.name, email: user.email }; // Creating the token
+          const token = { id: user.id, name: user.name, email: user.email };
           
-          // Log the allocated token to the console
           console.log('Allocated Token:', token);
 
           return token;
         } else {
-          // Invalid credentials
           return null;
         }
       }

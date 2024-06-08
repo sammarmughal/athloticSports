@@ -309,9 +309,8 @@ const CheckoutPage = () => {
                 <PayPalButton
                   amount={total}
                   onSuccess={(details, data) => {
-                    //save the transaction
-                    // console.log(details);
-                    addDonationInDB(details.payer.name.given_name);
+                    // Save the transaction
+                    addDonationInDB(details.payer.name.given_name, total);
                   }}
                 />
               ) : (
@@ -353,7 +352,7 @@ const CheckoutPage = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-1 sm:my-16 sm:mr-12 mx-12  bg-white block mx-auto">
+        <div className="col-span-1 sm:my-16 sm:mr-12 mx-12 bg-white block mx-auto">
           <h1 className="py-6 border-b-2 text-xl text-gray-600 px-8">
             Order Summary
           </h1>
@@ -406,6 +405,4 @@ const CheckoutPage = () => {
   );
 };
 
-export default CheckoutPage;
-//client id paypal
-//AeFJ0aek4IyfSJ-wA-B_O_MAKkMFvk-wRQANsl1mVwbg1A0AuK2vSjekswaBDaLuY3fa72decdgxTP-i
+export default withAuth(CheckoutPage, ["user"]);
