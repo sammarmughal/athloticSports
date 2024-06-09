@@ -1,12 +1,13 @@
-import Sidebar from "./component/sidebar";
+import Sidebar from "../component/sidebar";
 import Link from "next/link";
-import Admin_Nav from "./component/admin-nav";
-import { fetchProducts } from "../../lib/data";
+import Admin_Nav from "../component/admin-nav";
+import { fetchProducts } from "../../../lib/data";
 import { useState, useEffect } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import ReactPaginate from "react-paginate";
 import Swal from "sweetalert2";
-import withAuth from "../../components/withAuth";
+import withAuth from "../../../components/withAuth";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps() {
   try {
@@ -19,6 +20,19 @@ export async function getServerSideProps() {
 }
 
 const Products = ({ products }) => {
+  const [username, setUsername] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    // Retrieve the username from local storage or state management
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    } else {
+      // If no username found, redirect to login (optional)
+      router.push("/login");
+    }
+  }, []);  
   const [dropdown, setDropdown] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -96,8 +110,9 @@ const Products = ({ products }) => {
       <div className="min-h-screen w-full flex flex-col flex-auto flex-shrink-0 antialiased bg-white text-black">
         <Admin_Nav />
         <Sidebar />
-        <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
-          <Link href="/admin-portal/add-products">
+        <div className="h-full ml-14 mt-14 mb-10 md:ml-64">       
+
+          <Link  href={`/admin-portal/${username}/add-products`}>
             <button
               type="button"
               className="mt-10 ml-6 py-3 btn-action rounded-xl text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
@@ -199,7 +214,7 @@ const Products = ({ products }) => {
                             Delete
                           </button>
                           <Link
-                            href={`/admin-portal/edit-product/${product.sku_id}`}
+                            href={`/admin-portal/${username}/edit-product/${product.sku_id}`}
                           >
                             <button className="bg-green-400 rounded px-2 w-full text-white">
                               Edit
@@ -254,5 +269,5 @@ const Products = ({ products }) => {
     </>
   );
 };
-
-export default withAuth(Products, ["admin"]);
+export default Products;
+// export default withAuth(Products, ["admin"]);

@@ -1,8 +1,8 @@
-import Sidebar from "./component/sidebar";
+import Sidebar from "../component/sidebar";
 import Link from "next/link";
-import Admin_Nav from "./component/admin-nav";
+import Admin_Nav from "../component/admin-nav";
 import Image from "next/image";
-import withAuth from "../../components/withAuth";
+import withAuth from "../../../components/withAuth";
 
 const Profile = () => {
   return (
@@ -83,4 +83,5 @@ const Profile = () => {
     </>
   );
 };
-export default withAuth(Profile, ["admin"]);
+export default Profile;
+// export default withAuth(Profile, ["admin"]);

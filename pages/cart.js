@@ -23,7 +23,6 @@ export default function CartPage() {
   const shippingPerItem = 120;
   const totalShipping = totalQuantity * shippingPerItem;
   const total = (parseFloat(subTotal) + totalShipping).toFixed(2);
-
   const handleCheckout = () => {
     const accessToken = localStorage.getItem("accessToken");
 

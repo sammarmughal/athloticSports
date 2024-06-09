@@ -1,9 +1,9 @@
-import Sidebar from "./component/sidebar";
+import Sidebar from "../component/sidebar";
 import Link from "next/link";
-import User_Nav from "./component/user-nav";
+import User_Nav from "../component/user-nav";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import withAuth from "../../components/withAuth";
+import withAuth from "../../../components/withAuth";
 
 const Profile = () => {
   const [formPopup, setFormPopup] = useState(false);

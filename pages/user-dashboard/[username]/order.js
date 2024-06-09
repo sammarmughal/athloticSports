@@ -1,7 +1,7 @@
-import Sidebar from "./component/sidebar";
+import Sidebar from "../component/sidebar";
 import Link from "next/link";
-import User_Nav from "./component/user-nav";
-import withAuth from "../../components/withAuth";
+import User_Nav from "../component/user-nav";
+import withAuth from "../../../components/withAuth";
 
 const Orders = () => {
   return (

@@ -1,9 +1,10 @@
-import Sidebar from "./component/sidebar";
-import Admin_Nav from "./component/admin-nav";
+import Sidebar from "../component/sidebar";
+import Admin_Nav from "../component/admin-nav";
 import { useState } from "react";
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import withAuth from "../../components/withAuth";
+import withAuth from "../../../components/withAuth";
+import { defaultGroupByFn } from "react-table";
 
 const AddProducts = () => {
   const [product_name, setProduct_name] = useState("");
@@ -52,11 +53,15 @@ const AddProducts = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Validate form and check for errors
     const errors = validateForm();
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
       return;
     }
+  
+    // Prepare form data
     const formData = new FormData();
     formData.append('product_name', product_name);
     formData.append('category', category);
@@ -65,20 +70,35 @@ const AddProducts = () => {
     formData.append('quantity_available', quantity_available);
     formData.append('image', image_url);
     formData.append('sku_id', sku_id);
-
+  
     try {
+      // Send request to add the product
       const response = await axios.post('/api/products/add', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(response.data);
-      // Handle success, e.g., reset the form or show a success message
-      router.push('/admin-portal/products'); // Redirect to the products page
-
+  
+      console.log(response.data);  
+      const username = localStorage.getItem('username');  
+      Swal.fire({
+        title: 'Product Added Successfully!',
+        text: 'The product has been added.',
+        icon: 'success',
+        confirmButtonText: 'OK',
+      }).then(() => {
+        router.push(`/admin-portal/${username}/products`);
+      });
+  
     } catch (error) {
       console.error('Failed to add product:', error);
-      // Handle error, e.g., show an error message
+  
+      Swal.fire({
+        title: 'Error!',
+        text: 'Failed to add the product. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
     }
   };
   
@@ -87,8 +107,8 @@ const AddProducts = () => {
       <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white text-black">
         <Admin_Nav />
         <Sidebar />
-        <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
-          <div className="flex h-screen items-center justify-center mt-32 mb-32">
+        <div className="h-full ml-14 sm:mt-14 mb-10 md:ml-64">
+          <div className="flex h-screen items-center justify-center sm:mt-32 mb-32">
             <form className="w-full mt-28" >
               <div className="w-full grid p b-10 bg-white rounded-lg shadow-xl">
                 <div className="mt-28">
@@ -275,5 +295,5 @@ const AddProducts = () => {
     </>
   );
 };
-
-export default withAuth(AddProducts, ["admin"]);
+export default AddProducts;
+// export default withAuth(AddProducts, ["admin"]);

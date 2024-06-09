@@ -1,6 +1,6 @@
 import Layout from "../components/layout";
 import { useRouter } from "next/router";
-import "../styles/globals.css";
+import '../styles/globals.css';
 import { Inter } from "@next/font/google";
 import { Roboto_Condensed } from "@next/font/google";
 import ReduxProvider from "../components/store/reduxProvider";

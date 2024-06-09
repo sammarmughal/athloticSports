@@ -1,21 +1,41 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Fragment, useState } from "react";
+import { Fragment, useState,useEffect } from "react";
 import { Menu, Dialog, Transition } from "@headlessui/react";
 import { XIcon, FireIcon } from "@heroicons/react/outline";
 import { BsCart3, BsPerson } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import CartIcon from "./cartIcon";
 
-
 export default function Nav() {
   const count = useSelector((state) => state.cart.count);
   const router = useRouter();
   const currentRoute = router.pathname;
   const [open, setOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleToggle = () => {
     setOpen((open) => !open);
+  };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    setIsLoggedIn(accessToken !== null);
+  }, []);
+
+  // Redirect the user based on their role
+  const handleLoginRedirect = () => {
+    if (isLoggedIn) {
+      const role = localStorage.getItem('role');
+      const username = localStorage.getItem('username');
+      if (role === 'admin') {
+        return `/admin-portal/${username}`;
+      } else {
+        return `/user-dashboard/${username}`;
+      }
+    } else {
+      return '/login';
+    }
   };
 
   return (
@@ -339,17 +359,18 @@ export default function Nav() {
                 : "hover:text-[#01b8ee]"
             }
           >
-            <CartIcon/>
+            <CartIcon />
           </div>
-          <Link
-            href="/login"
-            className={
-              currentRoute === "/login"
-                ? "text-[#01b8ee]"
-                : "hover:text-[#01b8ee]"
-            }
-          >
-            <BsPerson className="text-gray-200 hover:border-2 rounded-xl hover:border-[#01b8ee] hover:rounded-xl p-1 hover:text-[#01b8ee]  w-10 h-10 flex items-center justify-center duration-300" />{" "}
+          <Link href={handleLoginRedirect()} passHref>
+            <p
+              className={
+                currentRoute === "/login"
+                  ? "text-[#01b8ee]"
+                  : "hover:text-[#01b8ee]"
+              }
+            >
+              <BsPerson className="text-gray-200 hover:border-2 rounded-xl hover:border-[#01b8ee] hover:rounded-xl p-1 hover:text-[#01b8ee]  w-10 h-10 flex items-center justify-center duration-300" />
+            </p>
           </Link>
           <button
             type="button"

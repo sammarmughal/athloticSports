@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { fetchProductById } from '../../../lib/data';
+import { fetchProductById } from '../../../../lib/data';
 
 const EditProduct = () => {
   const router = useRouter();

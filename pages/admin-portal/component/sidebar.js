@@ -1,5 +1,20 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 const Sidebar = () => {
+  const [username, setUsername] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    // Retrieve the username from local storage or state management
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    } else {
+      // If no username found, redirect to login (optional)
+      router.push("/login");
+    }
+  }, []);  
   return (
     <div className="fixed flex flex-col top-14 left-0 w-14 hover:w-64 md:w-64 bg-blue-900 h-full text-white transition-all duration-300 border-none z-10 sidebar">
       <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
@@ -13,7 +28,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/admin-portal"
+              href={`/admin-portal/${username}`}
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
@@ -68,7 +83,7 @@ const Sidebar = () => {
           </li> */}
           <li>
             <Link
-              href="/admin-portal/products"
+              href={`/admin-portal/${username}/products`}
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
@@ -94,7 +109,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/admin-portal/cancellerations"
+              href={`/admin-portal/${username}/cancellerations`}
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
@@ -123,7 +138,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/admin-portal/account-statement"
+              href={`/admin-portal/${username}/account-statement`}
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">

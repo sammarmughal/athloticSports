@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from 'next/router';
 import Swal from 'sweetalert2';
 
 function User_Nav() {
+  const [user , setUser] = useState("");
   const router = useRouter();
-
+  useEffect(() =>  {
+    const storeUser = localStorage.getItem("username");
+     setUser(storeUser);
+  }, [])
   const handleLogout = async () => {
     try {
       const response = await fetch("/api/logout", {
@@ -64,7 +68,7 @@ function User_Nav() {
             src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg"
             alt="Avatar"
           />
-          <span className="hidden md:block">User</span>
+          <span className="hidden md:block">{user}</span>
           <ul className="flex items-center">
             <li>
               <div className="block w-px h-6 mx-3 bg-gray-400"></div>

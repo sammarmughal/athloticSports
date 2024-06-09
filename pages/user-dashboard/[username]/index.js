@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Sidebar from "./component/sidebar";
-import User_nav from "./component/user-nav";
+import Sidebar from "../component/sidebar";
+import User_nav from "../component/user-nav";
 import Link from "next/link";
-import withAuth from '../../components/withAuth';
+import withAuth from '../../../components/withAuth';
 
 const User = () => {
   return (

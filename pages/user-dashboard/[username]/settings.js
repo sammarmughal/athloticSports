@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Sidebar from "./component/sidebar";
-import User_Nav from "./component/user-nav";
-import withAuth from "../../components/withAuth";
+import Sidebar from "../component/sidebar";
+import User_Nav from "../component/user-nav";
+import withAuth from "../../../components/withAuth";
 
 const Settings = () => {
   const [username, setUsername] = useState("");

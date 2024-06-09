@@ -1,7 +1,7 @@
-import Sidebar from "./component/sidebar";
+import Sidebar from "../component/sidebar";
 import Link from "next/link";
-import Admin_Nav from "./component/admin-nav";
-import withAuth from "../../components/withAuth";
+import Admin_Nav from "../component/admin-nav";
+import withAuth from "../../../components/withAuth";
 
 const Cancellerations = () => {
   return (
@@ -158,4 +158,5 @@ const Cancellerations = () => {
     </>
   );
 };
-export default withAuth(Cancellerations, ["admin"]);
+export default Cancellerations;
+// export default withAuth(Cancellerations, ["admin"]);

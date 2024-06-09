@@ -23,6 +23,9 @@ const LoginForm = () => {
     const formErrors = {};
     if (!formData.loginInput)
       formErrors.loginInput = "Email/Username is required";
+    else if (/[A-Z]/.test(formData.loginInput)) {
+      formErrors.loginInput = "Username must not contain uppercase letters";
+    }
     if (!formData.password) formErrors.password = "Password is required";
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
@@ -50,11 +53,13 @@ const LoginForm = () => {
             icon: "success",
             timer: 2000,
             timerProgressBar: true,
+            
             willClose: () => {
+              const username = formData.loginInput;
               if (data.role === "user") {
-                router.push(`/user-dashboard`);
+                router.push(`/user-dashboard/${username}`);
               } else if (data.role === "admin") {
-                router.push(`/admin-portal`);
+                router.push(`/admin-portal/${username}`);
               }
             },
           });
