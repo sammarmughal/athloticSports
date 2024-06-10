@@ -269,5 +269,5 @@ const Products = ({ products }) => {
     </>
   );
 };
-export default Products;
-// export default withAuth(Products, ["admin"]);
+// export default Products;
+export default withAuth(Products, ["admin"]);

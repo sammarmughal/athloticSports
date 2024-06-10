@@ -18,8 +18,13 @@ const withAuth = (WrappedComponent, allowedRoles = []) => {
       const { role, exp } = decodedToken;
 
       if (!allowedRoles.includes(role)) {
-        router.replace("/login");
+        // Redirect to home page if the role is not allowed
+        router.replace("/");
+      } else if (role === "username") {
+        // Redirect to home page if the role is specifically "username"
+        router.replace("/");
       } else if (Date.now() >= exp * 1000) {
+        // Token has expired, redirect to login
         router.replace("/login");
       } else {
         setUsername(storedUsername);

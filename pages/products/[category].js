@@ -162,12 +162,12 @@ export default function ProductDetailFitting({ products }) {
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
-            <Link
+            {/* <Link
               href="/contact-us"
               className="max-w-xs flex-1 mx-auto mt-10 bg-gradient-to-r from-yellow-500 to-blue-600 hover:from-blue-600 hover:to-yellow-500 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-lg font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-blue-500 sm:w-full"
             >
               Inquire Now
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>

@@ -112,18 +112,13 @@ export default function Contact() {
         <meta name="revisit-after" content="1 days" />
         <meta name="author" content="Sardar Imran" />
         <meta itemProp="name" content="Contact Athlotic Sports | Sports items Manufacturer Pakistan" />
-        <meta itemProp="image" content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Contact Athlotic Sports | Sports items Manufacturer Pakistan" />
         <meta name="twitter:description" content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!" />
-        <meta name="twitter:image:src" content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75" />
         <meta property="og:title" content="Contact Athlotic Sports | Sports items Manufacturer Pakistan" />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75" />
         <meta property="og:description" content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!" />
         <meta property="og:locale" content="en" />
-        <meta itemProp="image" content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75" />
-
         <link rel="canonical" href="https://athlotic.com/contact-us" />
         <link rel="preconnect" href="//www.google-analytics.com" as="script" />
         <meta name="google" content="notranslate" />
@@ -133,13 +128,13 @@ export default function Contact() {
       <MainHeader pageHeading="CONTACT US" pageImg="header1.jpg" />
 
       <section className="main-sec">
-        <div className="grid sm:grid-cols-2 gap-5 container mx-auto">
+        <div className="grid sm:grid-cols-1  gap-5 container mx-auto">
           <div className="content-bx">
             <div className="block mt-2 text-gray-900">
               <Image
                 src="/images/athlotic-logo.png"
                 alt="Athlotic Sports Logo"
-                className="mx-auto"
+                className="mx-auto transform hover:scale-125 duration-300"
                 width={140}
                 height={140}
               ></Image>
@@ -168,10 +163,10 @@ export default function Contact() {
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                     </svg>
-                    Mughal Chowk, Sialkot Road,
+                    Akram Colony, Gill Road,
                     <strong>Gujranwala</strong>, Punjab - <strong>Pakistan</strong> - 52250
                     <a
-                      href="https://www.google.com/maps/place/AAM+Pipes+Manufacturer/@32.2102348,74.1764114,15z/data=!4m5!3m4!1s0x0:0xffb2801cc815ba17!8m2!3d32.2102348!4d74.1764114"
+                      href="https://www.google.com/maps/place/Syed+Bukhari+St,+Akram+Colony+Civil+Lines,+Gujranwala,+Punjab,+Pakistan/@32.1676834,74.1938695,14z/data=!4m6!3m5!1s0x391f298d9d70ccb1:0x335f53e3ed749340!8m2!3d32.1753821!4d74.1914689!16s%2Fg%2F11g5_vhhjl?entry=ttu"
                       title="Direction"
                       className="tooltip"
                       target="_blank"
@@ -208,7 +203,7 @@ export default function Contact() {
                       />
                     </svg>
                     <a href="tel:+923024411817" style={{ color: "black" }} className="hover:underline">
-                      +92 302 441 1817
+                      +92 317 469 6178
                     </a>
                   </p>
                   <p className="text-base mt-2 text-gray-800 ">
@@ -227,10 +222,10 @@ export default function Contact() {
                       />
                     </svg>
                     <a className="hover:underline"
-                      href="mailto:info@athlotic.com"
+                      href="mailto:mughalsammar988@gmail.com"
                       style={{ color: "black" }}
                     >
-                      info@athlotic.com
+                      mughalsammar988@gmail.com
                     </a>
                   </p>
                 </li>
@@ -238,7 +233,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="content-bx">
+          {/* <div className="content-bx">
 
             <h3 className="text-2xl text-center">Send Inquiry</h3>
             <form onSubmit={handleSubmit} className="mt-2">
@@ -360,7 +355,7 @@ export default function Contact() {
               </div>
             </form>
 
-          </div>
+          </div> */}
         </div>
 
 

@@ -48,9 +48,9 @@ export default function Footer({ children, home }) {
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>{" "}
-                  Mughal Chowk, Sialkot Road, Gujranwala, Pakistan.{" "}
+                  Akram Colony, Gill Road, Gujranwala, Pakistan.{" "}
                   <a
-                    href="https://www.google.com/maps/place/AAM+Pipes+Manufacturer/@32.2102348,74.1764114,15z/data=!4m5!3m4!1s0x0:0xffb2801cc815ba17!8m2!3d32.2102348!4d74.1764114"
+                    href="https://www.google.com/maps/place/Syed+Bukhari+St,+Akram+Colony+Civil+Lines,+Gujranwala,+Punjab,+Pakistan/@32.1676834,74.1938695,14z/data=!4m6!3m5!1s0x391f298d9d70ccb1:0x335f53e3ed749340!8m2!3d32.1753821!4d74.1914689!16s%2Fg%2F11g5_vhhjl?entry=ttu"
                     title="Direction"
                     className="tooltip"
                     target="_blank"
@@ -108,13 +108,13 @@ export default function Footer({ children, home }) {
                       href="mailto:info@athlotic.com"
                       style={{ color: "white" }}
                     >
-                      info@athlotic.com
+                     mughalsammar988@gmail.com
                     </a>
                   </p>
                 </div>
                 <div className="gap-x-2 footer-social pt-4 relative items-center justify-center">
                   <a
-                    href="mailto:info@athlotic.com"
+                    href="mailto:mughalsammar988@gmail.com"
                     title="Email"
                     className="emailit tooltip group hover:fill-white hover:bg-black hover:border-black"
                   >

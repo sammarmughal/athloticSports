@@ -89,8 +89,8 @@ export default function blogPosts() {
                       className="h-10 w-10 rounded-full"
                       src={post.authorpic}
                       alt="Najam Awan Image"
-                      width={auto}
-                      height={auto}
+                      width={100}
+                      height={100}
                     />
 
                   </div>

@@ -618,5 +618,5 @@ const Admin = () => {
     </>
   );
 };
-export default Admin;
-// export default withAuth(Admin, ["admin"]);
+// export default Admin;
+export default withAuth(Admin, ["admin"]);

@@ -466,7 +466,7 @@ export default function Home() {
         >
           <SwiperSlide>
             <Image
-              src="/images/slides/athlotic.png"
+              src="/images/slides/athlotic-sports-banner-04.webp"
               alt="ATHLOTIC SPORTS"
               title="ATHLOTIC SPORTS"
               fill="true"
@@ -484,7 +484,7 @@ export default function Home() {
           </SwiperSlide>
           <SwiperSlide>
             <Image
-              src="/images/slides/sports-accessories.png"
+              src="/images/slides/athlotic-sports-banner-03.jpg"
               alt="ATHLOTIC SPORTS"
               title="ATHLOTIC SPORTS"
               fill="true"

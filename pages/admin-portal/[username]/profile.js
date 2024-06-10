@@ -83,5 +83,5 @@ const Profile = () => {
     </>
   );
 };
-export default Profile;
-// export default withAuth(Profile, ["admin"]);
+// export default Profile;
+export default withAuth(Profile, ["admin"]);

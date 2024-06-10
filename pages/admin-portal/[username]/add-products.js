@@ -3,6 +3,7 @@ import Admin_Nav from "../component/admin-nav";
 import { useState } from "react";
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import Swal from "sweetalert2";
 import withAuth from "../../../components/withAuth";
 import { defaultGroupByFn } from "react-table";
 
@@ -295,5 +296,5 @@ const AddProducts = () => {
     </>
   );
 };
-export default AddProducts;
-// export default withAuth(AddProducts, ["admin"]);
+// export default AddProducts;
+export default withAuth(AddProducts, ["admin"]);

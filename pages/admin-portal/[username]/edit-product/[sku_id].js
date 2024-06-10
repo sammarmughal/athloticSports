@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { fetchProductById } from '../../../../lib/data';
+import { withAuth } from 'next-auth/middleware';
 
 const EditProduct = () => {
   const router = useRouter();
@@ -134,4 +135,5 @@ const EditProduct = () => {
   );
 };
 
-export default EditProduct;
+export default withAuth(EditProduct, ["admin"]);
+
