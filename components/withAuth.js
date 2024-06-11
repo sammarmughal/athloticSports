@@ -11,7 +11,7 @@ const withAuth = (WrappedComponent, allowedRoles = []) => {
       const storedUsername = localStorage.getItem("username");
       
       const decodedToken = {
-        role: "user", 
+        role: "user",
         exp: Math.floor(Date.now() / 1000) + 60 * 60 * 1
       };
       

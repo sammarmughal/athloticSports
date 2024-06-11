@@ -163,8 +163,8 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              href={`/admin-portal/${username}/manage_users`}
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
@@ -189,7 +189,7 @@ const Sidebar = () => {
               <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">
                 0
               </span>
-            </a>
+            </Link>
           </li>
           <li className="px-5 hidden md:block">
             <div className="flex flex-row items-center mt-5 h-8">
