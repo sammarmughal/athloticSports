@@ -89,7 +89,7 @@ const CheckoutPage = () => {
         (total, item) => total + item.quantity,
         0
       );
-      const baseShipping = 300.99;
+      const baseShipping = 120;
       const additionalShippingPerItem = 120;
       const calculatedTotalShipping =
         baseShipping +

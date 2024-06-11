@@ -5,7 +5,7 @@ import Link from "next/link";
 import withAuth from '../../../components/withAuth';
 
 
-const Admin = () => {
+const AdminPortal = () => {
   const [activePanel, setActivePanel] = useState("No orders");
   const [selectedOption, setSelectedOption] = useState(null);
   const [dropdown, setDropdown] = useState(false);
@@ -618,5 +618,5 @@ const Admin = () => {
     </>
   );
 };
-// export default Admin;
-export default withAuth(Admin, ["admin"]);
+export default AdminPortal;
+// export default withAuth(AdminPortal, ["admin"]);

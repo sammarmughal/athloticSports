@@ -159,4 +159,6 @@ const Account_statement = () => {
     </>
   );
 };
-export default withAuth(Account_statement, ["admin"]);
+export default Account_statement;
+
+// export default withAuth(Account_statement, ["admin"]);

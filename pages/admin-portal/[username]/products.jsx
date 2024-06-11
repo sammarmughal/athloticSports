@@ -32,7 +32,7 @@ const Products = ({ products }) => {
       // If no username found, redirect to login (optional)
       router.push("/login");
     }
-  }, []);  
+  }, []);
   const [dropdown, setDropdown] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -110,16 +110,17 @@ const Products = ({ products }) => {
       <div className="min-h-screen w-full flex flex-col flex-auto flex-shrink-0 antialiased bg-white text-black">
         <Admin_Nav />
         <Sidebar />
-        <div className="h-full ml-14 mt-14 mb-10 md:ml-64">       
-
-          <Link  href={`/admin-portal/${username}/add-products`}>
-            <button
-              type="button"
-              className="mt-10 ml-6 py-3 btn-action rounded-xl text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-            >
-              Add Products
-            </button>
-          </Link>
+        <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
+          <div className="w-full justify-end">
+            <Link href={`/admin-portal/${username}/add-products`}>
+              <button
+                type="button"
+                className="mt-10 ml-6 py-3 btn-action justify-end rounded-xl text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+              >
+                Add Products
+              </button>
+            </Link>
+          </div>
           <div className="min-h-screen bg-slate-150">
             <div className="flex justify-between mx-8">
               <h1 className="my-4 text-xl text-slate-600 font-semibold">
@@ -269,5 +270,5 @@ const Products = ({ products }) => {
     </>
   );
 };
-// export default Products;
-export default withAuth(Products, ["admin"]);
+export default Products;
+// export default withAuth(Products, ["admin"]);

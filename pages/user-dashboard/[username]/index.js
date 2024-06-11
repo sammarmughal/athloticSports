@@ -4,7 +4,7 @@ import User_nav from "../component/user-nav";
 import Link from "next/link";
 import withAuth from '../../../components/withAuth';
 
-const User = () => {
+const UserDashboard = () => {
   return (
     <>
       <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white  text-black ">
@@ -303,4 +303,4 @@ const User = () => {
   );
 };
 
-export default withAuth(User, ["user"]);
+export default withAuth(UserDashboard, ["user"]);

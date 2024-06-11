@@ -12,17 +12,33 @@ import {
 } from "../components/store/cartSlice";
 
 export default function CartPage() {
-  const cart = useSelector((state) => state.cart.items);
   const router = useRouter();
+  const cart = useSelector((state) => state.cart.items); // Correctly access cart items
   const dispatch = useDispatch();
-  console.log(cart);
+
+  const handleIncrement = (sku_id, size) => {
+    dispatch(incrementQuantity({ sku_id, size }));
+  };
+
+  const handleDecrement = (sku_id, size) => {
+    dispatch(decrementQuantity({ sku_id, size }));
+  };
+
+  const handleRemove = (sku_id, size) => {
+    dispatch(removeFromCart({ sku_id, size }));
+  };
+
   const subTotal = cart
     .reduce((total, item) => total + item.price * item.quantity, 0)
     .toFixed(2);
+
   const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-  const shippingPerItem = 120;
+
+  const shippingPerItem = 120; // Assuming a fixed shipping cost per item
   const totalShipping = totalQuantity * shippingPerItem;
+
   const total = (parseFloat(subTotal) + totalShipping).toFixed(2);
+
   const handleCheckout = () => {
     const accessToken = localStorage.getItem("accessToken");
 
@@ -36,6 +52,7 @@ export default function CartPage() {
       });
     }
   };
+
   return (
     <>
       <Head>
@@ -47,7 +64,7 @@ export default function CartPage() {
           <div className="rounded-lg md:w-2/3">
             {cart.map((product) => (
               <div
-                key={product.sku_id}
+                key={`${product.sku_id}-${product.size}`}
                 className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start"
               >
                 <Image
@@ -63,14 +80,14 @@ export default function CartPage() {
                       {product.product_name}
                     </h2>
                     <p className="mt-1 text-xs text-gray-700">
-                      {product.category}
+                      {product.category} - Size: {product.size}
                     </p>
                   </div>
                   <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                     <div className="flex items-center border-gray-100">
                       <span
                         onClick={() =>
-                          dispatch(decrementQuantity(product.sku_id))
+                          handleDecrement(product.sku_id, product.size)
                         }
                         className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"
                       >
@@ -85,7 +102,7 @@ export default function CartPage() {
                       />
                       <span
                         onClick={() =>
-                          dispatch(incrementQuantity(product.sku_id))
+                          handleIncrement(product.sku_id, product.size)
                         }
                         className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"
                       >
@@ -96,7 +113,7 @@ export default function CartPage() {
                     <div className="flex items-center space-x-4">
                       <p className="text-sm">PKR {product.price}</p>
                       <svg
-                        onClick={() => dispatch(removeFromCart(product.sku_id))}
+                        onClick={() => handleRemove(product.sku_id, product.size)}
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"

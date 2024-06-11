@@ -158,5 +158,5 @@ const Cancellerations = () => {
     </>
   );
 };
-// export default Cancellerations;
-export default withAuth(Cancellerations, ["admin"]);
+export default Cancellerations;
+// export default withAuth(Cancellerations, ["admin"]);

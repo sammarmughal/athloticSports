@@ -1,26 +1,32 @@
 import Link from "next/link";
 import Image from "next/image";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "./store/cartSlice";
+
 export default function ProductCard({ product }) {
   const [formPopup, setFormPopup] = useState(false);
   const [selectedSize, setSelectedSize] = useState("m");
   const dispatch = useDispatch();
+
   const handlePopup = () => {
     setFormPopup(!formPopup);
   };
+
   const handleAddToCart = () => {
-    dispatch(addToCart(product));
+    dispatch(addToCart({ ...product, size: selectedSize }));
   };
+
   const formatPrice = (price) => {
     return price.toString().endsWith(".00")
       ? price.toString().slice(0, -3)
       : price;
   };
+
   const handleSizeChange = (event) => {
     setSelectedSize(event.target.value);
   };
+
   return (
     <div className="flex flex-col gap-2">
       <div key={product.id} className="group relative">
@@ -42,7 +48,6 @@ export default function ProductCard({ product }) {
                   {product.product_name}
                 </div>
               </h3>
-              {/* <p className="mt-1 text-sm text-gray-500">{product.sku_id}</p> */}
             </div>
           </div>
         </Link>
@@ -50,12 +55,9 @@ export default function ProductCard({ product }) {
       </div>
       <div className="flex flex-col flex-wrap md:flex-row justify-between items-center text-gray-900">
         <p className="font-bold text-lg">PKR {formatPrice(product.price)}</p>
-        <Link href="#">
-          <button className="add-cart mx-1" onClick={handlePopup}>
-            {" "}
-            Add to Cart
-          </button>
-        </Link>
+        <button className="add-cart mx-1" onClick={handlePopup}>
+          Add to Cart
+        </button>
       </div>
       {formPopup && (
         <div className="fixed inset-0 mt-36 z-40">
@@ -63,7 +65,7 @@ export default function ProductCard({ product }) {
             <div className="p-6 border border-gray-300 sm:rounded-md">
               <div className="flex justify-between">
                 <span className="text-xl font-semibold block">
-                {product.product_name}
+                  {product.product_name}
                 </span>
                 <svg
                   onClick={handlePopup}
@@ -82,110 +84,33 @@ export default function ProductCard({ product }) {
                 </svg>
               </div>
               <form>
-              <div className="space-x-2 flex text-sm">
-                <label>
-                  <input
-                    className="sr-only peer"
-                    name="size"
-                    type="radio"
-                    value="xs"
-                    checked={selectedSize === "xs"}
-                    onChange={handleSizeChange}
-                  />
-                  <div
-                    className={`w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 hover:bg-slate-900 hover:text-white ${
-                      selectedSize === "xs"
-                        ? "font-semibold bg-slate-900 text-white"
-                        : ""
-                    }`}
-                  >
-                    XS
-                  </div>
-                </label>
-                <label>
-                  <input
-                    className="sr-only peer"
-                    name="size"
-                    type="radio"
-                    value="s"
-                    checked={selectedSize === "s"}
-                    onChange={handleSizeChange}
-                  />
-                  <div
-                    className={`w-9 h-9 rounded-lg flex items-center justify-center  hover:bg-slate-900 hover:text-white text-slate-700 ${
-                      selectedSize === "s"
-                        ? "font-semibold bg-slate-900 text-white"
-                        : ""
-                    }`}
-                  >
-                    S
-                  </div>
-                </label>
-                <label>
-                  <input
-                    className="sr-only peer"
-                    name="size"
-                    type="radio"
-                    value="m"
-                    checked={selectedSize === "m"}
-                    onChange={handleSizeChange}
-                  />
-                  <div
-                    className={`w-9 h-9 rounded-lg flex items-center justify-center  hover:bg-slate-900 hover:text-white text-slate-700 ${
-                      selectedSize === "m"
-                        ? "font-semibold bg-slate-900 text-white"
-                        : ""
-                    }`}
-                  >
-                    M
-                  </div>
-                </label>
-                <label>
-                  <input
-                    className="sr-only peer"
-                    name="size"
-                    type="radio"
-                    value="l"
-                    checked={selectedSize === "l"}
-                    onChange={handleSizeChange}
-                  />
-                  <div
-                    className={`w-9 h-9 rounded-lg flex items-center justify-center  hover:bg-slate-900 hover:text-white text-slate-700 ${
-                      selectedSize === "l"
-                        ? "font-semibold bg-slate-900 text-white"
-                        : ""
-                    }`}
-                  >
-                    L
-                  </div>
-                </label>
-                <label>
-                  <input
-                    className="sr-only peer"
-                    name="size"
-                    type="radio"
-                    value="xl"
-                    checked={selectedSize === "xl"}
-                    onChange={handleSizeChange}
-                  />
-                  <div
-                    className={`w-9 h-9 rounded-lg flex items-center justify-center  hover:bg-slate-900 hover:text-white text-slate-700 ${
-                      selectedSize === "xl"
-                        ? "font-semibold bg-slate-900 text-white"
-                        : ""
-                    }`}
-                  >
-                    XL
-                  </div>
-                </label>
-              </div>
+                <div className="space-x-2 flex text-sm">
+                  {["xs", "s", "m", "l", "xl"].map((size) => (
+                    <label key={size}>
+                      <input
+                        className="sr-only peer"
+                        name="size"
+                        type="radio"
+                        value={size}
+                        checked={selectedSize === size}
+                        onChange={handleSizeChange}
+                      />
+                      <div
+                        className={`w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 hover:bg-slate-900 hover:text-white ${
+                          selectedSize === size
+                            ? "font-semibold bg-slate-900 text-white"
+                            : ""
+                        }`}
+                      >
+                        {size.toUpperCase()}
+                      </div>
+                    </label>
+                  ))}
+                </div>
                 <div className="mb-6 w-full flex justify-end">
-                  <Link onClick={handlePopup} href="#">
-                    <button className="add-cart mx-1" onClick={handleAddToCart}>
-                      {" "}
-                      Add to Cart
-                    </button>
-                  </Link>
+                  <button className="add-cart mx-1" onClick={handleAddToCart}>
+                    Add to Cart
+                  </button>
                 </div>
               </form>
             </div>

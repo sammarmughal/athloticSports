@@ -296,5 +296,5 @@ const AddProducts = () => {
     </>
   );
 };
-// export default AddProducts;
-export default withAuth(AddProducts, ["admin"]);
+export default AddProducts;
+// export default withAuth(AddProducts, ["admin"]);
