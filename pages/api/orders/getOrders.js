@@ -1,5 +1,5 @@
 import mysql from 'mysql2/promise';
-import 'dotenv/config'; // Ensure environment variables are loaded
+import 'dotenv/config';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {

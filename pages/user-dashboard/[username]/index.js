@@ -11,8 +11,8 @@ const UserDashboard = () => {
         <User_nav />
         <Sidebar />
         <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
-          <div className="mt-4 mx-4">
-            <div>
+          {/* <div className="mt-4 mx-4"> */}
+            {/* <div>
               <h1 className="my-4 text-xl text-slate-600 font-semibold">
                 My Returns
               </h1>
@@ -153,7 +153,7 @@ const UserDashboard = () => {
                 </table>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="mt-4 mx-4">
             <div>
               <h1 className="my-4 text-xl text-slate-600 font-semibold">

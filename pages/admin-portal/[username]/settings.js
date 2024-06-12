@@ -28,16 +28,6 @@ const Profile = () => {
                 <span className="text-gray-600">
                   This information is secret so be careful
                 </span>
-                <div className="w-full p-8 mx-2 flex justify-center">
-                  <Image
-                    id="showImage"
-                    className="max-w-xs w-32 items-center border"
-                    src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
-                    alt=""
-                    height={auto}
-                    width={auto}
-                  />
-                </div>
               </div>
               <div className="">
                 <div className="pb-6">
@@ -77,7 +67,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-          </div>         
+          </div>
         </div>
       </div>
     </>

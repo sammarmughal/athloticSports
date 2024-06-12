@@ -15,7 +15,6 @@ const Settings = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    // Retrieve username from localStorage
     const storedUsername = localStorage.getItem("username");
     setUsername(storedUsername);
   }, []);
