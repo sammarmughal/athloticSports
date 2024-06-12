@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../component/sidebar";
 import Admin_Nav from "../component/admin-nav";
 import Link from "next/link";
-import withAuth from '../../../components/withAuth';
-
 
 const AdminPortal = () => {
   const [activePanel, setActivePanel] = useState("No orders");
@@ -15,11 +13,11 @@ const AdminPortal = () => {
   };
   const handleSetActivePanel = (option) => {
     setSelectedOption(option);
-    setActivePanel(option); 
-    setStatus(option); 
-    setDropdown(false); 
+    setActivePanel(option);
+    setStatus(option);
+    setDropdown(false);
   };
-  
+
   return (
     <>
       <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white  text-black ">
@@ -507,7 +505,7 @@ const AdminPortal = () => {
                         </td>
                         <td className="px-4 py-3 text-sm">$369.75</td>
                         <td className="px-4 py-3 text-xs">
-                        <span className="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full">
+                          <span className="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full">
                             {" "}
                             Shipped{" "}
                           </span>
@@ -569,7 +567,7 @@ const AdminPortal = () => {
                         </td>
                         <td className="px-4 py-3 text-sm">$1276.75</td>
                         <td className="px-4 py-3 text-xs">
-                        <span className="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full">
+                          <span className="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full">
                             {" "}
                             Shipped{" "}
                           </span>
@@ -599,7 +597,7 @@ const AdminPortal = () => {
                         </td>
                         <td className="px-4 py-3 text-sm">$863.45</td>
                         <td className="px-4 py-3 text-xs">
-                        <span className="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full">
+                          <span className="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full">
                             {" "}
                             Shipped{" "}
                           </span>

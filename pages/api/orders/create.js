@@ -1,27 +1,51 @@
-import { connectToDatabase } from '../../../utils/db';
+import mysql from 'mysql2/promise';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { username, order_date, status, total_amount, shipping_address, phone } = req.body;
-
     try {
-      const { db } = await connectToDatabase();
-      const collection = db.collection('orders');
+      const { username, shipping_address, city, province, zip_code, phone, total_amount, order_items } = req.body;
 
-      const result = await collection.insertOne({
-        username,
-        order_date,
-        status,
-        total_amount,
-        shipping_address,
-        phone,
+      console.log(req.body) 
+
+      const connection = await mysql.createConnection({
+        host: process.env.MYSQL_HOST,
+        port: process.env.MYSQL_PORT,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: process.env.MYSQL_DATABASE,
       });
 
-      res.status(200).json({ success: true, message: 'Order Placed successfully', orderId: result.insertedId });
+      await connection.beginTransaction();
+
+      const orderResult = await connection.execute(
+        `INSERT INTO orders (username, order_date, status, total_amount, shipping_address, phone)
+         VALUES (?, NOW(), 'Pending', ?, ?, ?)`,
+        [username, total_amount, `${shipping_address}, ${city}, ${zip_code}, ${province}`, phone]
+      );
+
+      const orderId = orderResult[0].insertId;
+
+      for (const item of order_items) {
+        await connection.execute(
+          `INSERT INTO order_items (order_id, sku_id, quantity, unit_price, size, subtotal)
+           VALUES (?, ?, ?, ?, ?, ?)`,
+          [orderId, item.sku_id, item.quantity, item.unit_price, item.size, item.unit_price * item.quantity]
+        );
+      }
+
+      await connection.commit();
+
+      await connection.end();
+
+      res.status(201).json({ message: 'Order placed successfully', order_id: orderId });
     } catch (error) {
-      res.status(500).json({ success: false, message: 'Error Placing order', error: error.message });
+      console.error('Error placing order:', error);
+      // Rollback the transaction in case of an error
+      await connection.rollback();
+      await connection.end();
+      // res.status(500).json({ error: 'Error placing order' });
     }
   } else {
-    res.status(405).json({ success: false, message: 'Method not allowed' });
+    res.status(405).json({ error: 'Method not allowed' });
   }
 }

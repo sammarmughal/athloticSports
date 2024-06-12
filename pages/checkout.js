@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import withAuth from "../components/withAuth";
@@ -10,7 +10,9 @@ import Link from "next/link";
 const initialOptions = {
   "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
   currency: "USD",
+  components: "buttons"
 };
+
 const CheckoutPage = () => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [cart, setCart] = useState([]);
@@ -28,13 +30,13 @@ const CheckoutPage = () => {
     phone: "",
   });
   const [isVisible, setIsVisible] = useState(true);
-  const [selectedPayment, setSelectedPayment] = useState('type2'); 
+  const [selectedPayment, setSelectedPayment] = useState('cod');
   const router = useRouter();
+
   useEffect(() => {
     const paypalScript = () => {
       const script = document.createElement("script");
-      script.src =
-        "https://www.paypal.com/sdk/js?client-id=AVagQDrpSiWLTEPxT3TmDjLQ2a0LiK-kKuA5n_lBIFaFgq9KMKi5EhPfmre69te6Ou_suu84AUoUFQL-";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}`;
       script.type = "text/javascript";
       script.async = true;
       script.onload = () => setScriptLoaded(true);
@@ -62,7 +64,7 @@ const CheckoutPage = () => {
         (total, item) => total + item.quantity,
         0
       );
-      const baseShipping = 300.99;
+      const baseShipping = 0;
       const additionalShippingPerItem = 120;
       const calculatedTotalShipping =
         baseShipping +
@@ -72,78 +74,16 @@ const CheckoutPage = () => {
       const calculatedTotal = (
         parseFloat(calculatedSubTotal) + calculatedTotalShipping
       ).toFixed(2);
-      setTotal(calculatedTotal);
-    }
-  }, [router.query.cart]);
-  const addDonationInDB = async (name, amount) => {
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_ENDPOINT}/api/donations/`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            amount,
-          }),
-        }
-      );
-      const data = await res.json();
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    if (router.query.cart) {
-      const cartData = JSON.parse(router.query.cart);
-      setCart(cartData);
-
-      const calculatedSubTotal = cartData
-        .reduce((total, item) => total + item.price * item.quantity, 0)
-        .toFixed(2);
       setSubTotal(calculatedSubTotal);
-
-      const totalQuantity = cartData.reduce(
-        (total, item) => total + item.quantity,
-        0
-      );
-      const baseShipping = 120;
-      const additionalShippingPerItem = 120;
-      const calculatedTotalShipping =
-        baseShipping +
-        (totalQuantity > 1
-          ? (totalQuantity - 1) * additionalShippingPerItem
-          : 0);
       setTotalShipping(calculatedTotalShipping.toFixed(2));
-
-      const calculatedTotal = (
-        parseFloat(calculatedSubTotal) + calculatedTotalShipping
-      ).toFixed(2);
       setTotal(calculatedTotal);
+      setCart(cartData);
     }
   }, [router.query.cart]);
-
-  useEffect(() => {
-    const storedUsername = localStorage.getItem("username");
-    if (storedUsername) {
-      setUsername(storedUsername);
-    }
-    if (storedUsername) {
-      fetchUserDetails(storedUsername);
-    } else {
-      console.error("Username not found in local storage");
-    }
-  }, []);
 
   const fetchUserDetails = async (username) => {
     try {
-      const response = await axios.get(
-        `/api/user/getProfile?username=${username}`
-      );
+      const response = await axios.get(`/api/user/getProfile?username=${username}`);
       const userData = response.data;
       setUserDetails({
         name: userData.name,
@@ -158,61 +98,79 @@ const CheckoutPage = () => {
       console.error("Error fetching user details:", error);
     }
   };
-  
-  const initialOptions = {
-    "client-id":
-      "AVagQDrpSiWLTEPxT3TmDjLQ2a0LiK-kKuA5n_lBIFaFgq9KMKi5EhPfmre69te6Ou_suu84AUoUFQL-",
-    currency: "USD",
-    "disable-funding": "credit,card",
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+      fetchUserDetails(storedUsername);
+    } else {
+      console.error("Username not found in local storage");
+    }
+  }, []);
+
+  const createOrder = async () => {
+    try {
+      if (cart.length === 0) {
+        alert("Cart is empty. Please add items to proceed with the order.");
+        return;
+      }
+
+      // Map cart items to the required order_items structure
+      const orderItems = cart.map(item => ({
+        sku_id: item.sku_id,
+        quantity: item.quantity,
+        unit_price: item.price,
+        size: item.size,
+        subtotal: item.price * item.quantity
+      }));
+
+      const orderDetails = {
+        username,
+        total_amount: total,
+        shipping_address: `${userDetails.shipping_address}, ${userDetails.city}, ${userDetails.zip_code}, ${userDetails.province}`,
+        phone: userDetails.phone,
+        order_items: orderItems // Ensure order_items is an array of objects
+      };
+
+      const response = await axios.post('/api/orders/create', orderDetails);
+
+      console.log(response)
+
+      if (response.data.success) {
+        alert("Order placed successfully");
+        router.push('/order-confirmation');
+      } else {
+        alert("Failed to place order");
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert("An error occurred while placing the order. Please try again later.");
+    }
   };
+
+
   return (
     <>
       <Head>
         <meta charSet="utf-8" />
-        <meta
-          content="width=device-width, initial-scale=1.0, maximum-scale=5, shrink-to-fit=no"
-          name="viewport"
-        />
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=5, shrink-to-fit=no" name="viewport" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="generator" content="Getsol Inc." />
         <title>Checkout</title>
-        <meta
-          name="title"
-          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
-        <meta
-          name="description"
-          content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
-        />
+        <meta name="title" content="Contact Athlotic Sports | Sports items Manufacturer Pakistan" />
+        <meta name="description" content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico"></link>
         <meta name="robots" content="index, follow" />
         <meta name="revisit-after" content="1 days" />
         <meta name="author" content="Sardar Imran" />
-        <meta
-          itemProp="name"
-          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
-
+        <meta itemProp="name" content="Contact Athlotic Sports | Sports items Manufacturer Pakistan" />
         <meta name="twitter:card" content="summary" />
-        <meta
-          name="twitter:title"
-          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
-        <meta
-          name="twitter:description"
-          content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
-        />
-
-        <meta
-          property="og:title"
-          content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
+        <meta name="twitter:title" content="Contact Athlotic Sports | Sports items Manufacturer Pakistan" />
+        <meta name="twitter:description" content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!" />
+        <meta property="og:title" content="Contact Athlotic Sports | Sports items Manufacturer Pakistan" />
         <meta property="og:type" content="article" />
-
-        <meta
-          property="og:description"
-          content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
-        />
+        <meta property="og:description" content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!" />
         <meta property="og:locale" content="en" />
         <link rel="canonical" href="https://athlotic.com/contact-us" />
         <link rel="preconnect" href="//www.google-analytics.com" as="script" />
@@ -225,281 +183,149 @@ const CheckoutPage = () => {
             <div className="mt-6 p-4 relative flex flex-col sm:flex-row sm:items-center bg-white shadow rounded-md">
               <div className="flex flex-row items-center border-b sm:border-b-0 w-full sm:w-auto pb-4 sm:pb-0">
                 <div className="text-yellow-500">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 sm:w-5 h-6 sm:h-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12 2C6.476 2 2 6.477 2 12s4.477 10 10 10c2.112 0 4.145-.652 5.847-1.887c.466-.328 1.111-.196 1.437.272c.326.467.196 1.112-.272 1.438A11.958 11.958 0 0 1 12 22C5.935 22 1 17.065 1 11S5.935 0 12 0s11 4.935 11 11c0 2.282-.682 4.387-1.887 6.153c-.323.477-.97.609-1.437.272c-.467-.324-.598-.97-.272-1.437A9.961 9.961 0 0 0 21 11c0-5.523-4.477-10-10-10zm1 9V5a1 1 0 1 0-2 0v7c0 .552.447 1 1 1h5a1 1 0 1 0 0-2h-4z"></path>
                   </svg>
                 </div>
-                <div className="text-sm font-medium ml-3">Checkout</div>
+                <div className="text-sm font-medium ml-3">Checkout Process</div>
               </div>
-              <div className="text-sm tracking-wide text-gray-500 mt-4 sm:mt-0 sm:ml-4">
-                Complete your shipping and payment details below.
-              </div>
-              <div
-                className="absolute sm:relative sm:top-auto sm:right-auto ml-auto right-4 top-4 text-gray-400 hover:text-gray-800 cursor-pointer"
-                onClick={handleClose}
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  ></path>
+              <div className="text-sm tracking-wide text-gray-500 mt-4 sm:mt-0 sm:ml-4">Please select a payment method.</div>
+              <button onClick={handleClose} className="absolute sm:relative sm:ml-auto sm:pl-10 right-2 top-2 sm:top-auto sm:right-auto">
+                <svg className="w-4 h-4 text-gray-400 hover:text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
-              </div>
+              </button>
             </div>
           )}
-          <div className="rounded-md">
-            <form id="payment-form" method="POST" action="">
-              <section>
-                <div className="flex flex-row justify-between items-center mb-4">
-                  <h2 className="uppercase tracking-wide text-lg font-semibold text-gray-700 my-2">
-                    Shipping & Billing Information
-                  </h2>
 
-                  <Link href={`/user-dashboard/${username}/profile`}>
-                    <button className="btn-action my-3 px-4 py-2 rounded-full text-white focus:ring focus:outline-none mx-auto flex justify-center text-sm font-semibold">
-                      Click to Edit or Add Address
-                    </button>
-                  </Link>
-                </div>
-
-                <fieldset className="mb-3 bg-white shadow-lg rounded text-gray-600">
-                  <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">
-                      Name
-                    </span>
-                    <input
-                      name="name"
-                      className="focus:outline-none px-3"
-                      placeholder="Try Odinsson"
-                      required
-                      value={userDetails.name}
-                      readOnly
-                    />
-                  </label>
-                  <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">
-                      Email
-                    </span>
-                    <input
-                      name="email"
-                      className="focus:outline-none w-full px-3"
-                      placeholder="try@example.com"
-                      required
-                      value={userDetails.email}
-                      readOnly
-                    />
-                  </label>
-                  <label className="flex border-b border-gray-200 w-full h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">
-                      Address
-                    </span>
-                    <input
-                      name="shipping_address"
-                      className="focus:outline-none w-full px-3"
-                      placeholder="10 Street XYZ 654"
-                      required
-                      value={userDetails.shipping_address}
-                      readOnly
-                    />
-                  </label>
-                  <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">
-                      City
-                    </span>
-                    <input
-                      name="city"
-                      className="focus:outline-none px-3"
-                      placeholder="San Francisco"
-                      required
-                      value={userDetails.city}
-                      readOnly
-                    />
-                  </label>
-                  <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">
-                      State
-                    </span>
-                    <input
-                      name="province"
-                      className="focus:outline-none px-3"
-                      placeholder="CA"
-                      required
-                      value={userDetails.province}
-                      readOnly
-                    />
-                  </label>
-                  <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">
-                      ZIP Code
-                    </span>
-                    <input
-                      name="zip_code"
-                      className="focus:outline-none px-3"
-                      placeholder="98603"
-                      required
-                      value={userDetails.zip_code}
-                      readOnly
-                    />
-                  </label>
-                  <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">
-                      Phone
-                    </span>
-                    <input
-                      name="phone"
-                      className="focus:outline-none px-3"
-                      placeholder="98603"
-                      required
-                      value={userDetails.phone}
-                      readOnly
-                    />
-                  </label>
-                </fieldset>
-              </section>
-            </form>
-            <h2 className="uppercase tracking-wide text-lg font-semibold text-gray-700 ml-1 mt-6 mb-2">
-              Payment
-            </h2>
-            <div className="w-full mx-auto rounded-lg bg-white border border-gray-200 text-gray-800 font-light mb-6">
-              <div className="w-full p-5">
-                <label
-                  htmlFor="type2"
-                  className="flex items-center cursor-pointer"
-                >
-                  <input
-                    type="radio"
-                    className="form-radio h-5 w-5 text-indigo-500"
-                    name="type"
-                    id="type2"
-                    checked={selectedPayment === "type2"}
-                    onChange={handlePaymentChange}
-                  />
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"
-                    width="80"
-                    className="ml-3"
-                  />
-                </label>
-                <label
-                  htmlFor="type3"
-                  className="flex gap-3 items-center cursor-pointer my-5"
-                >
-                  <input
-                    type="radio"
-                    className="form-radio h-5 w-5 text-indigo-500"
-                    name="type"
-                    id="type3"
-                    checked={selectedPayment === "type3"}
-                    onChange={handlePaymentChange}
-                  />
-                  <p className="text-gray-600 font-semibold text-lg">
-                    Cash On Delivery (COD)
-                  </p>
-                </label>
+          <div className="bg-white rounded-md">
+            <div>
+              <div className="p-4 flex justify-between">
+                <h2 className="text-lg font-medium text-gray-700">Shipping Information</h2>
+                <Link href={`/user-dashboard/${username}/profile`}>
+                  EDIT
+                </Link>
               </div>
-              <button className="btn-action my-5 px-4 py-3 rounded-full text-white focus:ring focus:outline-none w-[90%] mx-auto flex justify-center text-xl font-semibold transition-colors">
-                Order Now
-              </button>
-              <div className="w-full mx-auto justify-center">
-                {scriptLoaded ? (
+              <div className="grid grid-cols-6 gap-6 p-4">
+                {[
+                  { label: "Name", value: userDetails.name },
+                  { label: "Email Address", value: userDetails.email },
+                  { label: "Shipping Address", value: userDetails.shipping_address },
+                  { label: "City", value: userDetails.city },
+                  { label: "Province", value: userDetails.province },
+                  { label: "Zip Code", value: userDetails.zip_code },
+                  { label: "Phone", value: userDetails.phone }
+                ].map((field, index) => (
+                  <div key={index} className={`col-span-6 sm:col-span-${index < 2 ? 3 : 6}`}>
+                    <label className="block text-sm font-medium text-gray-700">{field.label}</label>
+                    <div className="mt-1">{field.value}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-md">
+            <div className="p-4 flex justify-between">  
+              <h2 className="text-lg font-medium text-gray-700">Order Summary</h2>
+            </div>
+            <div className="grid grid-cols-6 gap-6 p-4">
+              {cart.map((item, index) => {
+                return (
+                  <div key={index} className="col-span-6 flex items-center">
+                    <img src={item.image_url} alt={item.name} className="w-16 h-16 object-cover" />
+                    <div className="ml-4">
+                      <div className="text-sm font-medium text-gray-700">{item.name}</div>
+                      <div className="text-sm text-gray-500">Size: {item.size}</div>
+                      <div className="text-sm text-gray-500">Quantity: {item.quantity}</div>
+                      <div className="text-sm text-gray-500">${(item.price * item.quantity).toFixed(2)}</div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-md">
+            <div className="p-4 flex justify-between">
+              <h2 className="text-lg font-medium text-gray-700">Payment Method</h2>
+            </div>
+            <div className="p-4 flex flex-col">
+              <div className="flex items-center mb-4">
+                <input type="radio" id="cod" name="payment-method" className="mr-2" checked={selectedPayment === 'cod'} onChange={handlePaymentChange} />
+                <label htmlFor="cod" className="text-gray-700">Cash on Delivery</label>
+              </div>
+              <div className="flex items-center mb-4">
+                <input type="radio" id="paypal" name="payment-method" className="mr-2" checked={selectedPayment === 'paypal'} onChange={handlePaymentChange} />
+                <label htmlFor="paypal" className="text-gray-700">PayPal</label>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-md">
+            <div className="p-4 flex justify-between">
+              <h2 className="text-lg font-medium text-gray-700">Order Total</h2>
+              <div className="text-lg font-medium text-gray-700">${total}</div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-md">
+            <div className="p-4 flex justify-between">
+              {selectedPayment === 'cod' ? (
+                <button className="bg-indigo-600 text-white py-2 px-4 rounded-md" onClick={createOrder}>Order Now</button>
+              ) : (
+                scriptLoaded && (
                   <PayPalScriptProvider options={initialOptions}>
-                    <PayPalButtons
-                      style={{ layout: "vertical" }}
-                      createOrder={(data, actions) => {
-                        return actions.order.create({
-                          purchase_units: [
-                            {
-                              amount: {
-                                value: total.toString(), // Total amount to be paid
-                              },
-                            },
-                          ],
-                        });
-                      }}
-                      onApprove={(data, actions) => {
-                        return actions.order.capture().then((details) => {
-                          const payerName = details.payer.name.given_name;
-                          addDonationInDB(payerName, total);
-                          alert(`Transaction completed by ${payerName}`);
-                        });
-                      }}
-                      onError={(err) => {
-                        console.error("PayPal Checkout onError", err);
-                      }}
-                    />
+                    <PayPalButtons style={{ layout: "vertical" }} createOrder={(data, actions) => actions.order.create({
+                      purchase_units: [{
+                        amount: {
+                          value: total,
+                        },
+                      }],
+                    })} onApprove={(data, actions) => actions.order.capture().then(details => {
+                      alert(`Transaction completed by ${details.payer.name.given_name}`);
+                      createOrder();
+                    })} />
                   </PayPalScriptProvider>
-                ) : (
-                  <span>Loading...</span>
-                )}
-              </div>
+                )
+              )}
             </div>
           </div>
+
         </div>
-        <div className="col-span-1 sm:my-16 sm:mr-12 mx-12 bg-white block mx-auto">
-          <h1 className="py-6 border-b-2 text-xl text-gray-600 px-8">
-            Order Summary
-          </h1>
-          {cart.map((product) => (
-            <div
-              key={product.sku_id}
-              className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start"
-            >
-              <img
-                src={product.image_url}
-                alt={product.image_alt}
-                className="w-full rounded-lg sm:w-40"
-              />
-              <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
-                <div className="mt-5 sm:mt-0">
-                  <h2 className="text-lg font-bold text-gray-900">
-                    {product.product_name}
-                  </h2>
-                  <p className="mt-1 text-xs text-gray-700">
-                    {product.category} Size: {product.size}
-                  </p>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <p className="text-sm">PKR {product.price}</p>
-                </div>
+        <div className="sm:px-4 sm:py-10 py-10 sm:col-span-1 col-span-3">
+          <div className="px-4 lg:px-8 py-10 bg-gray-100 bg-opacity-50 rounded-md">
+            <h2 className="text-xl font-medium text-gray-700 mb-4">Order Summary</h2>
+            <div className="text-gray-700">
+              <div className="flex justify-between py-2 border-b border-gray-200">
+                <span>Subtotal</span>
+                <span>${subTotal}</span>
+              </div>
+              <div className="flex justify-between py-2 border-b border-gray-200">
+                <span>Shipping</span>
+                <span>${totalShipping}</span>
+              </div>
+              <div className="flex justify-between py-2 border-b border-gray-200">
+                <span>Total</span>
+                <span className="font-medium text-gray-900">${total}</span>
               </div>
             </div>
-          ))}
-          <div className="px-8 border-b">
-            <div className="flex justify-between py-4 text-gray-600">
-              <span>Subtotal</span>
-              <span className="font-semibold text-blue-600">
-                PKR {subTotal}
-              </span>
+            <div className="mt-6">
+              {selectedPayment === 'paypal' && scriptLoaded && (
+                <PayPalScriptProvider options={initialOptions}>
+                  <PayPalButtons style={{ layout: "vertical" }} createOrder={(data, actions) => actions.order.create({
+                    purchase_units: [{
+                      amount: {
+                        value: total,
+                      },
+                    }],
+                  })} onApprove={(data, actions) => actions.order.capture().then(details => {
+                    alert(`Transaction completed by ${details.payer.name.given_name}`);
+                    createOrder();
+                  })} />
+                </PayPalScriptProvider>
+              )}
             </div>
-            <div className="flex justify-between py-4 text-gray-600">
-              <span>Shipping</span>
-              <span className="font-semibold text-blue-600">
-                PKR {totalShipping}
-              </span>
-            </div>
-          </div>
-          <div className="font-semibold text-xl px-8 flex justify-between py-8 text-gray-600">
-            <span>Total</span>
-            <span>PKR {total}</span>
           </div>
         </div>
       </div>
@@ -507,4 +333,5 @@ const CheckoutPage = () => {
   );
 };
 
-export default withAuth(CheckoutPage, ["user"]);
+export default withAuth(CheckoutPage, ['user']);
+
