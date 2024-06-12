@@ -8,37 +8,7 @@ export default function PrivacyPolicy() {
  
     return (
       <>
-	  <Head>        
-      <meta charSet="utf-8" />
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=5, shrink-to-fit=no' name='viewport' />
-	<meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="generator" content="Getsol Inc." />  
-  <title>Privacy Policy AA-M Pipes | Electric Fittings Supplier</title>
-  <meta name="title" content="Privacy Policy AA-M Pipes | Electric Fittings Supplier"/>
-  <meta name="description" content="Protect your personal information with AA-M Pipes' Privacy Policy. As a trusted electric fittings supplier, we prioritize your privacy and security. Read more now."/>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico"></link>
-  <meta name="robots" content="index, follow" />
-  <meta name="revisit-after" content="1 days" />
-  <meta name="author" content="Sardar Imran" />  
-  <meta itemProp="name" content="Privacy Policy AA-M Pipes | Electric Fittings Supplier"/>
-  <meta itemProp="image" content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"/>
-  <meta name="twitter:card" content="summary"/>
-  <meta name="twitter:title" content="Privacy Policy AA-M Pipes | Electric Fittings Supplier"/>
-  <meta name="twitter:description" content="Protect your personal information with AA-M Pipes' Privacy Policy. As a trusted electric fittings supplier, we prioritize your privacy and security. Read more now."/>
-  <meta name="twitter:image:src" content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"/>
-  <meta property="og:title" content="Privacy Policy AA-M Pipes | Electric Fittings Supplier"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:image" content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"/>
-  <meta property="og:description" content="Protect your personal information with AA-M Pipes' Privacy Policy. As a trusted electric fittings supplier, we prioritize your privacy and security. Read more now."/>
-  <meta property="og:locale" content="en" />
-  <meta itemProp="image" content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"/>
-  
-<link rel="canonical" href="https://aampipes.pk/privacy-policy"/>
-<link rel="preconnect" href="//www.google-analytics.com" as="script"/>
-<meta name="google" content="notranslate" />
-         
-        
-      </Head>
+	  
         <MainHeader pageHeading="PRIVACY POLICY" />
 
         <section className="main-sec ppolicy">
@@ -72,15 +42,7 @@ export default function PrivacyPolicy() {
                   You to access our Service or parts of our Service.
                 </p>
               </li>
-              <li>
-                <p>
-                  <strong>Company</strong> (referred to as either &quot;the
-                  Company&quot;, &quot;We&quot;, &quot;Us&quot; or
-                  &quot;Our&quot; in this Agreement) refers to AAM PIPES, AAM
-                  Pipes Manufacturer Pindi Bypass, Gulshan Aziz Colony,
-                  Gujranwala, Punjab - Pakistan.
-                </p>
-              </li>
+              
               <li>
                 <p>
                   <strong>Cookies</strong> are small files that are placed on
@@ -130,18 +92,7 @@ export default function PrivacyPolicy() {
                   duration of a page visit).
                 </p>
               </li>
-              <li>
-                <p>
-                  <strong>Website</strong> refers to AAM PIPES, accessible from{" "}
-                  <a
-                    href="https:aampipes.pk"
-                    rel="external nofollow noopener"
-                    target="_blank"
-                  >
-                    https:aampipes.pk
-                  </a>
-                </p>
-              </li>
+          
               <li>
                 <p>
                   <strong>You</strong> means the individual accessing or using
@@ -558,17 +509,12 @@ export default function PrivacyPolicy() {
             </p>
             <ul>
               <li>
-                <p>By email: info@aampipes.pk</p>
+                <p>By email: mughalsammar988@gmail.com</p>
               </li>
               <li>
-                <p>By phone number: +92 300 6320401</p>
+                <p>By phone number: +92 317 4696178 </p>
               </li>
-            </ul>
-			
-			<h2 className="text-2xl font-bold">Best Electric Fittings Supplier</h2>
-				  <p>
-				  AA-M Pipes takes the privacy of its customers seriously. The company understands the importance of protecting personal information and has developed a comprehensive privacy policy to ensure the safety and security of its customers' data. AA-M Pipes' privacy policy outlines how the company collects, uses, and manages personal information, as well as the measures taken to protect it. The policy also includes information about how customers can access and update their personal information, and the steps taken by AA-M Pipes to comply with relevant privacy laws and regulations. By choosing AA-M Pipes as your electric fittings supplier, you can be confident that your personal information is being handled with the utmost care and attention.
-				  </p>
+            </ul>		
 				  
           </div>
         </section>

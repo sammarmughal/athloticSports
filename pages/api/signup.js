@@ -12,7 +12,6 @@ export default async function handler(req, res) {
     });
 
     try {
-      // Check for duplicate email
       const [existingEmail] = await connection.execute(
         'SELECT * FROM users WHERE email = ?',
         [email]
@@ -21,8 +20,6 @@ export default async function handler(req, res) {
       if (existingEmail.length > 0) {
         return res.status(409).json({ message: 'Email is already registered' });
       }
-
-      // Check for duplicate username
       const [existingUsername] = await connection.execute(
         'SELECT * FROM users WHERE username = ?',
         [username]

@@ -24,12 +24,10 @@ const Products = ({ products }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // Retrieve the username from local storage or state management
     const storedUsername = localStorage.getItem("username");
     if (storedUsername) {
       setUsername(storedUsername);
     } else {
-      // If no username found, redirect to login (optional)
       router.push("/login");
     }
   }, []);

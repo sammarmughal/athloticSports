@@ -4,13 +4,10 @@ import fs from 'fs';
 import { v4 as uuidv4 } from 'uuid';
 import { query } from '../../../lib/db';
 
-// Configure multer for file upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const category = req.body.category ? req.body.category.toLowerCase().replace(/ /g, '_') : 'uncategorized';
     const dir = path.join(process.cwd(), 'public', 'images', 'products', category);
-
-    // Ensure directory exists
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
@@ -46,8 +43,6 @@ const handler = async (req, res) => {
       }
 
       const image_url = `/images/products/${category.toLowerCase().replace(/ /g, '_')}/${req.file.filename}`;
-
-      // Insert the product into the database
       const result = await query(
         'INSERT INTO products (product_name, category, description, price, quantity_available, sku_id, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)', 
         [product_name, category, description, price, quantity_available, sku_id, image_url]

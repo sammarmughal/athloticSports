@@ -18,7 +18,6 @@ export default async function handler(req, res) {
         [username]
       );
 
-      // Convert total_amount to a number
       const formattedOrders = orders.map(order => ({
         ...order,
         total_amount: Number(order.total_amount)
@@ -28,7 +27,7 @@ export default async function handler(req, res) {
 
       res.status(200).json({ success: true, orders: formattedOrders });
     } catch (error) {
-      console.error("Error fetching orders:", error); // Log the error for debugging
+      console.error("Error fetching orders:", error); 
       res.status(500).json({ success: false, message: 'Error fetching orders', error: error.message });
     }
   } else {

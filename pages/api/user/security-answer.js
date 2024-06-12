@@ -27,7 +27,6 @@ export default async function handler(req, res) {
       await connection.execute('UPDATE users SET security_answer = ? WHERE username = ?', [newSecurityAnswer, username]);
       res.status(200).json({ message: 'Security answer changed successfully' });
 
-      // Close the connection
       await connection.end();
     } catch (error) {
       console.error(error);

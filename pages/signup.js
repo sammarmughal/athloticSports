@@ -114,11 +114,7 @@ const SignupForm = () => {
         <meta
           itemProp="name"
           content="Contact Athlotic Sports | Sports items Manufacturer Pakistan"
-        />
-        <meta
-          itemProp="image"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
+        />      
         <meta name="twitter:card" content="summary" />
         <meta
           name="twitter:title"
@@ -138,18 +134,10 @@ const SignupForm = () => {
         />
         <meta property="og:type" content="article" />
         <meta
-          property="og:image"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
-        <meta
           property="og:description"
           content="Get in touch with Athlotic Sports, a leading manufacturer of Sport Uniforms and Accessories. Contact us today for reliable and efficient solutions!"
         />
         <meta property="og:locale" content="en" />
-        <meta
-          itemProp="image"
-          content="https://aampipes.pk/_next/image?url=%2Fimages%2Faam-pipes-logo.png&w=128&q=75"
-        />
         <script
           defer
           src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"

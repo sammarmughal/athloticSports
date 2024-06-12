@@ -1,11 +1,8 @@
-// /pages/api/user/updateAddress.js
 import mysql from 'mysql2/promise';
 
 export default async function handler(req, res) {
   if (req.method === 'PUT') {
     const { username, shipping_address, city, province, zip_code,phone } = req.body;
-
-    // Check for undefined values and set them to null
     const params = [
       shipping_address !== undefined ? shipping_address : null,
       city !== undefined ? city : null,
@@ -14,7 +11,6 @@ export default async function handler(req, res) {
       phone !== undefined ? phone : null,
       username !== undefined ? username : null,
     ];
-
     try {
       const connection = await mysql.createConnection({
         host: process.env.MYSQL_HOST,

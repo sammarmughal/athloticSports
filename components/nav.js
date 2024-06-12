@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Fragment, useState,useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Menu, Dialog, Transition } from "@headlessui/react";
 import { XIcon, FireIcon } from "@heroicons/react/outline";
 import { BsCart3, BsPerson } from "react-icons/bs";
@@ -19,22 +19,21 @@ export default function Nav() {
   };
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem("accessToken");
     setIsLoggedIn(accessToken !== null);
   }, []);
 
-  // Redirect the user based on their role
   const handleLoginRedirect = () => {
     if (isLoggedIn) {
-      const role = localStorage.getItem('role');
-      const username = localStorage.getItem('username');
-      if (role === 'admin') {
+      const role = localStorage.getItem("role");
+      const username = localStorage.getItem("username");
+      if (role === "admin") {
         return `/admin-portal/${username}`;
       } else {
-        return `/user-dashboard/${username}`;
+        return `/user-dashboard/${username}/profile`;
       }
     } else {
-      return '/login';
+      return "/login";
     }
   };
 
@@ -632,11 +631,6 @@ export default function Nav() {
                             </svg>
                             American Football
                           </Link>
-                          {/* <Link onClick={handleToggle} href="#" title="Netball Uniform" className="block mt-2 ml-4 text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 inline -mt-1 mr-1">
-                              <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" /></svg>
-                            Netball
-                          </Link> */}
                           <Link
                             onClick={handleToggle}
                             href="/products/tennis"
@@ -657,11 +651,6 @@ export default function Nav() {
                             </svg>
                             Tennis
                           </Link>
-                          {/* <Link onClick={handleToggle} href="#" title="Softball Uniform" className="block mt-2 ml-4 text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 inline -mt-1 mr-1">
-                              <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" /></svg>
-                            Softball
-                          </Link> */}
                           <Link
                             onClick={handleToggle}
                             href="/products/running"
@@ -682,11 +671,6 @@ export default function Nav() {
                             </svg>
                             Running
                           </Link>
-                          {/* <Link onClick={handleToggle} href="#" title="Australian Football League Uniform" className="block mt-2 ml-4 text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 inline -mt-1 mr-1">
-                              <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" /></svg>
-                            AFL
-                          </Link> */}
                         </li>
                         <li className="py-3">
                           SPORTS WEAR
@@ -770,15 +754,6 @@ export default function Nav() {
                             </svg>
                             Gym
                           </Link>
-                          {/* <Link onClick={handleToggle}
-                            href="#"
-                            title="Yoga Wear"
-                            className="block mt-2 ml-4 text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 inline -mt-1 mr-1">
-                              <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
-                            </svg>
-                            Yoga
-                          </Link> */}
                           <Link
                             onClick={handleToggle}
                             href="/products/martialarts"
@@ -799,15 +774,6 @@ export default function Nav() {
                             </svg>
                             Martial Arts
                           </Link>
-                          {/* <Link onClick={handleToggle}
-                            href="#"
-                            title="Fitness Wear"
-                            className="block mt-2 ml-4 text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 inline -mt-1 mr-1">
-                              <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
-                            </svg>
-                            Fitness
-                          </Link> */}
                         </li>
 
                         <li className="py-3">
@@ -912,55 +878,6 @@ export default function Nav() {
                               +923174696178
                             </a>
                           </div>
-                          {/* 
-                          <div className="gap-x-2  panel-social relative top-0 items-center justify-center">
-                            <a
-                              href="mailto:info@athlotic.com"
-                              title="Email"
-                              className="emailit tooltip group fill-white bg-black border-black"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                                className="w-5 h-auto fill-white"
-                              >
-                                <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
-                                <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
-                              </svg>
-                            </a>
-
-                            <a
-                              href="http://facebook.com/athloticsports"
-                              title="Athlotic Sports on Facebook"
-                              className="facebook tooltip group fill-white bg-[#4267B2] border-[#4267B2]"
-                            >
-                              <svg
-                                className="w-6 h-auto fill-white"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                              >
-                                {" "}
-                                <path d="M16.403,9H14V7c0-1.032,0.084-1.682,1.563-1.682h0.868c0.552,0,1-0.448,1-1V3.064c0-0.523-0.401-0.97-0.923-1.005 C15.904,2.018,15.299,1.999,14.693,2C11.98,2,10,3.657,10,6.699V9H8c-0.552,0-1,0.448-1,1v2c0,0.552,0.448,1,1,1l2-0.001V21 c0,0.552,0.448,1,1,1h2c0.552,0,1-0.448,1-1v-8.003l2.174-0.001c0.508,0,0.935-0.381,0.993-0.886l0.229-1.996 C17.465,9.521,17.001,9,16.403,9z" />
-                              </svg>
-                            </a>
-
-                            <a
-                              href="http://instagram.com/athloticsports"
-                              title="Athlotic Sports on Instagram"
-                              className="instagram tooltip group bg-[#405DE6] border-[#405DE6]"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-6 h-auto fill-white"
-                                viewBox="0 0 30 30"
-                              >
-                                {" "}
-                                <path d="M 9.9980469 3 C 6.1390469 3 3 6.1419531 3 10.001953 L 3 20.001953 C 3 23.860953 6.1419531 27 10.001953 27 L 20.001953 27 C 23.860953 27 27 23.858047 27 19.998047 L 27 9.9980469 C 27 6.1390469 23.858047 3 19.998047 3 L 9.9980469 3 z M 22 7 C 22.552 7 23 7.448 23 8 C 23 8.552 22.552 9 22 9 C 21.448 9 21 8.552 21 8 C 21 7.448 21.448 7 22 7 z M 15 9 C 18.309 9 21 11.691 21 15 C 21 18.309 18.309 21 15 21 C 11.691 21 9 18.309 9 15 C 9 11.691 11.691 9 15 9 z M 15 11 A 4 4 0 0 0 11 15 A 4 4 0 0 0 15 19 A 4 4 0 0 0 19 15 A 4 4 0 0 0 15 11 z" />
-                              </svg>
-                            </a>
-                    
-                          </div> */}
                         </div>
                       </div>
                     </div>

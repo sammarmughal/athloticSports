@@ -2,10 +2,8 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import React, { Component, useState, useEffect } from "react";
-import plainBlue from "../public/plainblue.png";
 import { Disclosure } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
-import { NextSeo } from "next-seo";
 import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
 import AFlogo from "../public/images/logos/AmericanFootball.png";
 import Baseball from "../public/images/logos/Baseball.png";
@@ -18,15 +16,12 @@ import Rugby from "../public/images/logos/Rugby.png";
 import Soccer from "../public/images/logos/Soccer.png";
 import Tennis from "../public/images/logos/Tennis.png";
 import Hoodies from "../public/images/logos/Hoodies.png";
-import Jackets from "../public/images/logos/Jackets.png";
 import SportsBra from "../public/images/logos/SportsBra.png";
 import MartialandArts from "../public/images/logos/MartialandArts.png";
 import Sweatshirts from "../public/images/logos/Sweatshirts.png";
 import socks from "../public/images/logos/socks.png";
-import T_shirt from "../public/images/logos/T-shirt.png";
 import caps from "../public/images/logos/caps.png";
 import Shorts from "../public/images/logos/Shorts.png";
-import content from "../db/blogposts.json";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
 import "swiper/css";
@@ -91,13 +86,11 @@ export default function Home() {
 
   const handleTouchEnd = (e) => {
     const touchEndX = e.changedTouches[0].clientX;
-    const minSwipeDistance = 50; // Adjust this value as needed
+    const minSwipeDistance = 50; 
 
     if (touchStartX - touchEndX > minSwipeDistance) {
-      // Swipe left (next slide)
       nextSlide();
     } else if (touchEndX - touchStartX > minSwipeDistance) {
-      // Swipe right (previous slide)
       prevSlide();
     }
   };
@@ -111,29 +104,14 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // Add event listeners for navigation on mobile devices
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchend", handleTouchEnd);
 
     return () => {
-      // Remove event listeners when the component unmounts
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
-  const sliderSettings = {
-    arrows: true,
-    autoplaySpeed: 2500,
-    dots: false,
-    autoplay: true,
-    infinite: true,
-    adaptiveHeight: true,
-    pauseOnHover: true,
-    slidesToShow: 9,
-    slidesToScroll: 1,
-    fade: false,
-    touchThreshold: 5,
-  };
   const sliderItems = [
 
     <Link href="/products/football">
@@ -278,117 +256,7 @@ export default function Home() {
     </Link>,
     // Add more slider items here as needed
   ];
-  const sliderItems2 = [
-    <Link href="/products/hoddies">
-      <div className="px-7">
-        <Image
-          src={Hoodies}
-          alt="Hoodies logo"
-          className="logo"
-          width={55}
-          height={60}
-        />
-        <h2 className="text-center text-white font-montserrat font-semibold">
-          Hoodies
-        </h2>
-      </div>
-    </Link>,
   
-    <Link href="/products/medical">
-      <div className="px-7">
-        <Image
-          src={SportsBra}
-          alt="SportsBra logo"
-          className="logo"
-          width={74}
-          height={60}
-        />
-        <h2 className="text-center text-white font-montserrat font-semibold">
-          Medical
-        </h2>
-      </div>
-    </Link>,
-    <div className="px-7">
-      <Image
-        src={MartialandArts}
-        alt="Martial and arts logo"
-        className="logo"
-        width={48}
-        height={60}
-      />
-      <h2 className="text-center text-white font-montserrat font-semibold">
-        Martial & <br></br> Arts
-      </h2>
-    </div>,
-    <div className="px-7">
-      <Image
-        src={Sweatshirts}
-        alt="Softshell jackets logo"
-        className="logo"
-        width={60}
-        height={60}
-      />
-      <h2 className="text-center text-white font-montserrat font-semibold">
-        Softshell <br></br> Jackets
-      </h2>
-    </div>,
-    <div className="px-7">
-      <Image
-        src={socks}
-        alt="Socks logo"
-        className="logo"
-        width={48}
-        height={60}
-      />
-      <h2 className="text-center text-white font-montserrat font-semibold">
-        Socks
-      </h2>
-    </div>,
-
-    <Link href="/products/tracksuits">
-      <div className="px-7">
-        <Image
-          src="/images/logos/T-shirt.png"
-          alt="T_shirt logo"
-          className="logo"
-          width={65}
-          height={60}
-        />
-        <h2 className="text-center text-white font-montserrat font-semibold">
-          Tracksuits
-        </h2>
-      </div>
-    </Link>,
-    <Link href="/products/caps">
-    <div className="px-7">
-      <Image
-        src={caps}
-        alt="Caps logo"
-        className="logo"
-        width={47}
-        height={60}
-      />
-      <h2 className="text-center text-white font-montserrat font-semibold">
-        Caps
-      </h2>
-    </div>
-    </Link>,
-
-    <Link href="/products/shorts">
-      <div className="px-7">
-        <Image
-          src={Shorts}
-          alt="Shorts logo"
-          className="logo"
-          width={77}
-          height={60}
-        />
-        <h2 className="text-center text-white font-montserrat font-semibold">
-          Shorts{" "}
-        </h2>
-      </div>
-    </Link>,
-  ];
   return (
     <div>
       <Head>
@@ -456,8 +324,6 @@ export default function Home() {
             </h2>
           </div>
         </div>
-
-        {/* <Image src="/images/aam-pipes-slide-a.jpg" alt='ATHLOTIC SPORTS' title='ATHLOTIC SPORTS' fill="true" className='bg-cover' ></Image> */}
         <Swiper
           className="mySwiper h-full w-full"
           modules={[Autoplay]}
@@ -493,62 +359,6 @@ export default function Home() {
           </SwiperSlide>
         </Swiper>
       </header>
-
-      {/* home-bg-aampipes */}
-
-      {/* CUSTOM UNIFORMS BY SPORTS */}
-      {/* <section className="mt-10 pb-12 py-10 relative">
-        <div
-          style={{
-            backgroundImage: 'url("/images/athlotic-blue-bg.png")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-
-          <div className='flex mx-auto py-10 relative'>
-            <div className='pr-6 mt-10'>
-              <h1 className="text-white font-montserrat text-3xl font-extrabold uppercase leading-tight"> WHY US?</h1>
-              <p className="pr-20 mb-6 text-justify text-white shadow-text">We offer low minimum order quantity and the best lead time. We have strict quality control checks to ensure customer satisfaction. Get your sportswear and activewear products manufactured conveniently and quickly. First, get your samples approved, once approved, they will go through the production process.</p>
-            </div>
-            <div className='flex mx-auto relative'>
-              
-                <div className="bg-e-global-color-secondary text-left flex-row" data-id="d4b1913" data-element_type="widget" data-widget_type="icon-box.default">
-                  <div className="transition-all duration-300 transform transition-transform">
-                    <div className="flex text-left items-center">
-                      <div className="inline-flex basis-auto">
-                        <span className="text-yellow-600 inline-block leading-1 transition-all duration-300 text-gray-700 text-center text-5xl border-yellow-600">
-                          <i aria-hidden="true" className="fas fa-bullseye"></i>
-                        </span>
-                      </div>
-                      <div className="elementor-icon-box-content">
-                        <p className="elementor-icon-box-title">
-                          <span className="font-bold">
-                            Quality Focus
-                          </span>
-                        </p>
-                        <p className="elementor-icon-box-description">
-                          We aim to provide the best quality as per our customer expectations.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              
-            </div>
-
-          </div>
-
-
-        </div>
-
-
-      </section> */}
       <section className="mt-10 py-10 pb-12">
         <div className="container mx-auto px-4 relative">
           <div className="sec-heading">
@@ -753,8 +563,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Standard Quality is Our Foremost Priority */}
       <section className=" h-auto bg-no-repeat bg-fixed relative bg-cover py-10 pb-5 ">
         <div className="container mx-auto h-full max-w-5xl px-4 flex justify-center items-center text-center relative">
           <div>
@@ -1166,8 +974,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Our Products Section */}
       <section className="py-5 pb-2 ">
         <div className="sec-heading">
           <h2>Our Products</h2>
@@ -1450,83 +1256,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Blog section */}
-      <section className="py-10 ">
-        <div className="sec-heading">
-          <h2>Blog & Updates</h2>
-          <p>Blog and updates related to Sports </p>
-        </div>
-        <div className="container mx-auto px-4 ">
-          <div className="mt-4 max-w-lg mx-auto grid gap-5 lg:grid-cols-2 xl:grid-cols-4 lg:max-w-none">
-            {content.posts.slice(0, 4).map((post, index) => {
-              if (post.category != "attractions") {
-                return (
-                  <div
-                    key={post.slug + "_" + index}
-                    className="flex flex-col rounded-lg shadow-lg overflow-hidden hover:-translate-y-2 duration-300"
-                  >
-                    <div className="flex-shrink-0">
-                      <Image
-                        className="h-48 w-full object-cover"
-                        width={400}
-                        height={300}
-                        src={post.featured_img}
-                        alt="Najam Awan Image"
-                      />
-                    </div>
-                    <div className="flex-1 bg-white p-6 flex flex-col justify-between">
-                      <div className="flex-1">
-                        <p className="text-sm font-medium text-indigo-600 capitalize">
-                          {post.category}
-                        </p>
-                        <a href={"blog/" + post.slug} className="block mt-2">
-                          <p className="text-base sm:text-xl font-semibold text-gray-900 hover:text-blue-600">
-                            {post.title}
-                          </p>
-                        </a>
-                        <p className="mt-3 text-sm sm:text-base text-gray-500">
-                          {post.shortdescription}
-                        </p>
-                      </div>
-                      <div className="mt-2 flex items-center">
-                        <div className="flex-shrink-0">
-                          <span className="sr-only">{post.author}</span>
-                          <img
-                            className="h-10 w-10 rounded-full"
-                            src={post.authorpic}
-                            alt="Najam Awan Image"
-                          />
-                        </div>
-                        <div className="ml-3">
-                          <p className="text-sm font-medium text-gray-900">
-                            {post.author}
-                          </p>
-                          <div className="flex space-x-1 text-sm text-gray-500">
-                            <time dateTime={post.datetime}>{post.date}</time>
-                            <span aria-hidden="true">&middot;</span>
-                            <span>{post.readingTime} read</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-            })}
-          </div>
-
-          <div className=" flex justify-center items-center mt-10">
-            <Link
-              href="/blog"
-              className="border border-slate-600 text-slate-700  rounded-full px-5 py-2 hover:bg-blue-400 hover:border-blue-400   hover:text-white transition duration-300 font-medium"
-            >
-              View all Blog & Updates
-            </Link>
-          </div>
-        </div>
-      </section>
-
       <section className="py-10 ">
         <div className="sec-heading">
           <h2>Frequently Asked Questions</h2>

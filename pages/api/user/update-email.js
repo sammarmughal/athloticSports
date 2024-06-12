@@ -1,11 +1,8 @@
-// /pages/api/user/updateEmail.js
 import mysql from 'mysql2/promise';
 
 export default async function handler(req, res) {
   if (req.method === 'PUT') {
     const { username, email } = req.body;
-
-    // Check for undefined values and set them to null
     const params = [
       email !== undefined ? email : null,
       username !== undefined ? username : null,

@@ -13,7 +13,7 @@ const Settings = () => {
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [isChangingSecurityAnswer, setIsChangingSecurityAnswer] = useState(false);
   const [message, setMessage] = useState("");
-
+  
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
     setUsername(storedUsername);

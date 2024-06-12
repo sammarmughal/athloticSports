@@ -9,16 +9,15 @@ const AdminPortal = () => {
   const [activePanel, setActivePanel] = useState("No orders");
   const [selectedOption, setSelectedOption] = useState(null);
   const [dropdown, setDropdown] = useState(false);
-  const [status, setStatus] = useState("Pending"); // Add this line
-
+  const [status, setStatus] = useState("Pending");
   const handleDropdown = () => {
     setDropdown(!dropdown);
   };
   const handleSetActivePanel = (option) => {
     setSelectedOption(option);
-    setActivePanel(option); // Update the active panel to the selected option
-    setStatus(option); // Update the status to the selected option
-    setDropdown(false); // Close the dropdown after selecting an option
+    setActivePanel(option); 
+    setStatus(option); 
+    setDropdown(false); 
   };
   
   return (

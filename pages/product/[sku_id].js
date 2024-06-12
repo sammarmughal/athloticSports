@@ -7,7 +7,6 @@ import MainHeader from "../../components/mainheader";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../components/store/cartSlice";
 import React, { useState } from "react";
-// import CartButton from "../../components/addtocart";
 export async function getServerSideProps(context) {
   const { sku_id } = context.params;
 

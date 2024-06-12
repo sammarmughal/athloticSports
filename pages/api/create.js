@@ -12,10 +12,7 @@ export default async function handler(req, res) {
     const { username, email, address, city, state, postalCode, total_amount, products } = req.body;
 
     try {
-      // Start a transaction
       await db.query('START TRANSACTION');
-
-      // Insert the order details
       const [orderResult] = await db.query(
         `INSERT INTO orders (username, email, address, city, state, postalCode, total_amount)
         VALUES (?, ?, ?, ?, ?, ?, ?)`,
@@ -23,8 +20,6 @@ export default async function handler(req, res) {
       );
 
       const orderId = orderResult.insertId;
-
-      // Insert each product related to the order
       const productInserts = products.map(product => [
         orderId,
         product.product_name,
@@ -40,17 +35,11 @@ export default async function handler(req, res) {
         VALUES ?`,
         [productInserts]
       );
-
-      // Commit the transaction
       await db.query('COMMIT');
-
       res.status(200).json({ message: 'Order created successfully', orderId });
     } catch (error) {
       console.error(error);
-
-      // Rollback the transaction in case of error
       await db.query('ROLLBACK');
-
       res.status(500).json({ error: 'Failed to create order' });
     }
   } else {

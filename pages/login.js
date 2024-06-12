@@ -57,7 +57,7 @@ const LoginForm = () => {
             willClose: () => {
               const username = formData.loginInput;
               if (data.role === "user") {
-                router.push(`/user-dashboard/${username}`);
+                router.push(`/user-dashboard/${username}/profile`);
               } else if (data.role === "admin") {
                 router.push(`/admin-portal/${username}`);
               }

@@ -12,7 +12,7 @@ export default function Footer({ children, home }) {
               <div>
                 <Image
                   src="/images/athlotic-logo.png"
-                  alt="AAM PIPES GUJRANWALA"
+                  alt="Athlotic Sports GUJRANWALA"
                   className="sm:w-32 w-24 mx-auto transform hover:scale-125 duration-300" title='Athlotic Sports Logo'
                   width={128}
                   height={128}
@@ -171,9 +171,9 @@ export default function Footer({ children, home }) {
             <div>
               <div className="ftr-links">
 
-                <Link href='/privacy-policy' title='Privacy Policy'>Privacy Policy</Link>
-                <Link href='/disclaimer' title='Disclaimer'>Disclaimer</Link>
-                <Link href='/sitemap.xml' title='Site Map'>Site Map</Link>
+                <Link href='/' title='Privacy Policy'>Privacy Policy</Link>
+                <Link href='/' title='Disclaimer'>Disclaimer</Link>
+                <Link href='/' title='Site Map'>Site Map</Link>
               </div>
               <p className="copy">
                 Copyright &copy; Athlotic Sports - Gujranwala, Pakistan

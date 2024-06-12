@@ -17,15 +17,12 @@ export default async (req, res) => {
   }
 
   try {
-    // Check user credentials
     const [user] = await db.query('SELECT * FROM users WHERE (email = ? OR username = ?) AND password = ?', [loginInput, loginInput, password]);
 
     if (user.length > 0) {
       const token = jwt.sign({ role: 'user', id: user[0].id }, JWT_SECRET, { expiresIn: '1h' });
       return res.status(200).json({ token, role: 'user', username: user[0].username });
     }
-
-    // Check admin credentials
     const [admin] = await db.query('SELECT * FROM admin WHERE (email = ? OR username = ?) AND password = ?', [loginInput, loginInput, password]);
 
     if (admin.length > 0) {

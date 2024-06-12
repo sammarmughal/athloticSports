@@ -7,7 +7,6 @@ export default async (req, res) => {
     }
   
     try {
-      // Clear the session or authentication token
       res.setHeader('Set-Cookie', 'token=; Max-Age=0; Path=/login; HttpOnly');
       return res.status(200).json({ message: 'Logged out successfully' });
     } catch (error) {

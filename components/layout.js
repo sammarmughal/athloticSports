@@ -10,7 +10,6 @@ export default function Layout({ children , showNavAndFooter = true }) {
     
   return (
     <div className="w-full mx-auto bg-center bg-no-repeat bg-cover">
-      {/*style= {{backgroundImage:"url('../images/svgexport-3.svg'),url('../images/svgexport-5.svg')"}}*/}
       <Head></Head>
       {showNavAndFooter && <Nav />}
       <div className="w-full   mx-auto">{children}</div>

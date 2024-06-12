@@ -14,7 +14,6 @@ export default async function handler(req, res) {
       const [rows] = await connection.execute('SELECT * FROM users');
       res.status(200).json(rows);
 
-      // Close the connection
       await connection.end();
     } catch (error) {
       console.error(error);

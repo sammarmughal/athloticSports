@@ -132,14 +132,7 @@ export default function ProductDetailFitting({ products }) {
                       <h4 className="relative p-4 font-slate text-xl font-bold uppercase cursor-pointer">
                         Category
                       </h4>
-                      <div className="my-4">
-                        <input
-                          className="w-full p-2 text-sm box-border mr-2 border-2 border-slate-300 text-slate-400"
-                          type="text"
-                          placeholder="Quick Lookup"
-                        />
-                      </div>
-                      <ul id="hawkfacet_d" className="mt-3 flex flex-col gap-2">
+                     <ul id="hawkfacet_d" className="mt-3 flex flex-col gap-2">
                         {facetItems.map((item, index) => (
                           <Link href={item.Link} key={index}>
                             <li className="flex">
@@ -162,12 +155,6 @@ export default function ProductDetailFitting({ products }) {
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
-            {/* <Link
-              href="/contact-us"
-              className="max-w-xs flex-1 mx-auto mt-10 bg-gradient-to-r from-yellow-500 to-blue-600 hover:from-blue-600 hover:to-yellow-500 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-lg font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-blue-500 sm:w-full"
-            >
-              Inquire Now
-            </Link> */}
           </div>
         </div>
       </section>

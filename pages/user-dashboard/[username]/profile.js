@@ -21,8 +21,6 @@ const Profile = () => {
   const [province, setProvince] = useState("");
   const [zip_code, setZipCode] = useState("");
   const [phone, setPhone] = useState("");
-  const [editname, setEditName] = useState("");
-  const [editemail, setEditEmail] = useState("");
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [shippingAddressError, setShippingAddressError] = useState("");

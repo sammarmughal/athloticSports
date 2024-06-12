@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import Swal from "sweetalert2";
 import withAuth from "../../../components/withAuth";
-import { defaultGroupByFn } from "react-table";
 
 const AddProducts = () => {
   const [product_name, setProduct_name] = useState("");
@@ -62,7 +61,6 @@ const AddProducts = () => {
       return;
     }
   
-    // Prepare form data
     const formData = new FormData();
     formData.append('product_name', product_name);
     formData.append('category', category);
@@ -73,7 +71,6 @@ const AddProducts = () => {
     formData.append('sku_id', sku_id);
   
     try {
-      // Send request to add the product
       const response = await axios.post('/api/products/add', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',

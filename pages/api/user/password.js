@@ -1,10 +1,9 @@
 import mysql from 'mysql2/promise';
-import { verifyToken } from '../../../lib/auth'; // Ensure you have a function to verify tokens
+import { verifyToken } from '../../../lib/auth'; 
 
 export default async function handler(req, res) {
   if (req.method === 'PUT') {
-    const { oldPassword, newPassword, username } = req.body; // Retrieve username from the request body
-
+    const { oldPassword, newPassword, username } = req.body;
     if (!username) {
       return res.status(401).json({ message: 'Username not provided' });
     }
@@ -28,7 +27,6 @@ export default async function handler(req, res) {
       await connection.execute('UPDATE users SET password = ? WHERE username = ?', [newPassword, username]);
       res.status(200).json({ message: 'Password changed successfully' });
 
-      // Close the connection
       await connection.end();
     } catch (error) {
       console.error(error);
