@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import withAuth from '../components/withAuth';
+import axios from "axios";
 import MainHeader from "../components/mainheader";
-// import { PayPalButton } from "react-paypal-button-v2";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import Link from "next/link";
 
 const initialOptions = {
   "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID, // This will use the public client ID
@@ -16,6 +17,15 @@ const CheckoutPage = () => {
   const [subTotal, setSubTotal] = useState(0);
   const [totalShipping, setTotalShipping] = useState(0);
   const [total, setTotal] = useState(0);
+  const [userDetails, setUserDetails] = useState({
+    name: "",
+    email: "",
+    shipping_address: "",
+    city: "",
+    province: "",
+    zip_code: "",
+    phone: "",
+  });
   const router = useRouter();
   useEffect(() => {
     const paypalScript = () => {
@@ -27,7 +37,7 @@ const CheckoutPage = () => {
       script.onload = () => setScriptLoaded(true);
 
       document.body.appendChild(script);
-    };  
+    };
     paypalScript();
   }, []);
   useEffect(() => {
@@ -104,11 +114,39 @@ const CheckoutPage = () => {
       setTotal(calculatedTotal);
     }
   }, [router.query.cart]);
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      fetchUserDetails(storedUsername);
+    } else {
+      console.error("Username not found in local storage");
+    }
+  }, []);
+
+  const fetchUserDetails = async (username) => {
+    try {
+      const response = await axios.get(`/api/user/getProfile?username=${username}`);
+      const userData = response.data;
+      setUserDetails({
+        name: userData.name,
+        email: userData.email,
+        shipping_address: userData.shipping_address,
+        city: userData.city,
+        province: userData.province,
+        zip_code: userData.zip_code,
+        phone: userData.phone,
+      });
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
+
   const initialOptions = {
     "client-id":
       "AVagQDrpSiWLTEPxT3TmDjLQ2a0LiK-kKuA5n_lBIFaFgq9KMKi5EhPfmre69te6Ou_suu84AUoUFQL-",
     currency: "USD",
-    "disable-funding": "credit,card", // Example of disabling certain payment methods
+    "disable-funding": "credit,card", 
   };
   return (
     <>
@@ -210,62 +248,42 @@ const CheckoutPage = () => {
           <div className="rounded-md">
             <form id="payment-form" method="POST" action="">
               <section>
-                <h2 className="uppercase tracking-wide text-lg font-semibold text-gray-700 my-2">
-                  Shipping & Billing Information
-                </h2>
+                <h2 className="uppercase tracking-wide text-lg font-semibold text-gray-700 my-2">Shipping & Billing Information</h2>
+
+                {/* <Link href={`/user-dashboard/${username}/profile`}> */}
+                  <button className="btn-action my-5 px-4 py-3 rounded-full text-white focus:ring focus:outline-none mx-auto flex justify-center text-md font-semibold">
+                    Click to Edit or Add Address
+                  </button>
+                {/* </Link> */}
+
                 <fieldset className="mb-3 bg-white shadow-lg rounded text-gray-600">
                   <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right px-2">Name</span>
-                    <input
-                      name="name"
-                      className="focus:outline-none px-3"
-                      placeholder="Try Odinsson"
-                      required
-                    />
+                    <span className="text-right text-lg font-bold px-2">Name</span>
+                    <input name="name" className="focus:outline-none px-3" placeholder="Try Odinsson" required value={userDetails.name} readOnly />
                   </label>
                   <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right px-2">Email</span>
-                    <input
-                      name="email"
-                      type="email"
-                      className="focus:outline-none px-3"
-                      placeholder="try@example.com"
-                      required=""
-                    />
-                  </label>
-                  <label className="flex border-b border-gray-200 h-12 py-3 pr-8 items-center">
-                    <span className="text-right px-2">Address</span>
-                    <input
-                      name="address"
-                      className="focus:outline-none w-full px-3"
-                      placeholder="10 Street XYZ 654"
-                    />
+                    <span className="text-right text-lg font-bold px-2">Email</span>
+                    <input name="email" className="focus:outline-none w-full px-3" placeholder="try@example.com" required value={userDetails.email} readOnly />
                   </label>
                   <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right px-2">City</span>
-                    <input
-                      name="city"
-                      className="focus:outline-none px-3"
-                      placeholder="Lahore"
-                    />
+                    <span className="text-right text-lg font-bold px-2">Address</span>
+                    <input name="shipping_address" className="focus:outline-none w-full px-3" placeholder="10 Street XYZ 654" required value={userDetails.shipping_address} readOnly />
                   </label>
-                  <label className="inline-flex w-2/4 border-gray-200 py-3">
-                    <span className="text-right px-2">State</span>
-                    <input
-                      name="state"
-                      className="focus:outline-none px-3"
-                      placeholder="CA"
-                    />
+                  <label className="flex border-b border-gray-200 h-12 py-3 items-center">
+                    <span className="text-right text-lg font-bold px-2">City</span>
+                    <input name="city" className="focus:outline-none px-3" placeholder="San Francisco" required value={userDetails.city} readOnly />
                   </label>
-                  <label className="xl:w-1/4 xl:inline-flex py-3 items-center flex xl:border-none border-t border-gray-200 py-3">
-                    <span className="text-right px-2 xl:px-0 xl:text-none">
-                      ZIP
-                    </span>
-                    <input
-                      name="postal_code"
-                      className="focus:outline-none px-3"
-                      placeholder="98603"
-                    />
+                  <label className="flex border-b border-gray-200 h-12 py-3 items-center">
+                    <span className="text-right text-lg font-bold px-2">State</span>
+                    <input name="province" className="focus:outline-none px-3" placeholder="CA" required value={userDetails.province} readOnly />
+                  </label>
+                  <label className="flex border-b border-gray-200 h-12 py-3 items-center">
+                    <span className="text-right text-lg font-bold px-2">ZIP Code</span>
+                    <input name="zip_code" className="focus:outline-none px-3" placeholder="98603" required value={userDetails.zip_code} readOnly />
+                  </label>
+                  <label className="flex border-b border-gray-200 h-12 py-3 items-center">
+                    <span className="text-right text-lg font-bold px-2">Phone</span>
+                    <input name="phone" className="focus:outline-none px-3" placeholder="98603" required value={userDetails.phone} readOnly />
                   </label>
                 </fieldset>
               </section>
@@ -306,49 +324,37 @@ const CheckoutPage = () => {
               <button className="btn-action my-5 px-4 py-3 rounded-full text-white focus:ring focus:outline-none w-[90%] mx-auto flex justify-center text-xl font-semibold transition-colors">
                 Order Now
               </button>
-              {/* {scriptLoaded ? (
-                <PayPalButton
-                  amount={total}
-                  onSuccess={(details, data) => {
-                    // Save the transaction
-                    addDonationInDB(details.payer.name.given_name, total);
-                  }}
-                />
-              ) : (
-                <span>Loading...</span>
-              )}{" "} */}
-             <div className="w-full mx-auto justify-center">
-              {scriptLoaded ? (
-                <PayPalScriptProvider options={initialOptions}>
-                  <PayPalButtons
-                    style={{ layout: "vertical" }}
-                    createOrder={(data, actions) => {
-                      return actions.order.create({
-                        purchase_units: [
-                          {
-                            amount: {
-                              value: total.toString(), // Total amount to be paid
+              <div className="w-full mx-auto justify-center">
+                {scriptLoaded ? (
+                  <PayPalScriptProvider options={initialOptions}>
+                    <PayPalButtons
+                      style={{ layout: "vertical" }}
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
+                            {
+                              amount: {
+                                value: total.toString(), // Total amount to be paid
+                              },
                             },
-                          },
-                        ],
-                      });
-                    }}
-                    onApprove={(data, actions) => {
-                      return actions.order.capture().then((details) => {
-                        const payerName = details.payer.name.given_name;
-                        addDonationInDB(payerName, total); // Save transaction details
-                        alert(`Transaction completed by ${payerName}`);
-                      });
-                    }}
-                    onError={(err) => {
-                      console.error("PayPal Checkout onError", err);
-                      // Handle errors here
-                    }}
-                  />
-                </PayPalScriptProvider>
-              ) : (
-                <span>Loading...</span>
-              )}
+                          ],
+                        });
+                      }}
+                      onApprove={(data, actions) => {
+                        return actions.order.capture().then((details) => {
+                          const payerName = details.payer.name.given_name;
+                          addDonationInDB(payerName, total);
+                          alert(`Transaction completed by ${payerName}`);
+                        });
+                      }}
+                      onError={(err) => {
+                        console.error("PayPal Checkout onError", err);
+                      }}
+                    />
+                  </PayPalScriptProvider>
+                ) : (
+                  <span>Loading...</span>
+                )}
               </div>
             </div>
           </div>

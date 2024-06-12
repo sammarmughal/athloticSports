@@ -138,32 +138,6 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href={`/admin-portal/${username}/account-statement`}
-              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
-            >
-              <span className="inline-flex justify-center items-center ml-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"
-                  />
-                </svg>
-              </span>
-              <span className="ml-2 text-sm tracking-wide truncate">
-                Finance{" "}
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link
               href={`/admin-portal/${username}/manage_users`}
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
