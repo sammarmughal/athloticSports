@@ -8,7 +8,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Link from "next/link";
 
 const initialOptions = {
-  "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID, // This will use the public client ID
+  "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
   currency: "USD",
 };
 const CheckoutPage = () => {
@@ -43,12 +43,15 @@ const CheckoutPage = () => {
     };
     paypalScript();
   }, []);
+
   const handlePaymentChange = (event) => {
     setSelectedPayment(event.target.id);
   };
+
   const handleClose = () => {
     setIsVisible(false);
   };
+
   useEffect(() => {
     if (router.query.cart) {
       const cartData = JSON.parse(router.query.cart);
@@ -155,7 +158,7 @@ const CheckoutPage = () => {
       console.error("Error fetching user details:", error);
     }
   };
-
+  
   const initialOptions = {
     "client-id":
       "AVagQDrpSiWLTEPxT3TmDjLQ2a0LiK-kKuA5n_lBIFaFgq9KMKi5EhPfmre69te6Ou_suu84AUoUFQL-",
