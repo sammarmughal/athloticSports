@@ -202,7 +202,6 @@ const CheckoutPage = () => {
         <meta name="google" content="notranslate" />
       </Head>
       <MainHeader pageHeading="CHECKOUT" pageImg="checkout2.png" />
-
       <div className="sm:grid sm:grid-cols-3 flex flex-col-reverse bg-indigo-50">
         <div className="py-10 lg:col-span-2 col-span-3 bg-indigo-50 space-y-8 px-12">
           <div className="mt-6 p-4 relative flex flex-col sm:flex-row sm:items-center bg-white shadow rounded-md">
@@ -379,7 +378,7 @@ const CheckoutPage = () => {
                     {product.product_name}
                   </h2>
                   <p className="mt-1 text-xs text-gray-700">
-                    {product.category}
+                    {product.category} Size: {product.size}
                   </p>
                 </div>
                 <div className="flex items-center space-x-4">
