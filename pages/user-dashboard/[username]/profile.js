@@ -209,7 +209,7 @@ const Profile = () => {
               </div>
             </div>
             {formPopupAddress && (
-              <div className="fixed inset-0 mt-36 z-40">
+              <div className="fixed inset-0 mt-36 z-40 overflow-y-auto">
                 <div className="w-full md:w-[40%] bg-white md:max-w-full z-40 mx-auto">
                   <div className="p-6 border border-gray-300 sm:rounded-md">
                     <div className="flex justify-between">

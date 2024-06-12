@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import withAuth from '../components/withAuth';
+import withAuth from "../components/withAuth";
 import axios from "axios";
 import MainHeader from "../components/mainheader";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
@@ -17,6 +17,7 @@ const CheckoutPage = () => {
   const [subTotal, setSubTotal] = useState(0);
   const [totalShipping, setTotalShipping] = useState(0);
   const [total, setTotal] = useState(0);
+  const [username, setUsername] = useState("");
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
@@ -26,6 +27,8 @@ const CheckoutPage = () => {
     zip_code: "",
     phone: "",
   });
+  const [isVisible, setIsVisible] = useState(true);
+  const [selectedPayment, setSelectedPayment] = useState('type2'); 
   const router = useRouter();
   useEffect(() => {
     const paypalScript = () => {
@@ -40,6 +43,12 @@ const CheckoutPage = () => {
     };
     paypalScript();
   }, []);
+  const handlePaymentChange = (event) => {
+    setSelectedPayment(event.target.id);
+  };
+  const handleClose = () => {
+    setIsVisible(false);
+  };
   useEffect(() => {
     if (router.query.cart) {
       const cartData = JSON.parse(router.query.cart);
@@ -116,7 +125,10 @@ const CheckoutPage = () => {
   }, [router.query.cart]);
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
     if (storedUsername) {
       fetchUserDetails(storedUsername);
     } else {
@@ -126,7 +138,9 @@ const CheckoutPage = () => {
 
   const fetchUserDetails = async (username) => {
     try {
-      const response = await axios.get(`/api/user/getProfile?username=${username}`);
+      const response = await axios.get(
+        `/api/user/getProfile?username=${username}`
+      );
       const userData = response.data;
       setUserDetails({
         name: userData.name,
@@ -146,7 +160,7 @@ const CheckoutPage = () => {
     "client-id":
       "AVagQDrpSiWLTEPxT3TmDjLQ2a0LiK-kKuA5n_lBIFaFgq9KMKi5EhPfmre69te6Ou_suu84AUoUFQL-",
     currency: "USD",
-    "disable-funding": "credit,card", 
+    "disable-funding": "credit,card",
   };
   return (
     <>
@@ -204,85 +218,157 @@ const CheckoutPage = () => {
       <MainHeader pageHeading="CHECKOUT" pageImg="checkout2.png" />
       <div className="sm:grid sm:grid-cols-3 flex flex-col-reverse bg-indigo-50">
         <div className="py-10 lg:col-span-2 col-span-3 bg-indigo-50 space-y-8 px-12">
-          <div className="mt-6 p-4 relative flex flex-col sm:flex-row sm:items-center bg-white shadow rounded-md">
-            <div className="flex flex-row items-center border-b sm:border-b-0 w-full sm:w-auto pb-4 sm:pb-0">
-              <div className="text-yellow-500">
+          {isVisible && (
+            <div className="mt-6 p-4 relative flex flex-col sm:flex-row sm:items-center bg-white shadow rounded-md">
+              <div className="flex flex-row items-center border-b sm:border-b-0 w-full sm:w-auto pb-4 sm:pb-0">
+                <div className="text-yellow-500">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 sm:w-5 h-6 sm:h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <div className="text-sm font-medium ml-3">Checkout</div>
+              </div>
+              <div className="text-sm tracking-wide text-gray-500 mt-4 sm:mt-0 sm:ml-4">
+                Complete your shipping and payment details below.
+              </div>
+              <div
+                className="absolute sm:relative sm:top-auto sm:right-auto ml-auto right-4 top-4 text-gray-400 hover:text-gray-800 cursor-pointer"
+                onClick={handleClose}
+              >
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 sm:w-5 h-6 sm:h-5"
+                  className="w-4 h-4"
                   fill="none"
-                  viewBox="0 0 24 24"
                   stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
+                    d="M6 18L18 6M6 6l12 12"
+                  ></path>
                 </svg>
               </div>
-              <div className="text-sm font-medium ml-3">Checkout</div>
             </div>
-            <div className="text-sm tracking-wide text-gray-500 mt-4 sm:mt-0 sm:ml-4">
-              Complete your shipping and payment details below.
-            </div>
-            <div className="absolute sm:relative sm:top-auto sm:right-auto ml-auto right-4 top-4 text-gray-400 hover:text-gray-800 cursor-pointer">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              </svg>
-            </div>
-          </div>
+          )}
           <div className="rounded-md">
             <form id="payment-form" method="POST" action="">
               <section>
-                <h2 className="uppercase tracking-wide text-lg font-semibold text-gray-700 my-2">Shipping & Billing Information</h2>
+                <div className="flex flex-row justify-between items-center mb-4">
+                  <h2 className="uppercase tracking-wide text-lg font-semibold text-gray-700 my-2">
+                    Shipping & Billing Information
+                  </h2>
 
-                {/* <Link href={`/user-dashboard/${username}/profile`}> */}
-                  <button className="btn-action my-5 px-4 py-3 rounded-full text-white focus:ring focus:outline-none mx-auto flex justify-center text-md font-semibold">
-                    Click to Edit or Add Address
-                  </button>
-                {/* </Link> */}
+                  <Link href={`/user-dashboard/${username}/profile`}>
+                    <button className="btn-action my-3 px-4 py-2 rounded-full text-white focus:ring focus:outline-none mx-auto flex justify-center text-sm font-semibold">
+                      Click to Edit or Add Address
+                    </button>
+                  </Link>
+                </div>
 
                 <fieldset className="mb-3 bg-white shadow-lg rounded text-gray-600">
                   <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">Name</span>
-                    <input name="name" className="focus:outline-none px-3" placeholder="Try Odinsson" required value={userDetails.name} readOnly />
+                    <span className="text-right text-lg font-bold px-2">
+                      Name
+                    </span>
+                    <input
+                      name="name"
+                      className="focus:outline-none px-3"
+                      placeholder="Try Odinsson"
+                      required
+                      value={userDetails.name}
+                      readOnly
+                    />
                   </label>
                   <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">Email</span>
-                    <input name="email" className="focus:outline-none w-full px-3" placeholder="try@example.com" required value={userDetails.email} readOnly />
+                    <span className="text-right text-lg font-bold px-2">
+                      Email
+                    </span>
+                    <input
+                      name="email"
+                      className="focus:outline-none w-full px-3"
+                      placeholder="try@example.com"
+                      required
+                      value={userDetails.email}
+                      readOnly
+                    />
+                  </label>
+                  <label className="flex border-b border-gray-200 w-full h-12 py-3 items-center">
+                    <span className="text-right text-lg font-bold px-2">
+                      Address
+                    </span>
+                    <input
+                      name="shipping_address"
+                      className="focus:outline-none w-full px-3"
+                      placeholder="10 Street XYZ 654"
+                      required
+                      value={userDetails.shipping_address}
+                      readOnly
+                    />
                   </label>
                   <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">Address</span>
-                    <input name="shipping_address" className="focus:outline-none w-full px-3" placeholder="10 Street XYZ 654" required value={userDetails.shipping_address} readOnly />
+                    <span className="text-right text-lg font-bold px-2">
+                      City
+                    </span>
+                    <input
+                      name="city"
+                      className="focus:outline-none px-3"
+                      placeholder="San Francisco"
+                      required
+                      value={userDetails.city}
+                      readOnly
+                    />
                   </label>
                   <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">City</span>
-                    <input name="city" className="focus:outline-none px-3" placeholder="San Francisco" required value={userDetails.city} readOnly />
+                    <span className="text-right text-lg font-bold px-2">
+                      State
+                    </span>
+                    <input
+                      name="province"
+                      className="focus:outline-none px-3"
+                      placeholder="CA"
+                      required
+                      value={userDetails.province}
+                      readOnly
+                    />
                   </label>
                   <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">State</span>
-                    <input name="province" className="focus:outline-none px-3" placeholder="CA" required value={userDetails.province} readOnly />
+                    <span className="text-right text-lg font-bold px-2">
+                      ZIP Code
+                    </span>
+                    <input
+                      name="zip_code"
+                      className="focus:outline-none px-3"
+                      placeholder="98603"
+                      required
+                      value={userDetails.zip_code}
+                      readOnly
+                    />
                   </label>
                   <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">ZIP Code</span>
-                    <input name="zip_code" className="focus:outline-none px-3" placeholder="98603" required value={userDetails.zip_code} readOnly />
-                  </label>
-                  <label className="flex border-b border-gray-200 h-12 py-3 items-center">
-                    <span className="text-right text-lg font-bold px-2">Phone</span>
-                    <input name="phone" className="focus:outline-none px-3" placeholder="98603" required value={userDetails.phone} readOnly />
+                    <span className="text-right text-lg font-bold px-2">
+                      Phone
+                    </span>
+                    <input
+                      name="phone"
+                      className="focus:outline-none px-3"
+                      placeholder="98603"
+                      required
+                      value={userDetails.phone}
+                      readOnly
+                    />
                   </label>
                 </fieldset>
               </section>
@@ -292,12 +378,17 @@ const CheckoutPage = () => {
             </h2>
             <div className="w-full mx-auto rounded-lg bg-white border border-gray-200 text-gray-800 font-light mb-6">
               <div className="w-full p-5">
-                <label for="type2" className="flex items-center cursor-pointer">
+                <label
+                  htmlFor="type2"
+                  className="flex items-center cursor-pointer"
+                >
                   <input
                     type="radio"
                     className="form-radio h-5 w-5 text-indigo-500"
                     name="type"
                     id="type2"
+                    checked={selectedPayment === "type2"}
+                    onChange={handlePaymentChange}
                   />
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"
@@ -306,14 +397,16 @@ const CheckoutPage = () => {
                   />
                 </label>
                 <label
-                  for="type3"
+                  htmlFor="type3"
                   className="flex gap-3 items-center cursor-pointer my-5"
                 >
                   <input
                     type="radio"
-                    className="form-radio h-5 w-5 text-indigo-500 "
+                    className="form-radio h-5 w-5 text-indigo-500"
                     name="type"
                     id="type3"
+                    checked={selectedPayment === "type3"}
+                    onChange={handlePaymentChange}
                   />
                   <p className="text-gray-600 font-semibold text-lg">
                     Cash On Delivery (COD)
