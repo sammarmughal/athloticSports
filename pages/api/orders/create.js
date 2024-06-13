@@ -3,7 +3,7 @@ import mysql from 'mysql2/promise';
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      const { username, shipping_address, city, province, zip_code, phone, total_amount, order_items } = req.body;
+      const { username, shipping_address, city, province, zip_code, phone, total_amount, order_items} = req.body;
 
       console.log(req.body) 
 
@@ -27,14 +27,13 @@ export default async function handler(req, res) {
 
       for (const item of order_items) {
         await connection.execute(
-          `INSERT INTO order_items (order_id, sku_id, quantity, unit_price, size, subtotal)
-           VALUES (?, ?, ?, ?, ?, ?)`,
-          [orderId, item.sku_id, item.quantity, item.unit_price, item.size, item.unit_price * item.quantity]
+          `INSERT INTO order_items (order_id, sku_id, quantity, unit_price, size, subtotal, image_url, product_name)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+          [orderId, item.sku_id, item.quantity, item.unit_price, item.size, item.unit_price * item.quantity, item.image_url, item.product_name]
         );
       }
 
       await connection.commit();
-
       await connection.end();
 
       res.status(201).json({ message: 'Order placed successfully', order_id: orderId });

@@ -8,7 +8,6 @@ const connection = await mysql.createConnection({
   database: process.env.MYSQL_DATABASE,
 });
 
-
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {

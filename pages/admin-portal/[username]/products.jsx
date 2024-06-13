@@ -212,13 +212,13 @@ const Products = ({ products }) => {
                           >
                             Delete
                           </button>
-                          <Link
+                          {/* <Link
                             href={`/admin-portal/${username}/edit-product/${product.sku_id}`}
                           >
                             <button className="bg-green-400 rounded px-2 w-full text-white">
                               Edit
                             </button>
-                          </Link>
+                          </Link> */}
                         </td>
                       </tr>
                     ))}

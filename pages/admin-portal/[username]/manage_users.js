@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Sidebar from "../component/sidebar";
 import Admin_Nav from "../component/admin-nav";
-
 import Swal from "sweetalert2";
 
 const ManageUsers = () => {

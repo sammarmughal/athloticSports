@@ -1,4 +1,3 @@
-// pages/cart.js
 import { useRouter } from "next/router";
 import Head from "next/head";
 import MainHeader from "../components/mainheader";

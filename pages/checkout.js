@@ -122,7 +122,9 @@ const CheckoutPage = () => {
         quantity: item.quantity,
         unit_price: item.price,
         size: item.size,
-        subtotal: item.price * item.quantity
+        subtotal: item.price * item.quantity,
+        image_url: item.image_url,
+        product_name: item.product_name,
       }));
 
       const orderDetails = {
@@ -137,9 +139,9 @@ const CheckoutPage = () => {
 
       console.log(response)
 
-      if (response.data.success) {
+      if (response) {
         alert("Order placed successfully");
-        router.push('/order-confirmation');
+        router.push('/user-dashboard/${username}/order');
       } else {
         alert("Failed to place order");
       }
@@ -148,7 +150,6 @@ const CheckoutPage = () => {
       alert("An error occurred while placing the order. Please try again later.");
     }
   };
-
 
   return (
     <>
