@@ -15,7 +15,7 @@ const Orders = () => {
 
   const fetchUserOrders = async () => {
     try {
-      const response = await fetch("/api/orders/getOrders", {
+      const response = await fetch("/api/orders/getUserOrders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
